@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'exploitation du sel en Tunisie : Réalité, cadre réglementaire et perspectives</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Outfit:wght@300;500;700&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #ffffff;
+            --bg-gradient: #f8fafc;
+            --text-dark: #0f172a;
+            --text-secondary: #64748b;
+            --cnaf-blue: #003B5C;
+            /* Marine Blue */
+            --cnaf-light: #0066A1;
+            /* Light Blue */
+            --accent-gold: #D4AF37;
+            /* Gold */
+            --accent-gold-light: #F4D03F;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(15, 23, 42, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f4f8 100%);
+            z-index: -2;
+        }
+
+        /* Orbs Animation - Enhanced */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+            mix-blend-mode: multiply;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--cnaf-blue) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-gold) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -5s;
+            animation-duration: 22s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
+            top: 40%;
+            left: 40%;
+            animation-delay: -10s;
+            animation-duration: 28s;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(50px, 50px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(0, 100px) scale(0.9);
+            }
+
+            75% {
+                transform: translate(-50px, 50px) scale(1.05);
+            }
+        }
+
+        /* Staggered Entrance Animations */
+        .slide h1,
+        .slide h2,
+        .slide h3,
+        .slide p,
+        .slide .card,
+        .slide li,
+        .slide .btn-primary,
+        .slide .btn-secondary,
+        .slide .info,
+        .slide table {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .slide.active h1,
+        .slide.active h2,
+        .slide.active h3,
+        .slide.active p,
+        .slide.active .card,
+        .slide.active li,
+        .slide.active .btn-primary,
+        .slide.active .btn-secondary,
+        .slide.active .info,
+        .slide.active table {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delays */
+        .slide.active .slide-header {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active h1 {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active .hero-subtitle {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .card:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .card:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .slide.active .card:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+
+        .slide.active .card:nth-child(4) {
+            transition-delay: 0.5s;
+        }
+
+        .slide.active .card:nth-child(5) {
+            transition-delay: 0.6s;
+        }
+
+        .slide.active .card:nth-child(6) {
+            transition-delay: 0.7s;
+        }
+
+        .slide.active li:nth-child(1) {
+            transition-delay: 0.3s;
+        }
+
+        .slide.active li:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+
+        .slide.active li:nth-child(3) {
+            transition-delay: 0.5s;
+        }
+
+        .slide.active li:nth-child(4) {
+            transition-delay: 0.6s;
+        }
+
+        .slide.active li:nth-child(5) {
+            transition-delay: 0.7s;
+        }
+
+        /* 3D Tilt Effect Styles */
+        .card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            will-change: transform;
+        }
+
+        .card-content {
+            transform: translateZ(20px);
+        }
+
+        .card-glare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4), transparent 60%);
+            opacity: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            padding: 1rem 6rem 1rem 2rem;
+            /* Added right padding for flag */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cnaf-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slide-counter {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cnaf-blue), var(--accent-gold));
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Main Slide Container */
+        main {
+            position: relative;
+            height: calc(100vh - 80px);
+            overflow: hidden;
+        }
+
+        /* Journey Step Animation */
+        .journey-step {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Stronger selector to override staggered animation */
+        .slide.active .journey-step:not(.visible) {
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+        }
+
+        .journey-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 4rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        .slide.prev {
+            transform: translateX(-100px);
+            opacity: 0;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--cnaf-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .section-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            background: linear-gradient(135deg, var(--cnaf-blue), var(--cnaf-light));
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            margin-right: 1rem;
+            font-weight: 600;
+        }
+
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        /* Layouts */
+        .content-full {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .content-single {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Components */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--cnaf-blue);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-list li:before {
+            content: '✦';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Alerts */
+        .info {
+            background: linear-gradient(135deg, rgba(0, 59, 92, 0.05), rgba(0, 102, 161, 0.05));
+            border: 1px solid rgba(0, 59, 92, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: var(--cnaf-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--cnaf-blue), var(--cnaf-light));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        tr:hover td {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 200;
+        }
+
+        button {
+            font-family: 'Inter', sans-serif;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cnaf-blue), var(--cnaf-light));
+            color: white;
+            box-shadow: 0 10px 30px -10px rgba(0, 59, 92, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px -10px rgba(0, 59, 92, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--cnaf-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Utils */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-4 {
+            margin-top: 2rem;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        /* Map Placeholder */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background: #e2e8f0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .map-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .card-gradient {
+            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f4f8 100%);
+            border-color: var(--accent-gold);
+        }
+
+        .tip-highlight {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 244, 248, 0.95));
+            border-left: 8px solid var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(217, 119, 6, 0.2);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            max-width: 90%;
+            font-size: 1.2rem;
+            border-radius: 12px;
+        }
+
+        .tip-highlight .tip-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .tip-highlight:hover {
+            transform: scale(1.07) translateY(-4px);
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.3);
+        }
+
+        .transition-slide {
+            background: var(--cnaf-blue);
+            color: white;
+        }
+
+        .transition-number {
+            font-size: 12rem;
+            font-weight: 800;
+            opacity: 0.1;
+            line-height: 1;
+            margin-bottom: -2rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .transition-title {
+            font-size: 4rem;
+            color: var(--accent-gold);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* WOW V2: Hero Slide - "Cinematic Luxury" */
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.3) contrast(1.1);
+            /* Darker for better text contrast */
+            transform: scale(1.0);
+            animation: kenBurns 30s infinite alternate;
+        }
+
+        @keyframes kenBurns {
+            from {
+                transform: scale(1.0) translate(0, 0);
+            }
+
+            to {
+                transform: scale(1.15) translate(-2%, -1%);
+            }
+        }
+
+        .cinematic-title {
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #d4af37 100%);
+            /* White to Gold */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+        }
+
+        .cinematic-subtitle {
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* WOW V2: Holographic Cards - "Cyber Glass" */
+        .holo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .holo-card {
+            background: rgba(255, 255, 255, 0.7);
+            /* Lighter, cleaner glass */
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .holo-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 59, 92, 0.15);
+            border-color: var(--cnaf-blue);
+        }
+
+        .holo-card strong {
+            color: var(--cnaf-blue);
+            font-weight: 800;
+        }
+
+        /* WOW V2: Elemental Orbs - "Floating Jewels" */
+        .orb-grid {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-top: 4rem;
+            perspective: 1000px;
+        }
+
+        .element-orb {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            /* Complex gradient for 3D Jewel look */
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 20%, var(--glow-color) 60%, #000 100%);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 60px rgba(0, 0, 0, 0.5),
+                0 0 30px var(--glow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Bouncy spring */
+            z-index: 1;
+        }
+
+        .element-orb::after {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 10%;
+            width: 40%;
+            height: 20%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(-45deg);
+            filter: blur(2px);
+        }
+
+        .element-orb:hover {
+            transform: translateY(-30px) scale(1.1);
+            box-shadow:
+                0 40px 80px rgba(0, 0, 0, 0.4),
+                inset 0 0 40px rgba(0, 0, 0, 0.3),
+                0 0 80px var(--glow-color);
+            z-index: 10;
+        }
+
+        .element-symbol {
+            font-size: 6rem;
+            font-weight: 900;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .element-name {
+            font-size: 1.4rem;
+            color: white;
+            margin-top: 0rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .element-ring {
+            position: absolute;
+            width: 160%;
+            height: 160%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--glow-color);
+            border-radius: 50%;
+            animation: spin 15s linear infinite;
+            pointer-events: none;
+        }
+
+        .element-ring::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--glow-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* Logo & Flag */
+        .header-logo {
+            height: 60px;
+            width: auto;
+            margin-right: 1rem;
+        }
+
+        .floating-flag {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: auto;
+            z-index: 1000;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .floating-flag:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <header>
+        <div style="display: flex; align-items: center;">
+            <img src="logo.png" alt="Logo République Tunisienne" class="header-logo">
+            <div class="logo">MINISTÈRE DE L'INDUSTRIE, DES MINES ET DE L'ÉNERGIE</div>
+        </div>
+        <div class="progress-container">
+            <span class="slide-counter"><span id="current">1</span> / <span id="total">45</span></span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+    </header>
+
+    <main id="slides-container">
+
+        <!-- SECTION 1: OUVERTURE -->
+
+        <!-- Slide 1: Hero (WOW Improved) -->
+      <div class="slide active">
+            <div class="content-full text-center">
+                <h1 class="hero-title">L'exploitation du sel en Tunisie : <br />Réalité, cadre réglementaire et
+                    perspectives</h1>
+                <p class="hero-subtitle">
+                    Direction Générale des Mines<br />
+                    <span style="color: var(--accent-gold); font-weight: 600;">Ministère de l'Industrie, des Mines et
+                        de
+                        l'Energie</span>
+                </p>
+
+            </div>
+        </div>
+
+        <!-- Slide 2: Sommaire -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">INTRODUCTION</span>
+                    <h2 class="slide-title">Sommaire Exécutif</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <span class="card-icon">🌍</span>
+                        <div class="card-title">1. Contexte & Réalité</div>
+                        <p class="card-text">Positionnement stratégique de la Tunisie et état des lieux du secteur.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⚖️</span>
+                        <div class="card-title">2. Cadre Réglementaire</div>
+                        <p class="card-text">Code Minier, procédures d'octroi et réformes en cours.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🚀</span>
+                        <div class="card-title">3. Perspectives</div>
+                        <p class="card-text">Lithium, économie circulaire et nouvelles opportunités.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transition Slide 1 -->
+        <div class="slide transition-slide">
+            <div class="content-full text-center">
+                <div class="transition-number">01</div>
+                <h2 class="transition-title">Contexte & Réalité</h2>
+            </div>
+        </div>
+
+        <!-- Slide 3: Contexte Mondial (WOW Improved) -->
+        <div class="slide">
+            <div class="content-grid" style="align-items: center;">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">CONTEXTE</span>
+                        <h2 class="slide-title">Transition Énergétique</h2>
+                    </div>
+                    <p class="mb-4" style="font-size: 1.2rem; color: var(--text-secondary);">
+                        Le sel : porte d'entrée vers les <strong style="color: var(--cnaf-blue)">minéraux
+                            stratégiques</strong>.
+                    </p>
+                    <div class="holo-container">
+                        <div class="holo-card">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="font-size: 1.5rem;">🔋</span>
+                                <div><strong>Lithium</strong> : Explosion de la demande (Batteries EV)</div>
+                            </div>
+                        </div>
+                        <div class="holo-card">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="font-size: 1.5rem;">🌾</span>
+                                <div><strong>Potassium</strong> : Sécurité alimentaire mondiale</div>
+                            </div>
+                        </div>
+                        <div class="holo-card">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="font-size: 1.5rem;">🧪</span>
+                                <div><strong>Saumures</strong> : Valorisation à haute valeur ajoutée</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Holographic Chart -->
+                <div class="card stat-card"
+                    style="background: linear-gradient(145deg, #0f172a, #1e293b); border: 1px solid rgba(255,255,255,0.1); color: white; position: relative; overflow: hidden;">
+                    <div
+                        style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,59,92,0.3), transparent); animation: spin 10s linear infinite;">
+                    </div>
+                    <div class="stat-value"
+                        style="color: var(--accent-gold); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); position: relative;">
+                        +500%</div>
+                    <div class="stat-label" style="color: rgba(255,255,255,0.7); position: relative;">Demande Lithium
+                        2030</div>
+
+                    <div
+                        style="margin-top: 2rem; height: 200px; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 10px; position: relative;">
+                        <!-- Animated Bars -->
+                        <div
+                            style="width: 30px; height: 20%; background: var(--cnaf-light); border-radius: 4px; box-shadow: 0 0 10px var(--cnaf-light);">
+                        </div>
+                        <div
+                            style="width: 30px; height: 35%; background: var(--cnaf-light); border-radius: 4px; box-shadow: 0 0 10px var(--cnaf-light);">
+                        </div>
+                        <div
+                            style="width: 30px; height: 50%; background: var(--cnaf-blue); border-radius: 4px; box-shadow: 0 0 15px var(--cnaf-blue);">
+                        </div>
+                        <div
+                            style="width: 30px; height: 75%; background: var(--cnaf-blue); border-radius: 4px; box-shadow: 0 0 15px var(--cnaf-blue);">
+                        </div>
+                        <div
+                            style="width: 30px; height: 100%; background: var(--accent-gold); border-radius: 4px; box-shadow: 0 0 30px var(--accent-gold); animation: pulseBar 2s infinite;">
+                        </div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 1rem; position: relative;">
+                        Projection Demande Mondiale</p>
+                </div>
+            </div>
+            <style>
+                @keyframes pulseBar {
+                    0% {
+                        box-shadow: 0 0 20px var(--accent-gold);
+                        opacity: 1;
+                    }
+
+                    50% {
+                        box-shadow: 0 0 40px var(--accent-gold);
+                        opacity: 0.8;
+                    }
+
+                    100% {
+                        box-shadow: 0 0 20px var(--accent-gold);
+                        opacity: 1;
+                    }
+                }
+            </style>
+        </div>
+
+        <!-- Slide 4: Position Tunisie -->
+        <div class="slide">
+            <div class="content-grid">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">LOCALISATION</span>
+                        <h2 class="slide-title">Tunisie : Hub Stratégique</h2>
+                    </div>
+                    <div class="info">
+                        <div class="info-title">📍 Avantages Géographiques</div>
+                        <p>Au cœur de la Méditerranée, à 1h de l'Europe. Un littoral étendu et des dépressions
+                            salines
+                            uniques (Chotts).</p>
+                    </div>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-title">Sebkhas</div>
+                            <p class="card-text">Dépressions côtières riches en sels marins.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Chotts</div>
+                            <p class="card-text">Lacs salés continentaux (Jerid, Gharsa) riches en saumures complexes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <img src="chott-el-djerid.jpg" alt="Carte Chott El Jerid"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SECTION 2: RÉALITÉ DU SECTEUR -->
+
+
+
+        <!-- Slide 6: Types de Ressources -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">RESSOURCES</span>
+                    <h2 class="slide-title">Diversité des Gisements</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <span class="card-icon">🌊</span>
+                        <div class="card-title">Salines Maritimes</div>
+                        <p class="card-text">Exploitation par évaporation solaire le long du littoral (Sfax, Zarzis,
+                            Sousse). Production de sel marin de haute pureté (NaCl).</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🏜️</span>
+                        <div class="card-title">Chotts & Sebkhas</div>
+                        <p class="card-text">Lacs salés continentaux (Jerid, Gharsa). Richesse exceptionnelle en
+                            saumures concentrées : Potassium, Lithium, Magnésium.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⛏️</span>
+                        <div class="card-title">Sel Gemme</div>
+                        <p class="card-text">Gisements souterrains (Diapirs) présents dans le Nord-Ouest, encore peu
+                            exploités.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Carte des Gisements -->
+        <div class="slide">
+            <div class="content-grid">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">CARTOGRAPHIE</span>
+                        <h2 class="slide-title">26 Concessions Actives</h2>
+                    </div>
+                    <ul class="feature-list">
+                        <li><strong>Sud-Ouest</strong> : Tozeur, Kébili (Chotts)</li>
+                        <li><strong>Sud-Est</strong> : Médenine, Tataouine, Zarzis</li>
+                        <li><strong>Centre-Est</strong> : Sfax, Sousse, Monastir</li>
+                        <li><strong>Centre</strong> : Sidi Bouzid</li>
+                    </ul>
+                </div>
+                <div class="card card-gradient"
+                    style="padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="carteConcession.png" alt="Carte des Concessions"
+                        style="width: 100%; height: auto; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- NEW SLIDE B: Évolution de la Production (Chart) -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">STATISTIQUES</span>
+                    <h2 class="slide-title">Évolution de la Production du Sel</h2>
+                </div>
+
+                <!-- CSS Bar Chart -->
+                <div class="chart-container"
+                    style="height: 400px; display: flex; align-items: flex-end; justify-content: space-between; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 16px; position: relative;">
+                    <!-- Y-Axis Labels (Simplified) -->
+                    <div
+                        style="position: absolute; left: 10px; top: 20px; bottom: 20px; display: flex; flex-direction: column; justify-content: space-between; color: var(--text-secondary); font-size: 0.8rem; height: 85%;">
+                        <span>2.5M</span>
+                        <span>2.0M</span>
+                        <span>1.5M</span>
+                        <span>1.0M</span>
+                        <span>0.5M</span>
+                        <span>0</span>
+                    </div>
+
+                    <!-- Bars (Representative Data Points) -->
+                    <!-- 1950s -->
+                    <div class="chart-bar" style="height: 10%;" data-year="1950"></div>
+                    <div class="chart-bar" style="height: 12%;" data-year="1960"></div>
+                    <!-- 1970s -->
+                    <div class="chart-bar" style="height: 15%;" data-year="1970"></div>
+                    <div class="chart-bar" style="height: 18%;" data-year="1980"></div>
+                    <!-- 1990s -->
+                    <div class="chart-bar" style="height: 25%;" data-year="1990"></div>
+                    <div class="chart-bar" style="height: 30%;" data-year="1995"></div>
+                    <!-- 2000s (Growth) -->
+                    <div class="chart-bar" style="height: 45%; background: var(--cnaf-blue);" data-year="2000"></div>
+                    <div class="chart-bar" style="height: 55%; background: var(--cnaf-blue);" data-year="2005"></div>
+                    <div class="chart-bar" style="height: 65%; background: var(--cnaf-blue);" data-year="2010"></div>
+                    <div class="chart-bar" style="height: 70%; background: var(--cnaf-blue);" data-year="2015"></div>
+                    <!-- Recent Peak -->
+                    <div class="chart-bar"
+                        style="height: 85%; background: var(--accent-gold); box-shadow: 0 0 20px var(--accent-gold);"
+                        data-year="2021">
+                        <span
+                            style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); color: var(--accent-gold); font-weight: bold;">2Mt</span>
+                    </div>
+                </div>
+                <style>
+                    .chart-bar {
+                        width: 6%;
+                        background: var(--cnaf-light);
+                        border-radius: 4px 4px 0 0;
+                        position: relative;
+                        transition: height 1s ease-out;
+                    }
+
+                    .chart-bar:hover {
+                        filter: brightness(1.2);
+                    }
+
+                    .chart-bar::after {
+                        content: attr(data-year);
+                        position: absolute;
+                        bottom: -25px;
+                        left: 50%;
+                        transform: translateX(-50%) rotate(-45deg);
+                        font-size: 0.7rem;
+                        color: var(--text-secondary);
+                    }
+                </style>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 9: Données de Production -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">PERFORMANCE</span>
+                    <h2 class="slide-title">Prévisions de Production (Tonnes)</h2>
+                </div>
+                <div
+                    style="display: flex; align-items: flex-end; justify-content: space-between; height: 300px; padding: 2rem 0; max-width: 900px; margin: 0 auto;">
+                    <!-- 2026 -->
+                    <div style="text-align: center; width: 15%;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem; color: var(--cnaf-blue);">3.1M</div>
+                        <div
+                            style="height: 200px; background: var(--cnaf-light); border-radius: 8px 8px 0 0; position: relative;">
+                            <div
+                                style="position: absolute; bottom: 0; width: 100%; height: 88%; background: var(--cnaf-blue); border-radius: 8px 8px 0 0;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-weight: 600;">2026</div>
+                    </div>
+                    <!-- 2027 -->
+                    <div style="text-align: center; width: 15%;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem; color: var(--cnaf-blue);">3.26M</div>
+                        <div
+                            style="height: 200px; background: var(--cnaf-light); border-radius: 8px 8px 0 0; position: relative;">
+                            <div
+                                style="position: absolute; bottom: 0; width: 100%; height: 93%; background: var(--cnaf-blue); border-radius: 8px 8px 0 0;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-weight: 600;">2027</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-green);">+5.0%</div>
+                    </div>
+                    <!-- 2028 -->
+                    <div style="text-align: center; width: 15%;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem; color: var(--cnaf-blue);">3.41M</div>
+                        <div
+                            style="height: 200px; background: var(--cnaf-light); border-radius: 8px 8px 0 0; position: relative;">
+                            <div
+                                style="position: absolute; bottom: 0; width: 100%; height: 97%; background: var(--cnaf-blue); border-radius: 8px 8px 0 0;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-weight: 600;">2028</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-green);">+4.6%</div>
+                    </div>
+                    <!-- 2029 -->
+                    <div style="text-align: center; width: 15%;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem; color: var(--accent-gold);">3.50M
+                        </div>
+                        <div
+                            style="height: 200px; background: var(--cnaf-light); border-radius: 8px 8px 0 0; position: relative;">
+                            <div
+                                style="position: absolute; bottom: 0; width: 100%; height: 100%; background: var(--accent-gold); border-radius: 8px 8px 0 0;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-weight: 600;">2029</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-green);">+2.6%</div>
+                    </div>
+                    <!-- 2030 -->
+                    <div style="text-align: center; width: 15%;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem; color: var(--cnaf-blue);">3.43M</div>
+                        <div
+                            style="height: 200px; background: var(--cnaf-light); border-radius: 8px 8px 0 0; position: relative;">
+                            <div
+                                style="position: absolute; bottom: 0; width: 100%; height: 98%; background: var(--cnaf-blue); border-radius: 8px 8px 0 0;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-weight: 600;">2030</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-red);">-2.0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- SECTION 3: CADRE RÉGLEMENTAIRE -->
+
+        <!-- Transition Slide 2 -->
+        <div class="slide transition-slide">
+            <div class="content-full text-center">
+                <div class="transition-number">02</div>
+                <h2 class="transition-title">Cadre Réglementaire</h2>
+            </div>
+        </div>
+
+        <!-- Slide 13: Code Minier -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge">CADRE RÉGLEMENTAIRE</span>
+                    <h2 class="slide-title">Code Minier de 2003</h2>
+                </div>
+                <div class="info">
+                    <div class="info-title">📜 Loi n° 2003-30</div>
+                    <p>Le cadre légal régissant les activités de prospection, de recherche et d'exploitation des
+                        substances minérales en Tunisie.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Objectifs Clés</div>
+                    <ul class="feature-list">
+                        <li>Encourager l'investissement</li>
+                        <li>Garantir la transparence des procédures</li>
+                        <li>Protéger l'environnement et les ressources</li>
+                        <li>Valoriser le patrimoine minier national</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Groupe 4 (Sels) 
+        -->
+
+        <div class="slide">
+            <div class="content-grid">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">CLASSIFICATION</span>
+                        <h2 class="slide-title">Le Groupe 4 : Les Sels</h2>
+                    </div>
+                    <p class="mb-4">Le Code Minier classe les substances minérales en six groupes. Le sel appartient
+                        au
+                        <strong>quatrième Groupe</strong>.
+                    </p>
+                    <style>
+                        .chem-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                            gap: 1rem;
+                            margin-top: 1rem;
+                        }
+
+                        .chem-card {
+                            background: rgba(255, 255, 255, 0.1);
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(255, 255, 255, 0.2);
+                            border-radius: 12px;
+                            padding: 1rem;
+                            text-align: center;
+                            transition: all 0.3s ease;
+                            cursor: pointer;
+                            position: relative;
+                            overflow: hidden;
+                        }
+
+                        .chem-card:hover {
+                            transform: translateY(-5px) scale(1.05);
+                            background: rgba(255, 255, 255, 0.2);
+                            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                            border-color: var(--cnaf-blue);
+                        }
+
+                        .chem-symbol {
+                            font-size: 2.5rem;
+                            font-weight: 800;
+                            background: linear-gradient(135deg, var(--cnaf-blue), var(--accent-gold));
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            margin-bottom: 0.5rem;
+                            display: block;
+                        }
+
+                        .chem-name {
+                            font-weight: bold;
+                            color: var(--text-primary);
+                            font-size: 0.9rem;
+                            margin-bottom: 0.2rem;
+                        }
+
+                        .chem-formula {
+                            font-family: monospace;
+                            color: var(--text-secondary);
+                            font-size: 0.8rem;
+                            background: rgba(0, 0, 0, 0.05);
+                            padding: 2px 6px;
+                            border-radius: 4px;
+                        }
+
+                        .chem-decoration {
+                            position: absolute;
+                            top: -10px;
+                            right: -10px;
+                            font-size: 3rem;
+                            opacity: 0.1;
+                            transform: rotate(15deg);
+                        }
+
+                        @keyframes float {
+                            0% {
+                                transform: translateY(0px);
+                            }
+
+                            50% {
+                                transform: translateY(-5px);
+                            }
+
+                            100% {
+                                transform: translateY(0px);
+                            }
+                        }
+
+                        .chem-card.floating {
+                            animation: float 4s ease-in-out infinite;
+                        }
+                    </style>
+                    <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                        <div class="card-title" style="margin-bottom: 1rem;">Substances Couvertes</div>
+                        <div class="chem-grid">
+                            <!-- NaCl -->
+                            <div class="chem-card floating" style="animation-delay: 0s;">
+                                <div class="chem-decoration">🧂</div>
+                                <span class="chem-symbol">Cl</span>
+                                <div class="chem-name">Chlorures</div>
+                                <span class="chem-formula">NaCl</span>
+                            </div>
+                            <!-- Bromures -->
+                            <div class="chem-card floating" style="animation-delay: 0.5s;">
+                                <div class="chem-decoration">🧪</div>
+                                <span class="chem-symbol">Br</span>
+                                <div class="chem-name">Bromures</div>
+                                <span class="chem-formula">MgBr₂</span>
+                            </div>
+                            <!-- Iodures -->
+                            <div class="chem-card floating" style="animation-delay: 1s;">
+                                <div class="chem-decoration">🟣</div>
+                                <span class="chem-symbol">I</span>
+                                <div class="chem-name">Iodures</div>
+                                <span class="chem-formula">NaI</span>
+                            </div>
+                            <!-- Sulfates -->
+                            <div class="chem-card floating" style="animation-delay: 1.5s;">
+                                <div class="chem-decoration">🧼</div>
+                                <span class="chem-symbol">SO₄</span>
+                                <div class="chem-name">Sulfates</div>
+                                <span class="chem-formula">MgSo₄</span>
+                            </div>
+                            <!-- Nitrates -->
+                            <div class="chem-card floating" style="animation-delay: 2s;">
+                                <div class="chem-decoration">🌱</div>
+                                <span class="chem-symbol">NO₃</span>
+                                <div class="chem-name">Nitrates</div>
+                                <span class="chem-formula">KNO₃</span>
+                            </div>
+                            <!-- Autres -->
+                            <div class="chem-card floating" style="animation-delay: 2.5s;">
+                                <div class="chem-decoration">⚗️</div>
+                                <span class="chem-symbol">+</span>
+                                <div class="chem-name">Connexes</div>
+                                <span class="chem-formula">...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-gradient"
+                    style="padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="sel.png" alt="Carte des Concessions"
+                        style="width: 100%; height: auto; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Parcours Administratif -->
+        <div class="slide" id="investor-journey-slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">PROCÉDURES</span>
+                    <h2 class="slide-title">Parcours de l'Investisseur</h2>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2rem;">
+                    <div class="card text-center" style="width: 18%; font-size: 0.9rem;">
+                        <div style="font-weight: bold; color: var(--cnaf-blue); margin-bottom: 0.5rem;">1. Demande
+                        </div>
+                        Dépôt dossier<br />(Technique + Financier)
+                    </div>
+                    <div class="journey-step" style="color: var(--text-secondary);">➜</div>
+                    <div class="card text-center journey-step" style="width: 18%; font-size: 0.9rem;">
+                        <div style="font-weight: bold; color: var(--cnaf-blue); margin-bottom: 0.5rem;">2. Examen
+                        </div>
+                        Comité Consultatif<br />des Mines (CCM)
+                    </div>
+                    <div class="journey-step" style="color: var(--text-secondary);">➜</div>
+                    <div class="card text-center journey-step" style="width: 18%; font-size: 0.9rem;">
+                        <div style="font-weight: bold; color: var(--cnaf-blue); margin-bottom: 0.5rem;">3. Permis
+                        </div>
+                        Octroi Permis<br />de Recherche
+                    </div>
+                    <div class="journey-step" style="color: var(--text-secondary);">➜</div>
+                    <div class="card text-center journey-step" style="width: 18%; font-size: 0.9rem;">
+                        <div style="font-weight: bold; color: var(--cnaf-blue); margin-bottom: 0.5rem;">4. Études
+                        </div>
+                        Travaux de recherche<br />& Faisabilité
+                    </div>
+                    <div class="journey-step" style="color: var(--text-secondary);">➜</div>
+                    <div class="card text-center journey-step"
+                        style="width: 18%; font-size: 0.9rem; border-color: var(--accent-gold); background: rgba(212, 175, 55, 0.05);">
+                        <div style="font-weight: bold; color: var(--accent-gold); margin-bottom: 0.5rem;">5.
+                            Concession
+                        </div>
+                        Octroi de la Concession<br /> d'exploitation
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Permis de Recherche 
+         TODO : mettre en valeur transition
+         -->
+        <div class="slide">
+            <div class="content-grid">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">PHASE 1</span>
+                        <h2 class="slide-title">Permis de Recherche</h2>
+                    </div>
+                    <div class="card">
+                        <ul class="feature-list">
+                            <li><strong>Durée</strong> : 3 ans (renouvelable 2 fois)</li>
+                            <li><strong>Droit</strong> : Exclusivité sur le périmètre</li>
+                            <li><strong>Obligation</strong> : Réalisation du programme de travaux minimum</li>
+                        </ul>
+                    </div>
+                    <div class="tip tip-highlight mt-4">
+                        <div class="tip-title">💡 Transition</div>
+                        <p>La découverte d'un gisement exploitable donne <strong>droit</strong> à l'octroi d'une
+                            concession d'exploitation.</p>
+                    </div>
+                </div>
+                <div class="card card-gradient">
+                    <h3 class="mb-3">Critères d'Attribution</h3>
+                    <ul class="feature-list">
+                        <li>Capacités techniques (Expertise)</li>
+                        <li>Capacités financières (Solvabilité)</li>
+                        <li>Qualité du programme de travaux proposé</li>
+                        <li>Impact environnemental maîtrisé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Slide 18: Tableau Concessions 
+         TODO ajouter la liste complete des 26
+         -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge">DATA</span>
+                    <h2 class="slide-title">Liste des Concessions Actives </h2>
+                </div>
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concession</th>
+                                <th>Société</th>
+                                <th>Gouvernorat</th>
+                                <th>Substance</th>
+                                <th>Échéance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chott El Jerid</td>
+                                <td>Société du Sahara de Sel</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>22/04/2034</td>
+                            </tr>
+                            <tr>
+                                <td>Sidi El Hani</td>
+                                <td>Société Saïda</td>
+                                <td>Monastir</td>
+                                <td>Sels</td>
+                                <td>27/08/2026</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat El Maleh (Zarzis)</td>
+                                <td>Société MARE ALB</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>28/04/2028</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat El Ghorra</td>
+                                <td>Société MARE ALB</td>
+                                <td>Sfax et Mahdia</td>
+                                <td>Sels</td>
+                                <td>24/03/2044</td>
+                            </tr>
+                            <tr>
+                                <td>Tina</td>
+                                <td>Société MARE ALB</td>
+                                <td>Sfax</td>
+                                <td>Sels</td>
+                                <td>05/10/2029</td>
+                            </tr>
+                            <tr>
+                                <td>Saâhline</td>
+                                <td>Société MARE ALB</td>
+                                <td>Sousse</td>
+                                <td>Sels</td>
+                                <td>05/10/2029</td>
+                            </tr>
+                            <tr>
+                                <td>Mima / Sebkhat El Adhbat</td>
+                                <td>Société Tunisienne du Sel (TUNISAL)</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>28/10/2034</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat El Mehbel Nord</td>
+                                <td>Société Sel de Soleil</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>28/03/2041</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Oum El Khiyalat</td>
+                                <td>Société Salines de Tataouine</td>
+                                <td>Tataouine</td>
+                                <td>Sels</td>
+                                <td>29/08/2041</td>
+                            </tr>
+                            <tr>
+                                <td>El Kenais</td>
+                                <td>Société Tunisienne du Sel</td>
+                                <td>Sousse</td>
+                                <td>Sels</td>
+                                <td>02/12/2043</td>
+                            </tr>
+                            <tr>
+                                <td>Nour</td>
+                                <td>Tunisian Salt Company</td>
+                                <td>Sfax</td>
+                                <td>Sels</td>
+                                <td>26/12/2043</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat El Mechiguieg</td>
+                                <td>Société du Sel Solaire</td>
+                                <td>Sidi Bouzid</td>
+                                <td>Sels</td>
+                                <td>06/04/2047</td>
+                            </tr>
+                            <tr>
+                                <td>Touzouros</td>
+                                <td>Société El Djerid du Sel</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>29/11/2048</td>
+                            </tr>
+                            <tr>
+                                <td>El Djerid</td>
+                                <td>Société El Djerid du Sel Pur</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>06/05/2049</td>
+                            </tr>
+                            <tr>
+                                <td>Manchiya - Chott El Jerid</td>
+                                <td>Société Générale de Forage et d'Exploitation des Carrières</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>03/02/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Samara Nord</td>
+                                <td>Société Golden Salt</td>
+                                <td>Sfax</td>
+                                <td>Sels</td>
+                                <td>03/08/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Bouhlel</td>
+                                <td>Société Chott El Jerid du Sel</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>03/08/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Boujmal</td>
+                                <td>Mourad Mejaï</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>12/11/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Tader</td>
+                                <td>Jilani Jouili</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>12/11/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Bouchneba</td>
+                                <td>Société Moderne des Salines</td>
+                                <td>Kébili</td>
+                                <td>Sels</td>
+                                <td>18/11/2051</td>
+                            </tr>
+                            <tr>
+                                <td>Chott Gharbi</td>
+                                <td>Société Sel El Djerid</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>18/11/2051</td>
+                            </tr>
+                            <tr>
+                                <td>Adam</td>
+                                <td>Yasmine Ben Chikho</td>
+                                <td>Tozeur</td>
+                                <td>Sels</td>
+                                <td>30/11/2053</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Sidi El Hani Sud</td>
+                                <td>Société Générale des Travaux du Sahel</td>
+                                <td>Sousse et Mahdia</td>
+                                <td>Sels</td>
+                                <td>09/01/2041</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Sidi El Hani Nord</td>
+                                <td>Abdelkader Bouziane</td>
+                                <td>Sousse</td>
+                                <td>Sels</td>
+                                <td>09/01/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat El Mnikhra 2</td>
+                                <td>Badie Kooki</td>
+                                <td>Médenine</td>
+                                <td>Sels</td>
+                                <td>30/10/2050</td>
+                            </tr>
+                            <tr>
+                                <td>Sebkhat Sidi Khlifa</td>
+                                <td>Société Centrale de Vente en Gros des Matériaux de Construction</td>
+                                <td>Sousse</td>
+                                <td>Sels</td>
+                                <td>30/10/2040</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-2" style="font-size: 0.9rem; color: var(--text-secondary);">
+                    Total : 26 concessions actives couvrant tout le territoire.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18b: Concessions par Gouvernorat (Interactive) -->
+        <div class="slide">
+            <style>
+                .gov-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem;
+                    margin-top: 1.5rem;
+                }
+
+                .gov-card {
+                    background: var(--card-bg);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 12px;
+                    padding: 1.25rem 1.5rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .gov-card:hover {
+                    transform: translateY(-3px);
+                    border-color: var(--accent-gold);
+                    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+                }
+
+                .gov-card-left {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                }
+
+                .gov-card-star {
+                    color: var(--accent-gold);
+                    font-size: 1.1rem;
+                }
+
+                .gov-card-name {
+                    font-weight: 600;
+                    color: var(--cnaf-blue);
+                }
+
+                .gov-card-count {
+                    background: var(--cnaf-blue);
+                    color: white;
+                    padding: 0.35rem 0.85rem;
+                    border-radius: 20px;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                }
+
+                .gov-back-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.6rem 1.2rem;
+                    border: 1px solid var(--glass-border);
+                    background: var(--card-bg);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    color: var(--cnaf-blue);
+                    transition: all 0.2s ease;
+                    font-size: 0.9rem;
+                }
+
+                .gov-back-btn:hover {
+                    background: rgba(0, 59, 92, 0.05);
+                    border-color: var(--cnaf-blue);
+                }
+
+                .gov-detail-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                .gov-detail-badge {
+                    background: var(--accent-gold);
+                    color: white;
+                    padding: 0.4rem 0.9rem;
+                    border-radius: 6px;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                }
+
+                .gov-detail-title {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--cnaf-blue);
+                }
+
+                .concession-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    max-height: 380px;
+                    overflow-y: auto;
+                    padding-right: 0.5rem;
+                }
+
+                .concession-card {
+                    background: var(--card-bg);
+                    border: 1px solid var(--glass-border);
+                    border-radius: 12px;
+                    padding: 1.25rem;
+                    transition: all 0.2s ease;
+                }
+
+                .concession-card:hover {
+                    border-color: var(--accent-gold);
+                }
+
+                .concession-header {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.75rem;
+                }
+
+                .concession-star {
+                    color: var(--accent-gold);
+                    font-size: 1.1rem;
+                    margin-top: 0.1rem;
+                }
+
+                .concession-info {
+                    flex: 1;
+                }
+
+                .concession-name {
+                    font-weight: 600;
+                    color: var(--cnaf-blue);
+                    margin-bottom: 0.3rem;
+                }
+
+                .concession-company {
+                    font-size: 0.85rem;
+                    color: var(--text-secondary);
+                }
+
+                .concession-footer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 0.75rem;
+                    padding-top: 0.75rem;
+                    border-top: 1px solid var(--glass-border);
+                }
+
+                .concession-label {
+                    font-size: 0.75rem;
+                    color: var(--text-secondary);
+                }
+
+                .concession-exp {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: var(--cnaf-blue);
+                }
+
+                .gov-view-home,
+                .gov-view-detail {
+                    display: none;
+                }
+
+                .gov-view-home.active,
+                .gov-view-detail.active {
+                    display: block;
+                }
+            </style>
+            <div class="content-full">
+                <!-- Vue principale : Liste des gouvernorats -->
+                <div class="gov-view-home active" id="govViewHome">
+                    <div class="slide-header">
+                        <span class="section-badge">DATA</span>
+                        <h2 class="slide-title">Concessions par Gouvernorat</h2>
+                    </div>
+                    <div class="gov-grid">
+                        <div class="gov-card" onclick="showGovDetail('Tozeur')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Tozeur</span>
+                            </div>
+                            <span class="gov-card-count">7</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Médenine')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Médenine</span>
+                            </div>
+                            <span class="gov-card-count">6</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Sfax')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Sfax</span>
+                            </div>
+                            <span class="gov-card-count">4</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Sousse')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Sousse</span>
+                            </div>
+                            <span class="gov-card-count">4</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Monastir')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Monastir</span>
+                            </div>
+                            <span class="gov-card-count">1</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Mahdia')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Mahdia</span>
+                            </div>
+                            <span class="gov-card-count">1</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Tataouine')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Tataouine</span>
+                            </div>
+                            <span class="gov-card-count">1</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Sidi Bouzid')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Sidi Bouzid</span>
+                            </div>
+                            <span class="gov-card-count">1</span>
+                        </div>
+                        <div class="gov-card" onclick="showGovDetail('Kébili')">
+                            <div class="gov-card-left">
+                                <span class="gov-card-star">✦</span>
+                                <span class="gov-card-name">Kébili</span>
+                            </div>
+                            <span class="gov-card-count">1</span>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4"
+                        style="font-size: 0.9rem; color: var(--text-secondary); font-style: italic;">
+                        Total : 26 concessions actives · Cliquez sur un gouvernorat pour voir les détails
+                    </p>
+                </div>
+
+                <!-- Vue détail : Concessions d'un gouvernorat -->
+                <div class="gov-view-detail" id="govViewDetail">
+                    <div class="gov-detail-header">
+                        <button class="gov-back-btn" onclick="showGovHome()">← Retour</button>
+                        <span class="gov-detail-badge" id="govDetailCount">0</span>
+                        <h2 class="gov-detail-title" id="govDetailTitle">Gouvernorat</h2>
+                    </div>
+                    <div class="concession-grid" id="concessionGrid">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Data des concessions
+                const concessionsData = [
+                    { name: "Chott El Jerid", company: "Soc. du Sahara de Sel", gov: "Tozeur", exp: "2034" },
+                    { name: "Sidi El Hani", company: "Société Saïda", gov: "Monastir", exp: "2026" },
+                    { name: "Sebkhat El Maleh (Zarzis)", company: "MARE ALB", gov: "Médenine", exp: "2028" },
+                    { name: "Sebkhat El Ghorra", company: "MARE ALB", gov: "Sfax", exp: "2044" },
+                    { name: "Tina", company: "MARE ALB", gov: "Sfax", exp: "2029" },
+                    { name: "Saâhline", company: "MARE ALB", gov: "Sousse", exp: "2029" },
+                    { name: "Mima / Sebkhat El Adhbat", company: "TUNISAL", gov: "Médenine", exp: "2034" },
+                    { name: "Sebkhat El Mehbel Nord", company: "Sel de Soleil", gov: "Médenine", exp: "2041" },
+                    { name: "Sebkhat Oum El Khiyalat", company: "Salines de Tataouine", gov: "Tataouine", exp: "2041" },
+                    { name: "El Kenais", company: "TUNISAL", gov: "Sousse", exp: "2043" },
+                    { name: "Nour", company: "Tunisian Salt Company", gov: "Sfax", exp: "2043" },
+                    { name: "Sebkhat El Mechiguieg", company: "Soc. du Sel Solaire", gov: "Sidi Bouzid", exp: "2047" },
+                    { name: "Touzouros", company: "El Djerid du Sel", gov: "Tozeur", exp: "2048" },
+                    { name: "El Djerid", company: "El Djerid du Sel Pur", gov: "Tozeur", exp: "2049" },
+                    { name: "Manchiya", company: "SGFEC", gov: "Tozeur", exp: "2050" },
+                    { name: "Sebkhat Samara Nord", company: "Golden Salt", gov: "Sfax", exp: "2050" },
+                    { name: "Bouhlel", company: "Chott El Jerid du Sel", gov: "Tozeur", exp: "2050" },
+                    { name: "Sebkhat Boujmal", company: "Mourad Mejaï", gov: "Médenine", exp: "2050" },
+                    { name: "Sebkhat Tader", company: "Jilani Jouili", gov: "Médenine", exp: "2050" },
+                    { name: "Bouchneba", company: "Soc. Moderne des Salines", gov: "Kébili", exp: "2051" },
+                    { name: "Chott Gharbi", company: "Sel El Djerid", gov: "Tozeur", exp: "2051" },
+                    { name: "Adam", company: "Yasmine Ben Chikho", gov: "Tozeur", exp: "2053" },
+                    { name: "Sidi El Hani Sud", company: "SGTS", gov: "Mahdia", exp: "2041" },
+                    { name: "Sidi El Hani Nord", company: "Abdelkader Bouziane", gov: "Sousse", exp: "2050" },
+                    { name: "Sebkhat El Mnikhra 2", company: "Badie Kooki", gov: "Médenine", exp: "2050" },
+                    { name: "Sebkhat Sidi Khlifa", company: "SCVGMC", gov: "Sousse", exp: "2040" }
+                ];
+
+                function showGovDetail(govName) {
+                    const filtered = concessionsData.filter(c => c.gov === govName);
+                    document.getElementById('govDetailTitle').textContent = govName;
+                    document.getElementById('govDetailCount').textContent = filtered.length;
+
+                    const grid = document.getElementById('concessionGrid');
+                    grid.innerHTML = filtered.map(c => `
+                        <div class="concession-card">
+                            <div class="concession-header">
+                                <span class="concession-star">✦</span>
+                                <div class="concession-info">
+                                    <div class="concession-name">${c.name}</div>
+                                    <div class="concession-company">${c.company}</div>
+                                    <div class="concession-footer">
+                                        <span class="concession-label">Échéance</span>
+                                        <span class="concession-exp">${c.exp}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    document.getElementById('govViewHome').classList.remove('active');
+                    document.getElementById('govViewDetail').classList.add('active');
+                }
+
+                function showGovHome() {
+                    document.getElementById('govViewDetail').classList.remove('active');
+                    document.getElementById('govViewHome').classList.add('active');
+                }
+            </script>
+        </div>
+
+        <!-- Slide 19: Droits et Obligations -->
+        <div class="slide">
+            <div class="content-grid">
+                <div>
+                    <div class="slide-header">
+                        <span class="section-badge">RÈGLES</span>
+                        <h2 class="slide-title">Droits & Devoirs</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-green);">✅ Droits</div>
+                        <ul class="feature-list">
+                            <li>Exploitation exclusive</li>
+                            <li>Libre commercialisation (Export)</li>
+                            <li>Occupation des terrains nécessaires</li>
+                            <li>Utilisation des ressources en eau (sous conditions)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="slide-header" style="visibility: hidden;">
+                        <h2 class="slide-title">.</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-red);">⚠️ Obligations</div>
+                        <ul class="feature-list">
+                            <li>Respect du cahier des charges</li>
+                            <li>Protection de l'environnement (Étude d'impact)</li>
+                            <li>Reporting régulier (Production, Ventes)</li>
+                            <li>Paiement des redevances et impôts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Réforme -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge">FUTUR</span>
+                    <h2 class="slide-title">Réforme du Code Minier</h2>
+                </div>
+                <p class="mb-4">Une modernisation est en cours pour aligner la Tunisie sur les meilleurs standards
+                    internationaux et attirer davantage d'investissements.</p>
+                <div class="mt-4">
+                    <div class="card">
+                        <div class="card-title">Objectifs</div>
+                        <ul class="feature-list">
+                            <li>Renforcer la souveraineté de l’État sur les ressources naturelles</li>
+                            <li>Améliorer l’attractivité du secteur minier</li>
+                            <li>Simplifier et accélérer les procédures</li>
+                            <li>Revoir et stabiliser le régime fiscal et douanier</li>
+                            <li>Donner plus de transparence et de visibilité aux investisseurs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- SECTION 4: PERSPECTIVES STRATÉGIQUES -->
+
+        <!-- Transition Slide 3 -->
+        <div class="slide transition-slide">
+            <div class="content-full text-center">
+                <div class="transition-number">03</div>
+                <h2 class="transition-title">Perspectives</h2>
+            </div>
+        </div>
+
+        <!-- Slide 23: Vision Or Blanc (WOW Improved) -->
+        <div class="slide">
+            <div class="content-full text-center">
+                <div class="slide-header" style="justify-content: center;">
+                    <span class="section-badge">VISION</span>
+                    <h2 class="slide-title">Au-delà du Sel : L'Or Blanc</h2>
+                </div>
+                <p class="hero-subtitle">Le chlorure de sodium (NaCl) n'est que la partie visible de l'iceberg. La
+                    véritable valeur réside dans les <strong>saumures mères</strong>.</p>
+                <div class="grid-3">
+                    <div class="card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔋</div>
+                        <h3>Lithium</h3>
+                        <p>Batteries & Stockage</p>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌾</div>
+                        <h3>Potassium</h3>
+                        <p>Engrais & Agriculture</p>
+                    </div>
+                    <div class="card">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🧪</div>
+                        <h3>Bromure</h3>
+                        <p>Industrie Pharmaceutique</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- SECTION 5: APPEL À L'ACTION -->
+
+        <!-- Slide 36: Pourquoi Investir Maintenant ? -->
+        <div class="slide">
+            <div class="content-full text-center">
+                <div class="slide-header" style="justify-content: center;">
+                    <span class="section-badge">TIMING</span>
+                    <h2 class="slide-title">Le TIMING est Parfait</h2>
+                </div>
+                <div class="mt-4" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div class="card" style="flex: 0 1 300px;">
+                        <div style="font-size: 3rem;">📍ˆ</div>
+                        <h3>Demande</h3>
+                        <p>Pic de demande mondiale pour les minéraux stratégiques.</p>
+                    </div>
+                    <div class="card" style="flex: 0 1 300px;">
+                        <div style="font-size: 3rem;">📜</div>
+                        <h3>Réforme</h3>
+                        <p>Cadre légal en modernisation pour plus de flexibilité.</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button class="btn-primary" style="font-size: 1.2rem;">Saisir l'Opportunité</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slide 40: Contacts -->
+        <!-- Slide 40: Contacts -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header" style="justify-content: center;">
+                    <span class="section-badge">RÉSEAU</span>
+                    <h2 class="slide-title">Vos Interlocuteurs</h2>
+                </div>
+                <div class="card"
+                    style="display: flex; align-items: center; gap: 3rem; max-width: 1000px; margin: 2rem auto; padding: 3rem;">
+                    <img src="minister.jpg" alt="Ministre"
+                        style="width: 250px; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <div style="text-align: left;">
+                        <div class="card-title" style="font-size: 2rem; margin-bottom: 1.5rem; line-height: 1.2;">
+                            Ministère de l'Industrie, des Mines et de l'Énergie</div>
+                        <p style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-secondary);">Direction
+                            Générale des Mines</p>
+                        <p
+                            style="color: var(--cnaf-blue); font-weight: bold; font-size: 1.5rem; margin-bottom: 0.5rem;">
+                            contact@energiemines.gov.tn</p>
+                        <p style="color: var(--cnaf-blue); font-weight: bold; font-size: 1.5rem;">71 951 517</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- SECTION 6: CONCLUSION -->
+
+        <!-- Slide 43: Synthèse -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge">RÉSUMÉ</span>
+                    <h2 class="slide-title">Ce qu'il faut retenir</h2>
+                </div>
+                <div class="card">
+                    <ul class="feature-list">
+                        <li><strong>Ressource Abondante</strong> : 26 concessions, potentiel inexploré.</li>
+                        <li><strong>Cadre Clair</strong> : Code Minier robuste, réforme attractive.</li>
+                        <li><strong>Avenir Stratégique</strong> : Lithium, Potassium, Économie Circulaire.</li>
+                        <li><strong>Rentabilité</strong> : Coûts compétitifs, fiscalité avantageuse.</li>
+                        <li><strong>Partenariat</strong> : L'État tunisien vous accompagne.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 45: Merci -->
+        <div class="slide">
+            <div class="content-full text-center">
+                <h1 class="hero-title">Merci</h1>
+                <p class="hero-subtitle">Ensemble, valorisons l'Or Blanc de Tunisie.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <nav>
+        <button class="btn-secondary" onclick="prevSlide()">← Précédent</button>
+        <button class="btn-primary" onclick="nextSlide()">Suivant →</button>
+    </nav>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressFill = document.getElementById('progress');
+        const currentEl = document.getElementById('current');
+        const totalEl = document.getElementById('total');
+
+        totalEl.textContent = totalSlides;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            // Update Progress
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentEl.textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            // Check for Investor Journey Slide
+            const currentSlideEl = slides[currentSlide];
+            if (currentSlideEl.id === 'investor-journey-slide') {
+                const hiddenSteps = currentSlideEl.querySelectorAll('.journey-step:not(.visible)');
+                if (hiddenSteps.length > 0) {
+                    // Reveal next step (Arrow + Card)
+                    hiddenSteps[0].classList.add('visible');
+                    // If it was an arrow, reveal the card too
+                    if (hiddenSteps.length > 1) {
+                        hiddenSteps[1].classList.add('visible');
+                    }
+                    return;
+                }
+            }
+
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Click Navigation (for presentation feel)
+        document.addEventListener('click', (e) => {
+            // Ignore clicks on buttons, links, or specific interactive elements
+            if (e.target.closest('button') || e.target.closest('a') || e.target.closest('.gov-card')) return;
+            nextSlide();
+        });
+
+        // Initialize
+        updateSlide();
+
+        // 3D Tilt Effect
+        document.querySelectorAll('.card').forEach(card => {
+            // Add glare element
+            const glare = document.createElement('div');
+            glare.className = 'card-glare';
+            card.appendChild(glare);
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg rotation
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+                // Glare effect
+                glare.style.opacity = '1';
+                glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3), transparent 60%)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                glare.style.opacity = '0';
+            });
+        });
+    </script>
+    <img src="tunisie.jpg" alt="Drapeau Tunisie" class="floating-flag">
+</body>
+
+</html>
