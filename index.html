@@ -504,117 +504,6 @@
             font-size: 1.25rem;
         }
 
-        /* TOC Items - Editorial Magazine Style */
-        .toc-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.6rem 2rem;
-        }
-
-        .toc-entry {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 0;
-            cursor: pointer;
-            position: relative;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .toc-entry::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--rakuten-red), var(--accent-purple));
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .toc-entry:hover::before {
-            width: 100%;
-        }
-
-        .toc-entry:hover {
-            transform: translateX(6px);
-        }
-
-        .toc-entry:hover .toc-num {
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            color: white;
-            transform: scale(1.1) rotate(-2deg);
-        }
-
-        .toc-entry:hover .toc-title {
-            color: var(--rakuten-red);
-        }
-
-        .toc-num {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            min-width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            color: var(--rakuten-red);
-            border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .toc-content {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .toc-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-main);
-            transition: color 0.3s ease;
-            letter-spacing: -0.01em;
-        }
-
-        .toc-page {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            opacity: 0.7;
-            padding: 0.2rem 0.5rem;
-            background: rgba(0,0,0,0.03);
-            border-radius: 4px;
-        }
-
-        /* Staggered animation for TOC entries */
-        .slide.active .toc-entry {
-            animation: tocSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        }
-        .slide.active .toc-entry:nth-child(1) { animation-delay: 0.05s; }
-        .slide.active .toc-entry:nth-child(2) { animation-delay: 0.1s; }
-        .slide.active .toc-entry:nth-child(3) { animation-delay: 0.15s; }
-        .slide.active .toc-entry:nth-child(4) { animation-delay: 0.2s; }
-        .slide.active .toc-entry:nth-child(5) { animation-delay: 0.25s; }
-        .slide.active .toc-entry:nth-child(6) { animation-delay: 0.3s; }
-
-        @keyframes tocSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         /* Tags */
         .tag {
             display: inline-block;
@@ -651,7 +540,7 @@
         }
 
         .feature-list li::before {
-            content: '→';
+            content: '\2192';
             color: var(--accent-green);
             font-weight: bold;
             font-size: 1.3rem;
@@ -911,118 +800,13 @@
         .mt-1 { margin-top: 0.5rem; }
         .mt-2 { margin-top: 1rem; }
 
-        /* ===== PDF Export Button ===== */
-        .pdf-export-btn {
-            background: linear-gradient(135deg, var(--rakuten-red), var(--rakuten-dark));
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(191, 0, 0, 0.3);
-        }
-        .pdf-export-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(191, 0, 0, 0.4);
-        }
-        .pdf-export-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: white;
-        }
-
-        /* ===== Print / PDF Styles ===== */
         @media print {
-            @page {
-                size: landscape;
-                margin: 0;
-            }
-
-            body {
-                overflow: visible;
-                height: auto;
-                background: white;
-                background-image: none;
-            }
-
-            header {
-                position: relative;
-                box-shadow: none;
-                border-bottom: 2px solid rgba(191, 0, 0, 0.15);
-                backdrop-filter: none;
-                background: white;
-                break-after: avoid;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            main {
-                position: relative;
-                height: auto;
-                overflow: visible;
-            }
-
             .slide {
-                position: relative;
-                opacity: 1 !important;
-                transform: none !important;
-                pointer-events: all;
-                display: flex !important;
                 page-break-after: always;
-                break-after: page;
-                min-height: 100vh;
-                width: 100%;
-                padding: 1.5rem 3rem;
-                animation: none !important;
+                min-height: auto;
+                padding: 1rem;
             }
-
-            .slide:last-child {
-                page-break-after: avoid;
-                break-after: avoid;
-            }
-
-            .slide.prev,
-            .slide:not(.active) {
-                opacity: 1 !important;
-                transform: none !important;
-                display: flex !important;
-            }
-
-            /* Force color rendering */
-            .section-badge,
-            .metric-card,
-            .card,
-            .logo-icon,
-            .toc-number,
-            .info-box,
-            .success-box,
-            .warning-box,
-            table th,
-            .tag,
-            .hero-title .accent {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            /* Remove all animations for print */
-            *, *::before, *::after {
-                animation: none !important;
-                transition: none !important;
-            }
-
-            /* Hide interactive elements */
-            nav,
-            .progress-bar,
-            .pdf-export-btn {
-                display: none !important;
-            }
+            nav { display: none; }
         }
     </style>
 </head>
@@ -1042,8 +826,9 @@
         <div class="header-right">
             <div class="institution-badge">
                 <div class="institution-info">
-                    <div class="institution-label">Formation</div>
+                    <div class="institution-label">Formation RNCP</div>
                     <div class="institution-name">DataScientest</div>
+                    <div class="institution-sub">Mines Paris-PSL</div>
                 </div>
             </div>
         </div>
@@ -1051,225 +836,136 @@
 
     <main id="slides-container">
 
-        <!-- ===================== SLIDE 0: COVER ===================== -->
+        <!-- ===================== SLIDE 1: COVER ===================== -->
         <div class="slide active">
             <div class="content-full text-center">
                 <h1 class="hero-title">Classification <span class="accent">Multimodale</span><br>
                     <span style="font-size: 0.5em; font-weight: 500;">Produits E-Commerce — Challenge Rakuten France</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Approche hybride combinant <strong>texte</strong> et <strong>image</strong> avec un système de vote innovant
-                    pour classifier automatiquement des produits parmi 27 catégories.
+                    Approche hybride combinant <strong>texte</strong> et <strong>image</strong> avec un systeme de vote innovant
+                    pour classifier automatiquement des produits parmi 27 categories.
                 </p>
 
                 <div class="grid-4 mt-2">
                     <div class="metric-card">
                         <div class="metric-value">84 916</div>
-                        <div class="metric-label">Produits analysés</div>
+                        <div class="metric-label">Produits</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-value">27</div>
-                        <div class="metric-label">Catégories</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value">92%</div>
-                        <div class="metric-label">Accuracy Image</div>
+                        <div class="metric-label">Categories</div>
                     </div>
                     <div class="metric-card warning">
+                        <div class="metric-value">~79%</div>
+                        <div class="metric-label">Image</div>
+                    </div>
+                    <div class="metric-card success">
                         <div class="metric-value">83%</div>
-                        <div class="metric-label">Accuracy Texte</div>
+                        <div class="metric-label">Texte</div>
                     </div>
                 </div>
 
                 <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
                     <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
-                    <span style="color: var(--rakuten-red);">•</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
                     <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
-                    <span style="color: var(--rakuten-red);">•</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
                     <span style="font-weight: 600; color: var(--text-main);">Hery M. Ralaimanantsoa</span>
-                    <span style="color: var(--rakuten-red);">•</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
                     <span style="font-weight: 600; color: var(--text-main);">Oussama Akir</span>
                 </div>
 
                 <div style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">
-                    <strong>Mentor : Antoine</strong> — Février 2026
+                    <strong>Mentor : Antoine</strong> &#8212; Fevrier 2026
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 1: EQUIPE ===================== -->
+        <!-- ===================== SLIDE 2: EQUIPE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header" style="border-bottom: none; margin-bottom: 0.8rem;">
                     <h2 class="slide-title" style="font-size: 2.2rem; letter-spacing: -0.03em;">
-                        <span style="color: var(--rakuten-red);">—</span> L'Équipe & Contributions
+                        <span style="color: var(--rakuten-red);">&#8212;</span> L'Equipe &amp; Contributions
                     </h2>
                 </div>
                 <div class="grid-2" style="gap: 1.5rem; margin-top: 1rem;">
                     <div class="card" style="border-left: 4px solid var(--rakuten-red);">
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Johan Frachon</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Pipeline Image & Voting System</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Pipeline Image &amp; Voting System</p>
                         <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
-                            <li>DINOv3 + MLP (91.4%)</li>
-                            <li>EfficientNet-B0 & XGBoost</li>
-                            <li>Voting System (92%)</li>
+                            <li>DINOv3 + MLP (79.43%)</li>
+                            <li>EfficientNet-B0 &amp; XGBoost</li>
                             <li>Calibration Sharpening</li>
                         </ul>
                     </div>
                     <div class="card" style="border-left: 4px solid #3b82f6;">
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Liviu Andronic</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">NLP & Expert Technique</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">NLP &amp; Expert Technique</p>
                         <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
                             <li>LinearSVC (83%)</li>
-                            <li>Fusion multimodale (~94%)</li>
-                            <li>Optimisation GridSearch</li>
-                            <li>Explicabilité (SHAP, LIME)</li>
+                            <li>Fusion multimodale (F1~0.85)</li>
+                            <li>GridSearch, SHAP</li>
                         </ul>
                     </div>
                     <div class="card" style="border-left: 4px solid #10b981;">
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Hery M. Ralaimanantsoa</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Données & Preprocessing Texte</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Donnees &amp; Preprocessing Texte</p>
                         <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
                             <li>Exploration dataset (84 916 produits)</li>
                             <li>Nettoyage HTML, gestion NaN</li>
                             <li>TF-IDF 280K features</li>
-                            <li>Analyse du déséquilibre</li>
                         </ul>
                     </div>
                     <div class="card" style="border-left: 4px solid #f59e0b;">
                         <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Oussama Akir</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Image & Intégration</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Image &amp; Integration</p>
                         <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
                             <li>Pipeline image</li>
                             <li>Application Streamlit</li>
-                            <li>Intégration multimodale</li>
-                            <li>Présentation & Démo</li>
+                            <li>Multimodal, Demo</li>
                         </ul>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">
-                    <strong>Mentor :</strong> Antoine — DataScientest × Mines Paris-PSL
+                    <strong>Mentor :</strong> Antoine &#8212; DataScientest &#215; Mines Paris-PSL
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 2: SOMMAIRE ===================== -->
+        <!-- ===================== SLIDE 3: NOTRE MISSION ===================== -->
         <div class="slide">
             <div class="content-single">
-                <div class="slide-header" style="border-bottom: none; margin-bottom: 0.8rem;">
-                    <h2 class="slide-title" style="font-size: 2.2rem; letter-spacing: -0.03em;">
-                        <span style="color: var(--rakuten-red);">—</span> Sommaire
-                    </h2>
+                <div class="slide-header">
+                    <span class="section-badge">Contexte</span>
+                    <h2 class="slide-title">Notre Mission</h2>
                 </div>
 
-                <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; font-style: italic;">
-                    Classification multimodale en 11 étapes clés
-                </p>
-
-                <div class="toc-grid">
-                    <!-- Colonne 1 -->
-                    <div>
-                        <div class="toc-entry" onclick="goToSlide(2)">
-                            <div class="toc-num">01</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Le Challenge Rakuten</span>
-                                <span class="toc-page">03</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(3)">
-                            <div class="toc-num">02</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Déséquilibre des Classes</span>
-                                <span class="toc-page">04</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(4)">
-                            <div class="toc-num">03</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Preprocessing</span>
-                                <span class="toc-page">05</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(5)">
-                            <div class="toc-num">04</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Modélisation Texte</span>
-                                <span class="toc-page">06</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(6)">
-                            <div class="toc-num">05</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Modélisation Image</span>
-                                <span class="toc-page">07</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(7)">
-                            <div class="toc-num">06</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Voting System</span>
-                                <span class="toc-page">08</span>
-                            </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-orange);">Le Probleme</div>
+                        <div class="warning-box" style="margin-top: 0.5rem;">
+                            <p style="font-size: 1.15rem;">Classification manuelle : <strong>5 min/produit</strong>, 10-15% d'erreur, non-scalable pour des millions de produits.</p>
                         </div>
                     </div>
-                    <!-- Colonne 2 -->
-                    <div>
-                        <div class="toc-entry" onclick="goToSlide(8)">
-                            <div class="toc-num">07</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Fusion Multimodale</span>
-                                <span class="toc-page">09</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(9)">
-                            <div class="toc-num">08</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Architecture End-to-End</span>
-                                <span class="toc-page">10</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(10)">
-                            <div class="toc-num">09</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Explicabilité</span>
-                                <span class="toc-page">11</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(11)">
-                            <div class="toc-num">10</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Exemples de Prédictions</span>
-                                <span class="toc-page">12</span>
-                            </div>
-                        </div>
-                        <div class="toc-entry" onclick="goToSlide(12)">
-                            <div class="toc-num">11</div>
-                            <div class="toc-content">
-                                <span class="toc-title">Conclusion & Perspectives</span>
-                                <span class="toc-page">13</span>
-                            </div>
+
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-green);">Notre Solution</div>
+                        <div class="success-box" style="margin-top: 0.5rem;">
+                            <p style="font-size: 1.15rem;">IA multimodale : <strong>&lt;1s/produit</strong>, 27 categories, F1~0.85, deploiement Streamlit.</p>
                         </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
-                        <span style="width: 12px; height: 12px; background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); border-radius: 50%;"></span>
-                        Texte : 83%
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
-                        <span style="width: 12px; height: 12px; background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple)); border-radius: 50%;"></span>
-                        Image : 92%
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
-                        <span style="width: 12px; height: 12px; background: linear-gradient(135deg, var(--accent-orange), var(--warning)); border-radius: 50%;"></span>
-                        Fusion : ~94%
-                    </div>
+                <div class="info-box mt-2" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Soutenance RNCP &#8212; Ingenieur Machine Learning</div>
+                    <p>DataScientest &#215; Mines Paris-PSL &#8212; Promotion Octobre 2025. <strong>Plongeons dans la technique.</strong></p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 2: CHALLENGE ===================== -->
+        <!-- ===================== SLIDE 4: CHALLENGE RAKUTEN ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
@@ -1280,17 +976,17 @@
                 <div class="grid-2">
                     <div>
                         <div class="warning-box">
-                            <div class="warning-box-title">🎯 Objectif</div>
-                            <p>Classifier automatiquement des produits e-commerce parmi <strong>27 catégories</strong> en utilisant le texte (titre + description) et l'image du produit.</p>
+                            <div class="warning-box-title">Objectif</div>
+                            <p>Classifier automatiquement des produits e-commerce parmi <strong>27 categories</strong> en utilisant texte + image.</p>
                         </div>
 
                         <div class="card" style="padding: 0.7rem 1rem; margin-top: 0.5rem;">
                             <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0.2rem;">Enjeux Business</div>
                             <ul class="feature-list" style="font-size: 0.95rem;">
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Améliorer l'expérience de recherche</li>
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Réduire le taux de rebond</li>
+                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Ameliorer l'experience de recherche</li>
+                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Reduire le taux de rebond</li>
                                 <li style="padding: 0.15rem 0; font-size: 0.95rem;">Automatiser millions de produits/jour</li>
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Traiter données multilingues</li>
+                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Traiter donnees multilingues</li>
                             </ul>
                         </div>
                     </div>
@@ -1307,7 +1003,7 @@
                             </div>
                             <div class="metric-card success">
                                 <div class="metric-value">27</div>
-                                <div class="metric-label">Catégories</div>
+                                <div class="metric-label">Categories</div>
                             </div>
                             <div class="metric-card warning">
                                 <div class="metric-value">35%</div>
@@ -1316,30 +1012,74 @@
                         </div>
 
                         <div class="info-box mt-1">
-                            <div class="info-box-title">📊 Métrique d'évaluation</div>
-                            <p><strong>F1-Score weighted</strong> : prend en compte le déséquilibre des classes.</p>
+                            <div class="info-box-title">Metrique d'evaluation</div>
+                            <p><strong>F1-Score weighted</strong> : prend en compte le desequilibre des classes.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 3: DÉSÉQUILIBRE ===================== -->
+        <!-- ===================== SLIDE 5: DATASET EN CHIFFRES ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
-                    <span class="section-badge data">Données</span>
-                    <h2 class="slide-title">Déséquilibre des Classes</h2>
+                    <span class="section-badge data">Donnees</span>
+                    <h2 class="slide-title">Le Dataset en Chiffres</h2>
                 </div>
 
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">L'analyse révèle un <strong>déséquilibre significatif</strong> constituant un défi majeur du projet.</p>
+                <div class="grid-3 mt-2">
+                    <div class="metric-card" style="padding: 1.8rem;">
+                        <div class="metric-value">84 916</div>
+                        <div class="metric-label">Produits Train</div>
+                    </div>
+                    <div class="metric-card" style="padding: 1.8rem;">
+                        <div class="metric-value">27</div>
+                        <div class="metric-label">Categories</div>
+                    </div>
+                    <div class="metric-card" style="padding: 1.8rem;">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">Langues</div>
+                    </div>
+                </div>
+
+                <div class="grid-3 mt-1">
+                    <div class="metric-card warning">
+                        <div class="metric-value" style="font-size: 2.4rem;">35%</div>
+                        <div class="metric-label">Descriptions NaN</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="font-size: 2.4rem;">500&#215;500</div>
+                        <div class="metric-label">Images px</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-value" style="font-size: 2.4rem;">13&#215;</div>
+                        <div class="metric-label">Ratio Desequilibre</div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-1" style="text-align: center;">
+                    <p><strong>Texte :</strong> designation + description (courte, 8 mots en moyenne). <strong>Image :</strong> photos produit JPEG.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 6: DESEQUILIBRE ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge data">Donnees</span>
+                    <h2 class="slide-title">Desequilibre des Classes</h2>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">L'analyse revele un <strong>desequilibre significatif</strong> constituant un defi majeur du projet.</p>
 
                 <div class="grid-2">
                     <div>
                         <table>
                             <tr>
                                 <th>Rang</th>
-                                <th>Catégorie</th>
+                                <th>Categorie</th>
                                 <th>Effectif</th>
                                 <th>%</th>
                             </tr>
@@ -1357,7 +1097,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Déco</td>
+                                <td>Deco</td>
                                 <td>4 996</td>
                                 <td>5.9%</td>
                             </tr>
@@ -1379,7 +1119,7 @@
                     <div>
                         <div class="grid-2" style="gap: 0.8rem;">
                             <div class="metric-card warning">
-                                <div class="metric-value">13×</div>
+                                <div class="metric-value">13&#215;</div>
                                 <div class="metric-label">Ratio Max/Min</div>
                             </div>
                             <div class="metric-card">
@@ -1389,7 +1129,7 @@
                         </div>
 
                         <div class="success-box mt-1">
-                            <div class="success-box-title">✅ Solutions adoptées</div>
+                            <div class="success-box-title">Solutions adoptees</div>
                             <p>
                                 <span class="tag tag-green">class_weight='balanced'</span>
                                 <span class="tag tag-blue">F1-Score weighted</span>
@@ -1401,80 +1141,523 @@
             </div>
         </div>
 
-        <!-- ===================== SLIDE 4: PREPROCESSING ===================== -->
+        <!-- ===================== SLIDE 7: PREPROCESSING TEXTE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
                     <span class="section-badge">Pipeline</span>
-                    <h2 class="slide-title">Preprocessing</h2>
+                    <h2 class="slide-title">Preprocessing Texte &#8212; TF-IDF</h2>
                 </div>
 
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-icon">📝</div>
-                        <div class="card-title">Pipeline Texte — TF-IDF</div>
+                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F4DD;</div>
 
-                        <div class="dataflow-container" style="justify-content: flex-start; margin: 1rem 0;">
-                            <div class="dataflow-box">HTML+NaN</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box">Clean</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box">Concat</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box highlight-box">TF-IDF</div>
-                        </div>
-
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">FeatureUnion combinant :</p>
-                        <div class="mt-1">
-                            <span class="tag tag-blue">Word n-grams (1,2)</span>
-                            <span class="tag tag-purple">Char n-grams (3,5)</span>
-                            <span class="tag tag-green">280K features</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">🖼️</div>
-                        <div class="card-title">Pipeline Image — Transfer Learning</div>
-
-                        <div class="dataflow-container" style="justify-content: flex-start; margin: 1rem 0;">
-                            <div class="dataflow-box">500×500</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box">224×224</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box">Normalize</div>
-                            <span class="dataflow-arrow">→</span>
-                            <div class="dataflow-box highlight-box">CNN</div>
-                        </div>
-
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">Extraction de features via :</p>
-                        <div class="mt-1">
-                            <span class="tag tag-red">DINOv3 (1024)</span>
-                            <span class="tag tag-green">EfficientNet-B0</span>
-                            <span class="tag tag-orange">Pre-trained weights</span>
-                        </div>
-                    </div>
+                <div class="dataflow-container">
+                    <div class="dataflow-box">HTML+NaN</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box">Clean</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box">Concat</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box highlight-box">TF-IDF</div>
                 </div>
 
-                <div class="info-box mt-1">
-                    <div class="info-box-title">💡 Justification</div>
-                    <p>La combinaison <strong>word + char TF-IDF</strong> capture sémantique et morphologie, robuste aux fautes d'orthographe et textes multilingues.</p>
+                <ul class="feature-list" style="max-width: 900px; margin: 0 auto;">
+                    <li>Nettoyage HTML, suppression accents, gestion NaN (35%)</li>
+                    <li>Detection de langue (5 langues) + traduction FR</li>
+                    <li>FeatureUnion : Word n-grams (1,2) + Char n-grams (3,5)</li>
+                    <li><strong>Pas de lemmatisation</strong> &#8212; preserve les marques (iPhone, PlayStation)</li>
+                </ul>
+
+                <div class="success-box mt-2" style="text-align: center;">
+                    <p><strong>Resultat :</strong> 280K features TF-IDF &#8212; robuste aux fautes, au multilingue, et aux noms de marques.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 5: TEXTE ===================== -->
+        <!-- ===================== SLIDE 8: PREPROCESSING IMAGE ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge">Pipeline</span>
+                    <h2 class="slide-title">Preprocessing Image &#8212; Transfer Learning</h2>
+                </div>
+
+                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F5BC;&#xFE0F;</div>
+
+                <div class="dataflow-container">
+                    <div class="dataflow-box">500&#215;500</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box">224&#215;224</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box">Normalize</div>
+                    <span class="dataflow-arrow">&#8594;</span>
+                    <div class="dataflow-box highlight-box">Features</div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <div class="card-title" style="font-size: 1.15rem;">DINOv3</div>
+                        <div class="card-text" style="font-size: 1rem;">ViT-Large self-supervised (Meta)</div>
+                        <div style="margin-top: auto; padding-top: 0.5rem;">
+                            <span class="tag tag-purple">1024 features</span>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                        <div class="card-title" style="font-size: 1.15rem;">EfficientNet</div>
+                        <div class="card-text" style="font-size: 1rem;">CNN B0 lightweight (5.3M params)</div>
+                        <div style="margin-top: auto; padding-top: 0.5rem;">
+                            <span class="tag tag-blue">1280 features</span>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-green);">
+                        <div class="card-title" style="font-size: 1.15rem;">ResNet50</div>
+                        <div class="card-text" style="font-size: 1rem;">Feature extractor pour XGBoost</div>
+                        <div style="margin-top: auto; padding-top: 0.5rem;">
+                            <span class="tag tag-green">2048 features</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-1" style="text-align: center;">
+                    <p>Normalisation ImageNet (mean/std). Pas de fine-tuning : extraction de features directe.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 9: POSITIONNEMENT SOTA ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge">Contexte</span>
+                    <h2 class="slide-title">Positionnement vs Etat de l'Art</h2>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Approche</th>
+                        <th>Architecture</th>
+                        <th>Fusion</th>
+                        <th>F1</th>
+                        <th>Contrainte</th>
+                    </tr>
+                    <tr>
+                        <td>Gagnant Rakuten 2020</td>
+                        <td>CamemBERT + ResNet152</td>
+                        <td>Late Fusion</td>
+                        <td>91.4%</td>
+                        <td><span class="tag tag-red">GPU massif</span></td>
+                    </tr>
+                    <tr>
+                        <td>SOTA 2024-2025</td>
+                        <td>Transformers multimodaux</td>
+                        <td>Attention fusion</td>
+                        <td>94-95%</td>
+                        <td><span class="tag tag-red">Infrastructure lourde</span></td>
+                    </tr>
+                    <tr style="background: rgba(16, 185, 129, 0.1);">
+                        <td class="highlight">Notre approche</td>
+                        <td class="highlight">TF-IDF + Voting + Late Fusion</td>
+                        <td>Late Fusion</td>
+                        <td class="highlight">~85%</td>
+                        <td><span class="tag tag-green">CPU-friendly</span></td>
+                    </tr>
+                </table>
+
+                <div class="grid-2 mt-1">
+                    <div class="info-box">
+                        <div class="info-box-title">Pourquoi 85% et pas 91% ?</div>
+                        <p>Nos choix : pas de CamemBERT (GPU), pas de fine-tuning (temps), interpretabilite (SHAP).</p>
+                    </div>
+                    <div class="success-box">
+                        <div class="success-box-title">Notre avantage</div>
+                        <p>Deployable, interpretable, <strong>&lt;1s inference sans GPU</strong> pour le texte.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 10: IMAGE ML vs DL ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge model">Image</span>
+                    <h2 class="slide-title">Modelisation Image &#8212; ML vs Deep Learning</h2>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Modele</th>
+                        <th>F1-Score</th>
+                        <th>Temps</th>
+                        <th>Hardware</th>
+                        <th>Verdict</th>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>0.71</td>
+                        <td>~30 min</td>
+                        <td>CPU</td>
+                        <td><span class="tag tag-blue">Baseline</span></td>
+                    </tr>
+                    <tr>
+                        <td>XGBoost GPU</td>
+                        <td>0.72</td>
+                        <td>~10 min</td>
+                        <td>GPU</td>
+                        <td><span class="tag tag-blue">Standard</span></td>
+                    </tr>
+                    <tr>
+                        <td>XGBoost Heavy</td>
+                        <td>0.765</td>
+                        <td>6 heures</td>
+                        <td>CPU 128GB</td>
+                        <td><span class="tag tag-orange">Plafond ML</span></td>
+                    </tr>
+                    <tr style="background: rgba(16, 185, 129, 0.1);">
+                        <td class="highlight">DINOv3 + MLP</td>
+                        <td class="highlight">0.794</td>
+                        <td>58 sec</td>
+                        <td>GPU</td>
+                        <td><span class="tag tag-green">Rupture</span></td>
+                    </tr>
+                </table>
+
+                <div class="grid-2 mt-1">
+                    <div class="warning-box">
+                        <div class="warning-box-title">Plafond ML</div>
+                        <p>Les modeles classiques plafonnent a ~76% malgre 6h de calcul.</p>
+                    </div>
+                    <div class="success-box">
+                        <div class="success-box-title">Rupture Deep Learning</div>
+                        <p>DINOv3 + MLP atteint <strong>79.43%</strong> en 58 secondes sur GPU RTX 4070.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 11: PIPELINE VOTING ===================== -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge model">Image</span>
+                    <h2 class="slide-title">Architecture Voting &#8212; Ensemble Image</h2>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1rem;">
+                    Trois architectures complementaires combinees par <strong>Voting pondere</strong> pour la robustesse.
+                </p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                    <svg viewBox="0 0 820 240" style="max-width: 95%; height: auto;">
+                        <defs>
+                            <marker id="iGrey" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#424242"/></marker>
+                            <marker id="iPurple" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#7c3aed"/></marker>
+                            <marker id="iCyan" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0288d1"/></marker>
+                            <marker id="iDkGreen" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2e7d32"/></marker>
+                        </defs>
+
+                        <!-- Input -->
+                        <ellipse cx="45" cy="120" rx="38" ry="22" fill="#e0e0e0" stroke="#9e9e9e" stroke-width="1.5"/>
+                        <text x="45" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Input</text>
+
+                        <!-- Arrow Input to Preproc -->
+                        <line x1="85" y1="120" x2="118" y2="120" stroke="#424242" stroke-width="2" marker-end="url(#iGrey)"/>
+
+                        <!-- Preproc -->
+                        <rect x="123" y="100" width="80" height="40" rx="10" fill="#fff" stroke="#424242" stroke-width="1.5"/>
+                        <text x="163" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Preproc</text>
+
+                        <!-- Fork Preproc to DINOv3 / EffNet -->
+                        <line x1="205" y1="110" x2="240" y2="60" stroke="#424242" stroke-width="1.5" marker-end="url(#iGrey)"/>
+                        <line x1="205" y1="130" x2="240" y2="180" stroke="#424242" stroke-width="1.5" marker-end="url(#iGrey)"/>
+
+                        <!-- DINOv3 (purple, top) -->
+                        <ellipse cx="290" cy="52" rx="48" ry="22" fill="#d1c4e9" stroke="#7c3aed" stroke-width="2"/>
+                        <text x="290" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#4a148c">DINOv3</text>
+
+                        <!-- EffNet (blue, bottom) -->
+                        <ellipse cx="290" cy="188" rx="48" ry="22" fill="#b3e5fc" stroke="#0288d1" stroke-width="2"/>
+                        <text x="290" y="193" text-anchor="middle" font-size="13" font-weight="700" fill="#01579b">EffNet</text>
+
+                        <!-- Dashed DINOv3 to XGBoost -->
+                        <line x1="325" y1="68" x2="365" y2="110" stroke="#424242" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#iGrey)"/>
+                        <!-- Dashed EffNet to XGBoost -->
+                        <line x1="325" y1="172" x2="365" y2="130" stroke="#424242" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#iGrey)"/>
+
+                        <!-- XGBoost (green, middle) -->
+                        <ellipse cx="410" cy="120" rx="48" ry="22" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+                        <text x="410" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1b5e20">XGBoost</text>
+
+                        <!-- Curved DINOv3 to VOTING (x4, over top) -->
+                        <path d="M 325,38 C 400,0 510,0 545,75" stroke="#7c3aed" stroke-width="3" fill="none" marker-end="url(#iPurple)"/>
+                        <rect x="425" y="8" width="28" height="18" rx="4" fill="white" fill-opacity="0.9"/>
+                        <text x="439" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">x4</text>
+
+                        <!-- Curved EffNet to VOTING (x2, under bottom) -->
+                        <path d="M 325,202 C 400,240 510,240 545,165" stroke="#0288d1" stroke-width="2.5" fill="none" marker-end="url(#iCyan)"/>
+                        <rect x="425" y="222" width="28" height="18" rx="4" fill="white" fill-opacity="0.9"/>
+                        <text x="439" y="236" text-anchor="middle" font-size="13" font-weight="bold" fill="#0288d1">x2</text>
+
+                        <!-- XGBoost to VOTING (x1) -->
+                        <line x1="460" y1="120" x2="530" y2="120" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#iDkGreen)"/>
+                        <rect x="480" y="103" width="24" height="16" rx="3" fill="white" fill-opacity="0.9"/>
+                        <text x="492" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">x1</text>
+
+                        <!-- VOTING diamond (large) -->
+                        <polygon points="565,65 615,120 565,175 515,120" fill="#ff8a80" stroke="#d32f2f" stroke-width="2.5"/>
+                        <text x="565" y="125" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">VOTING</text>
+
+                        <!-- Arrow VOTING to Sortie -->
+                        <line x1="617" y1="120" x2="650" y2="120" stroke="#424242" stroke-width="2" marker-end="url(#iGrey)"/>
+
+                        <!-- Sortie -->
+                        <ellipse cx="693" cy="120" rx="38" ry="22" fill="gold" stroke="#f9a825" stroke-width="1.5"/>
+                        <text x="693" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#5d4037">Sortie</text>
+
+                        <!-- Resume box -->
+                        <rect x="742" y="70" width="70" height="100" rx="8" fill="#fef2f2" stroke="#d32f2f" stroke-width="1.5"/>
+                        <text x="777" y="92" text-anchor="middle" font-size="9" font-weight="700" fill="#991b1b">Voting</text>
+                        <text x="777" y="115" text-anchor="middle" font-size="18" font-weight="800" fill="#d32f2f">~79%</text>
+                        <text x="777" y="135" text-anchor="middle" font-size="8" fill="#64748b">Robustesse</text>
+                        <text x="777" y="148" text-anchor="middle" font-size="8" fill="#64748b">Diversite</text>
+                        <text x="777" y="161" text-anchor="middle" font-size="8" fill="#64748b">3 archis</text>
+                    </svg>
+                </div>
+
+                <div class="info-box" style="text-align: center; margin-top: 0.5rem;">
+                    <div class="info-box-title" style="justify-content: center;">3 architectures orthogonales</div>
+                    <p>Transformer (DINOv3), CNN (EfficientNet), Gradient Boosting (XGBoost)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 12: COMPLEMENTARITE ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Innovation</span>
+                    <h2 class="slide-title">Complementarite des Modeles</h2>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <div class="card-title" style="color: var(--accent-purple);">DINOv3 &#8212; Le Patron</div>
+                        <div class="card-text">
+                            <p><strong>Vision Transformer</strong></p>
+                            <p>Contexte global, poids 4/7</p>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-purple" style="font-size: 1.3rem;">79.43% seul</span>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                        <div class="card-title" style="color: var(--accent-blue);">EfficientNet &#8212; L'Expert</div>
+                        <div class="card-text">
+                            <p><strong>CNN</strong></p>
+                            <p>Textures locales, poids 2/7</p>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-blue" style="font-size: 1.3rem;">66.63% seul</span>
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-green);">
+                        <div class="card-title" style="color: var(--accent-green);">XGBoost &#8212; Le Statisticien</div>
+                        <div class="card-text">
+                            <p><strong>Gradient Boosting</strong></p>
+                            <p>Features tabulaires, poids 1/7</p>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-green" style="font-size: 1.3rem;">85.32% seul</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-2" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Pourquoi le Voting ?</div>
+                    <p>XGBoost est le champion individuel (85.32%) mais fait des erreurs <strong>DIFFERENTES</strong> des reseaux de neurones. C'est cette independance qui securise le vote.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 13: CALIBRATION SHARPENING ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Innovation</span>
+                    <h2 class="slide-title">Calibration &#8212; Le Sharpening</h2>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-orange);">AVANT &#8212; Le Probleme</div>
+                        <div class="card-text" style="font-size: 1.1rem;">
+                            XGBoost produit des scores groupes a ~25%. Le seuil de 80% n'est jamais atteint &#8594; le modele hesite trop.
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent-green);">APRES &#8212; La Solution</div>
+                        <div class="card-text" style="font-size: 1.1rem;">
+                            Sharpening force XGBoost a trancher. Les scores depassent 80% &#8594; decisions nettes.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 1.5rem 0;">
+                    <div style="display: inline-block; background: white; border: 2px solid var(--accent-purple); border-radius: 12px; padding: 1.2rem 2.5rem; box-shadow: var(--shadow-lg);">
+                        <code style="font-size: 1.8rem; background: none; color: var(--accent-purple);">p_sharp = p&#179; / &#931;(p&#179;)</code>
+                        <p style="color: var(--text-muted); font-size: 1rem; margin-top: 0.5rem;">Concentre la probabilite sur la classe dominante</p>
+                    </div>
+                </div>
+
+                <div class="success-box" style="text-align: center;">
+                    <div class="success-box-title" style="justify-content: center;">Resultat</div>
+                    <p>Apres sharpening : le Voting est mieux calibre, <strong>~70% d'automatisation</strong> au seuil de 80%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 14: RESULTATS IMAGE ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Resultats</span>
+                    <h2 class="slide-title">Resultats Image</h2>
+                </div>
+
+                <div class="voting-container">
+                    <div class="model-card">
+                        <div class="model-icon">&#x1F996;</div>
+                        <div class="model-name">DINOv3 + MLP</div>
+                        <div class="model-score">79.43%</div>
+                        <div class="model-weight">Poids 4/7</div>
+                    </div>
+                    <span class="voting-arrow">&#8594;</span>
+                    <div class="model-card">
+                        <div class="model-icon">&#x1F332;</div>
+                        <div class="model-name">XGBoost</div>
+                        <div class="model-score">85.32%</div>
+                        <div class="model-weight">Champion</div>
+                    </div>
+                    <span class="voting-arrow">&#8594;</span>
+                    <div class="model-card">
+                        <div class="model-icon">&#x26A1;</div>
+                        <div class="model-name">EfficientNet</div>
+                        <div class="model-score">66.63%</div>
+                        <div class="model-weight">Poids 2/7</div>
+                    </div>
+                    <span class="voting-arrow" style="font-size: 2rem;">&#8658;</span>
+                    <div class="model-card final-card">
+                        <div class="model-icon">&#x1F3C6;</div>
+                        <div class="model-name">VOTING</div>
+                        <div class="model-score" style="font-size: 1.8rem;">~79%</div>
+                        <div class="model-weight">Diversite</div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Le role du Voting</div>
+                    <p>Le Voting (~79%) ne bat pas XGBoost individuel (85%). Son role : <strong>robustesse architecturale et diversite</strong>. Quand un modele se trompe, les autres compensent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 15: PIPELINE TEXTE ===================== -->
+        <div class="slide">
+            <div class="content-full">
+                <div class="slide-header">
+                    <span class="section-badge model">Texte</span>
+                    <h2 class="slide-title">TEXTE : Quel classifieur ?</h2>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1rem;">
+                    Chaque choix technique resulte d'un <strong>arbitrage raisonne</strong> entre performance, complexite et contraintes.
+                </p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                    <svg viewBox="0 0 820 200" style="max-width: 95%; height: auto;">
+                        <defs>
+                            <marker id="tGrey" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#424242"/></marker>
+                            <marker id="tGreen" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#10b981"/></marker>
+                        </defs>
+
+                        <!-- Input -->
+                        <ellipse cx="45" cy="100" rx="38" ry="22" fill="#e0e0e0" stroke="#9e9e9e" stroke-width="1.5"/>
+                        <text x="45" y="105" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Input</text>
+
+                        <!-- Arrow Input to Clean -->
+                        <line x1="85" y1="100" x2="118" y2="100" stroke="#424242" stroke-width="2" marker-end="url(#tGrey)"/>
+
+                        <!-- Clean -->
+                        <rect x="123" y="80" width="75" height="40" rx="10" fill="#fff" stroke="#424242" stroke-width="1.5"/>
+                        <text x="160" y="105" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Clean</text>
+
+                        <!-- Arrow Clean to TF-IDF -->
+                        <line x1="200" y1="100" x2="233" y2="100" stroke="#424242" stroke-width="2" marker-end="url(#tGrey)"/>
+
+                        <!-- TF-IDF -->
+                        <ellipse cx="285" cy="100" rx="48" ry="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                        <text x="285" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">TF-IDF</text>
+
+                        <!-- Fork to 3 candidates -->
+                        <line x1="335" y1="86" x2="380" y2="38" stroke="#424242" stroke-width="1.5" marker-end="url(#tGrey)"/>
+                        <line x1="335" y1="100" x2="380" y2="100" stroke="#10b981" stroke-width="3" marker-end="url(#tGreen)"/>
+                        <line x1="335" y1="114" x2="380" y2="165" stroke="#424242" stroke-width="1.5" marker-end="url(#tGrey)"/>
+
+                        <!-- CamemBERT (top, rejected) -->
+                        <ellipse cx="450" cy="32" rx="60" ry="22" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <text x="450" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">CamemBERT</text>
+                        <text x="450" y="43" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="bold">GPU | 200ms | lourd</text>
+                        <line x1="502" y1="18" x2="516" y2="32" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="516" y1="18" x2="502" y2="32" stroke="#ef4444" stroke-width="3"/>
+
+                        <!-- LinearSVC (middle, selected) -->
+                        <ellipse cx="450" cy="100" rx="60" ry="22" fill="#d1fae5" stroke="#10b981" stroke-width="3"/>
+                        <text x="450" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">LinearSVC</text>
+                        <text x="450" y="111" text-anchor="middle" font-size="10" fill="#065f46" font-weight="bold">83% | CPU | 10ms</text>
+
+                        <!-- Random Forest (bottom, rejected) -->
+                        <ellipse cx="450" cy="168" rx="60" ry="22" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <text x="450" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">RandomForest</text>
+                        <text x="450" y="179" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="bold">72% | CPU | 50ms</text>
+                        <line x1="502" y1="154" x2="516" y2="168" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="516" y1="154" x2="502" y2="168" stroke="#ef4444" stroke-width="3"/>
+
+                        <!-- Arrow LinearSVC to Sortie -->
+                        <line x1="512" y1="100" x2="555" y2="100" stroke="#10b981" stroke-width="3" marker-end="url(#tGreen)"/>
+
+                        <!-- Sortie -->
+                        <ellipse cx="600" cy="100" rx="38" ry="22" fill="gold" stroke="#f9a825" stroke-width="1.5"/>
+                        <text x="600" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#5d4037">Sortie</text>
+
+                        <!-- Resume box -->
+                        <rect x="660" y="60" width="150" height="80" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+                        <text x="735" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="#065f46">Champion Texte</text>
+                        <text x="735" y="100" text-anchor="middle" font-size="18" font-weight="800" fill="#10b981">F1 = 0.83</text>
+                        <text x="735" y="118" text-anchor="middle" font-size="9" fill="#64748b">CPU | &lt; 10ms</text>
+                        <text x="735" y="132" text-anchor="middle" font-size="9" fill="#64748b">Interpretable</text>
+                    </svg>
+                </div>
+
+                <div class="info-box" style="text-align: center; margin-top: 0.5rem;">
+                    <div class="info-box-title" style="justify-content: center;">Principe directeur</div>
+                    <p>Le gain potentiel de CamemBERT (~1-2%) ne justifie pas la complexite (GPU, 200ms, boite noire). <strong>LinearSVC = meilleur compromis.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 16: BENCHMARK TEXTE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
                     <span class="section-badge model">Texte</span>
-                    <h2 class="slide-title">Modélisation Texte — LinearSVC</h2>
+                    <h2 class="slide-title">Modelisation Texte &#8212; LinearSVC</h2>
                 </div>
 
                 <div class="grid-2">
                     <div>
                         <table>
                             <tr>
-                                <th>Modèle</th>
+                                <th>Modele</th>
                                 <th>F1-Score</th>
                                 <th>Temps</th>
                             </tr>
@@ -1510,156 +1693,44 @@
                 </div>
 
                 <div class="success-box mt-1">
-                    <div class="success-box-title">✅ Champion Texte</div>
-                    <p><strong>LinearSVC</strong> avec <code>class_weight='balanced'</code> et <code>C=0.5</code> optimisé par GridSearch. F1-Score weighted : <strong>0.827</strong></p>
+                    <div class="success-box-title">Champion Texte</div>
+                    <p><strong>LinearSVC</strong> avec <code>class_weight='balanced'</code> et <code>C=0.5</code> optimise par GridSearch.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 6: IMAGE BENCHMARK ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge model">Image</span>
-                    <h2 class="slide-title">Modélisation Image — ML vs Deep Learning</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <th>Modèle</th>
-                        <th>F1-Score</th>
-                        <th>Temps</th>
-                        <th>Hardware</th>
-                        <th>Verdict</th>
-                    </tr>
-                    <tr>
-                        <td>Random Forest</td>
-                        <td>0.71</td>
-                        <td>~30 min</td>
-                        <td>CPU</td>
-                        <td><span class="tag tag-blue">Baseline</span></td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost GPU</td>
-                        <td>0.72</td>
-                        <td>~10 min</td>
-                        <td>GPU</td>
-                        <td><span class="tag tag-blue">Standard</span></td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost Heavy</td>
-                        <td>0.765</td>
-                        <td>6 heures</td>
-                        <td>CPU 128GB</td>
-                        <td><span class="tag tag-orange">Plafond ML</span></td>
-                    </tr>
-                    <tr style="background: rgba(16, 185, 129, 0.1);">
-                        <td class="highlight">DINOv3 + MLP</td>
-                        <td class="highlight">0.914</td>
-                        <td>58 sec</td>
-                        <td>GPU</td>
-                        <td><span class="tag tag-green">🚀 Rupture</span></td>
-                    </tr>
-                </table>
-
-                <div class="grid-2 mt-1">
-                    <div class="warning-box">
-                        <div class="warning-box-title">⚠️ Plafond ML</div>
-                        <p>Les modèles classiques plafonnent à ~76% malgré 6h de calcul.</p>
-                    </div>
-                    <div class="success-box">
-                        <div class="success-box-title">🚀 Rupture Deep Learning</div>
-                        <p>DINOv3 + MLP atteint <strong>91.4%</strong> en 58 secondes sur GPU RTX 4070.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 7: VOTING SYSTEM ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Innovation</span>
-                    <h2 class="slide-title">Voting System — Modèle Final Image</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center;">Exploitation de la <strong>complémentarité</strong> des architectures : les modèles font des erreurs différentes.</p>
-
-                <div class="voting-container">
-                    <div class="model-card">
-                        <div class="model-icon">🦖</div>
-                        <div class="model-name">DINOv3 + MLP</div>
-                        <div class="model-score">91.4%</div>
-                        <div class="model-weight">Poids: 4/7</div>
-                    </div>
-                    <span class="voting-arrow">→</span>
-                    <div class="model-card">
-                        <div class="model-icon">🌲</div>
-                        <div class="model-name">XGBoost</div>
-                        <div class="model-score">76.5%</div>
-                        <div class="model-weight">Poids: 1/7</div>
-                    </div>
-                    <span class="voting-arrow">→</span>
-                    <div class="model-card">
-                        <div class="model-icon">⚡</div>
-                        <div class="model-name">EfficientNet</div>
-                        <div class="model-score">~75%</div>
-                        <div class="model-weight">Poids: 2/7</div>
-                    </div>
-                    <span class="voting-arrow" style="font-size: 2rem;">⇒</span>
-                    <div class="model-card final-card">
-                        <div class="model-icon">🏆</div>
-                        <div class="model-name">VOTING</div>
-                        <div class="model-score" style="font-size: 1.8rem;">92%</div>
-                        <div class="model-weight">Final</div>
-                    </div>
-                </div>
-
-                <div class="grid-2 mt-1">
-                    <div class="info-box">
-                        <div class="info-box-title">💡 Orthogonalité des Erreurs</div>
-                        <p>Où DINOv3 se trompe, XGBoost peut avoir raison, et vice-versa.</p>
-                    </div>
-                    <div class="success-box">
-                        <div class="success-box-title">🔧 Calibration (Sharpening)</div>
-                        <p><code>p³/Σp³</code> pour renforcer la confiance → 88% d'automatisation.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 8: FUSION ===================== -->
+        <!-- ===================== SLIDE 17: FUSION MULTIMODALE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
                     <span class="section-badge results">Fusion</span>
-                    <h2 class="slide-title">Fusion Multimodale — Late Fusion</h2>
+                    <h2 class="slide-title">Fusion Multimodale &#8212; Late Fusion</h2>
                 </div>
 
                 <div class="dataflow-container" style="margin: 2rem 0;">
                     <div class="dataflow-box" style="border-color: var(--accent-green);">
-                        <strong>Image</strong><br>92%
+                        <strong>Image</strong><br>~79%
                     </div>
-                    <span class="dataflow-arrow">×0.6</span>
+                    <span class="dataflow-arrow">&#215;0.6</span>
                     <div class="dataflow-box" style="border-color: var(--accent-purple);">
                         <strong>+</strong><br>Late Fusion
                     </div>
-                    <span class="dataflow-arrow">×0.4</span>
+                    <span class="dataflow-arrow">&#215;0.4</span>
                     <div class="dataflow-box" style="border-color: var(--accent-orange);">
                         <strong>Texte</strong><br>83%
                     </div>
                     <span class="dataflow-arrow" style="font-size: 1.5rem;">=</span>
                     <div class="dataflow-box highlight-box" style="background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple)); color: white; border: none;">
-                        <strong>Final</strong><br>~94%
+                        <strong>Final</strong><br>F1~0.85
                     </div>
                 </div>
 
                 <div class="grid-2">
                     <div class="card">
-                        <div class="card-title">Exemple de Synergie</div>
+                        <div class="card-title">Exemple Synergie</div>
                         <div class="card-text">
-                            <strong>Image</strong> : Forme ronde bleue → "Piscine" ❌<br>
-                            <strong>Texte</strong> : "DVD Le Grand Bleu" → "DVD" ✓<br>
+                            <strong>Image</strong> : Forme ronde bleue &#8594; "Piscine" &#10060;<br>
+                            <strong>Texte</strong> : "DVD Le Grand Bleu" &#8594; "DVD" &#10004;<br>
                             <strong>Fusion</strong> : Le texte corrige l'erreur visuelle
                         </div>
                     </div>
@@ -1676,11 +1747,11 @@
                             </tr>
                             <tr>
                                 <td>Image seule</td>
-                                <td>92%</td>
+                                <td>~79%</td>
                             </tr>
                             <tr style="background: rgba(16, 185, 129, 0.1);">
                                 <td class="highlight">Fusion Multimodale</td>
-                                <td class="highlight">~94%</td>
+                                <td class="highlight">F1 ~ 0.85</td>
                             </tr>
                         </table>
                     </div>
@@ -1688,264 +1759,72 @@
             </div>
         </div>
 
-        <!-- ===================== SLIDE 9: ARBRE DE DECISION METHODOLOGIQUE ===================== -->
+        <!-- ===================== SLIDE 18: EXPLICABILITE TEXTE ===================== -->
         <div class="slide">
-            <div class="content-full">
+            <div class="content-single">
                 <div class="slide-header">
-                    <span class="section-badge results">Méthodologie</span>
-                    <h2 class="slide-title">Processus de Sélection des Modèles</h2>
+                    <span class="section-badge">Transparence</span>
+                    <h2 class="slide-title">Explicabilite &#8212; SHAP (Texte)</h2>
                 </div>
 
-                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1rem;">
-                    Chaque choix technique résulte d'un <strong>arbitrage raisonné</strong> entre performance, complexité et contraintes.
-                </p>
-
-                <!-- Decision Tree Visual -->
-                <div style="text-align: center; margin: 0.5rem 0;">
-                    <svg viewBox="0 0 900 280" style="max-width: 100%; height: auto;">
-                        <!-- Level 0: Root -->
-                        <rect x="325" y="5" width="250" height="40" rx="8" fill="#bf0000" />
-                        <text x="450" y="30" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Classification 27 classes</text>
-
-                        <!-- Branches from root -->
-                        <line x1="370" y1="45" x2="200" y2="75" stroke="#64748b" stroke-width="2"/>
-                        <line x1="530" y1="45" x2="700" y2="75" stroke="#64748b" stroke-width="2"/>
-
-                        <!-- Level 1: Text vs Image -->
-                        <rect x="80" y="75" width="240" height="35" rx="6" fill="#2563eb"/>
-                        <text x="200" y="97" text-anchor="middle" fill="white" font-size="12" font-weight="600">TEXTE : Quel classifieur ?</text>
-
-                        <rect x="580" y="75" width="240" height="35" rx="6" fill="#7c3aed"/>
-                        <text x="700" y="97" text-anchor="middle" fill="white" font-size="12" font-weight="600">IMAGE : Quelle stratégie ?</text>
-
-                        <!-- Text branch decisions -->
-                        <line x1="130" y1="110" x2="80" y2="140" stroke="#64748b" stroke-width="1.5"/>
-                        <line x1="200" y1="110" x2="200" y2="140" stroke="#10b981" stroke-width="2.5"/>
-                        <line x1="270" y1="110" x2="320" y2="140" stroke="#64748b" stroke-width="1.5"/>
-
-                        <rect x="10" y="140" width="130" height="50" rx="5" fill="#fee2e2" stroke="#ef4444"/>
-                        <text x="75" y="158" text-anchor="middle" fill="#991b1b" font-size="10" font-weight="600">CamemBERT</text>
-                        <text x="75" y="172" text-anchor="middle" fill="#991b1b" font-size="9">81% | GPU | 200ms</text>
-                        <text x="75" y="184" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold">ELIMINÉ</text>
-
-                        <rect x="145" y="140" width="110" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
-                        <text x="200" y="158" text-anchor="middle" fill="#065f46" font-size="10" font-weight="bold">LinearSVC</text>
-                        <text x="200" y="172" text-anchor="middle" fill="#065f46" font-size="9">83% | CPU | 10ms</text>
-                        <text x="200" y="184" text-anchor="middle" fill="#10b981" font-size="9" font-weight="bold">RETENU</text>
-
-                        <rect x="260" y="140" width="130" height="50" rx="5" fill="#fee2e2" stroke="#ef4444"/>
-                        <text x="325" y="158" text-anchor="middle" fill="#991b1b" font-size="10" font-weight="600">Random Forest</text>
-                        <text x="325" y="172" text-anchor="middle" fill="#991b1b" font-size="9">72% | CPU | 50ms</text>
-                        <text x="325" y="184" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold">ELIMINÉ</text>
-
-                        <!-- Image branch decisions -->
-                        <line x1="640" y1="110" x2="570" y2="140" stroke="#64748b" stroke-width="1.5"/>
-                        <line x1="700" y1="110" x2="700" y2="140" stroke="#64748b" stroke-width="1.5"/>
-                        <line x1="760" y1="110" x2="830" y2="140" stroke="#64748b" stroke-width="1.5"/>
-
-                        <rect x="505" y="140" width="130" height="50" rx="5" fill="#ede9fe" stroke="#7c3aed"/>
-                        <text x="570" y="158" text-anchor="middle" fill="#4c1d95" font-size="10" font-weight="600">DINOv3+MLP</text>
-                        <text x="570" y="172" text-anchor="middle" fill="#4c1d95" font-size="9">91.4% | w=4/7</text>
-
-                        <rect x="640" y="140" width="120" height="50" rx="5" fill="#e0f2fe" stroke="#0284c7"/>
-                        <text x="700" y="158" text-anchor="middle" fill="#0c4a6e" font-size="10" font-weight="600">EfficientNet</text>
-                        <text x="700" y="172" text-anchor="middle" fill="#0c4a6e" font-size="9">~75% | w=2/7</text>
-
-                        <rect x="770" y="140" width="120" height="50" rx="5" fill="#dcfce7" stroke="#16a34a"/>
-                        <text x="830" y="158" text-anchor="middle" fill="#14532d" font-size="10" font-weight="600">XGBoost</text>
-                        <text x="830" y="172" text-anchor="middle" fill="#14532d" font-size="9">76.5% | w=1/7</text>
-
-                        <!-- Voting arrow -->
-                        <line x1="570" y1="190" x2="700" y2="220" stroke="#7c3aed" stroke-width="2"/>
-                        <line x1="700" y1="190" x2="700" y2="220" stroke="#0284c7" stroke-width="2"/>
-                        <line x1="830" y1="190" x2="700" y2="220" stroke="#16a34a" stroke-width="2"/>
-
-                        <rect x="620" y="220" width="160" height="40" rx="8" fill="#7c3aed"/>
-                        <text x="700" y="237" text-anchor="middle" fill="white" font-size="11" font-weight="bold">VOTING = 92%</text>
-                        <text x="700" y="253" text-anchor="middle" fill="#e9d5ff" font-size="9">Ensemble &gt; Single</text>
-
-                        <!-- Criteria box -->
-                        <rect x="10" y="210" width="380" height="60" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
-                        <text x="200" y="228" text-anchor="middle" fill="#1e293b" font-size="11" font-weight="bold">Critères de sélection</text>
-                        <text x="200" y="244" text-anchor="middle" fill="#64748b" font-size="10">Accuracy | Vitesse inférence | Taille modèle</text>
-                        <text x="200" y="258" text-anchor="middle" fill="#64748b" font-size="10">Risque overfitting | Compatibilité CPU</text>
-                    </svg>
+                <div class="card" style="max-width: 800px; margin: 1rem auto;">
+                    <div class="card-title">Exemple : "iPhone 15 Pro Max 256GB"</div>
+                    <div class="card-text">
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0;">
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="width: 200px; height: 22px; background: linear-gradient(90deg, #bf0000 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 1rem;">iphone (0.42)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="width: 135px; height: 22px; background: linear-gradient(90deg, #dc2626 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 1rem;">smartphone (0.28)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="width: 85px; height: 22px; background: linear-gradient(90deg, #ef4444 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 1rem;">apple (0.18)</span>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 1.15rem;">Prediction : <strong style="color: var(--accent-green);">Telephones (94.2%)</strong></p>
+                    </div>
                 </div>
 
-                <div class="info-box" style="text-align: center; margin-top: 0.5rem;">
-                    <div class="info-box-title" style="justify-content: center;">Principe directeur</div>
-                    <p>Le meilleur modèle n'est pas le plus complexe, mais celui qui offre le <strong>meilleur compromis performance/déployabilité</strong> pour le cas d'usage.</p>
+                <div class="info-box mt-1" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">SHAP (Shapley Values)</div>
+                    <p>Identifie les mots-cles qui poussent vers chaque categorie. Interpretation directe grace aux coefficients LinearSVC.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 10: ARCHITECTURE COMPLETE ===================== -->
+        <!-- ===================== SLIDE 19: EXPLICABILITE IMAGE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
-                    <span class="section-badge results">Vue Globale</span>
-                    <h2 class="slide-title">Architecture End-to-End</h2>
+                    <span class="section-badge">Transparence</span>
+                    <h2 class="slide-title">Explicabilite &#8212; Grad-CAM (Image)</h2>
                 </div>
 
-                <div style="text-align: center; margin: 1rem 0;">
-                    <svg viewBox="0 0 900 320" style="max-width: 100%; height: auto;">
-                        <!-- Input Data -->
-                        <rect x="10" y="120" width="100" height="80" rx="10" fill="#f3f4f6" stroke="#bf0000" stroke-width="2"/>
-                        <text x="60" y="155" text-anchor="middle" font-family="Outfit" font-size="14" font-weight="600" fill="#1e293b">Produit</text>
-                        <text x="60" y="175" text-anchor="middle" font-family="Outfit" font-size="11" fill="#64748b">Texte + Image</text>
-
-                        <!-- Arrow 1 -->
-                        <path d="M 115 160 L 155 160" stroke="#f59e0b" stroke-width="3" fill="none" marker-end="url(#arrowOrange)"/>
-
-                        <!-- Text Pipeline -->
-                        <rect x="160" y="40" width="120" height="70" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
-                        <text x="220" y="70" text-anchor="middle" font-family="Outfit" font-size="13" font-weight="600" fill="#2563eb">TF-IDF</text>
-                        <text x="220" y="90" text-anchor="middle" font-family="Fira Code" font-size="10" fill="#64748b">280K features</text>
-
-                        <!-- Image Pipeline -->
-                        <rect x="160" y="210" width="120" height="70" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
-                        <text x="220" y="240" text-anchor="middle" font-family="Outfit" font-size="13" font-weight="600" fill="#d97706">Transfer Learning</text>
-                        <text x="220" y="260" text-anchor="middle" font-family="Fira Code" font-size="10" fill="#64748b">DINOv3/EfficientNet</text>
-
-                        <!-- Arrows to models -->
-                        <path d="M 285 75 L 325 75" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
-                        <path d="M 285 245 L 325 245" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
-
-                        <!-- Text Model -->
-                        <rect x="330" y="40" width="110" height="70" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-                        <text x="385" y="65" text-anchor="middle" font-family="Outfit" font-size="13" font-weight="700" fill="#1e40af">LinearSVC</text>
-                        <text x="385" y="85" text-anchor="middle" font-family="Fira Code" font-size="16" font-weight="700" fill="#2563eb">83%</text>
-
-                        <!-- Image Voting -->
-                        <rect x="330" y="180" width="180" height="100" rx="8" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
-                        <text x="420" y="205" text-anchor="middle" font-family="Outfit" font-size="13" font-weight="700" fill="#047857">Voting System</text>
-                        <text x="360" y="230" text-anchor="middle" font-family="Fira Code" font-size="9" fill="#64748b">DINOv3</text>
-                        <text x="420" y="230" text-anchor="middle" font-family="Fira Code" font-size="9" fill="#64748b">XGBoost</text>
-                        <text x="480" y="230" text-anchor="middle" font-family="Fira Code" font-size="9" fill="#64748b">EffNet</text>
-                        <text x="420" y="260" text-anchor="middle" font-family="Fira Code" font-size="18" font-weight="700" fill="#10b981">92%</text>
-
-                        <!-- Arrows to Fusion -->
-                        <path d="M 445 75 L 570 130" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
-                        <path d="M 515 210 L 570 170" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
-
-                        <!-- Late Fusion -->
-                        <rect x="575" y="110" width="130" height="100" rx="10" fill="linear-gradient(135deg, #fef2f2, #fce7f3)" stroke="#bf0000" stroke-width="3"/>
-                        <text x="640" y="145" text-anchor="middle" font-family="Outfit" font-size="14" font-weight="700" fill="#bf0000">Late Fusion</text>
-                        <text x="640" y="170" text-anchor="middle" font-family="Fira Code" font-size="10" fill="#64748b">α=0.6 img</text>
-                        <text x="640" y="185" text-anchor="middle" font-family="Fira Code" font-size="10" fill="#64748b">(1-α)=0.4 txt</text>
-
-                        <!-- Final Arrow -->
-                        <path d="M 710 160 L 760 160" stroke="#bf0000" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
-
-                        <!-- Final Result -->
-                        <rect x="765" y="110" width="120" height="100" rx="12" fill="url(#gradientRed)"/>
-                        <text x="825" y="150" text-anchor="middle" font-family="Outfit" font-size="14" font-weight="700" fill="white">PRÉDICTION</text>
-                        <text x="825" y="185" text-anchor="middle" font-family="Fira Code" font-size="24" font-weight="800" fill="white">~94%</text>
-
-                        <!-- Defs for arrows and gradients -->
-                        <defs>
-                            <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#f59e0b"/>
-                            </marker>
-                            <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
-                            </marker>
-                            <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#10b981"/>
-                            </marker>
-                            <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#bf0000"/>
-                            </marker>
-                            <linearGradient id="gradientRed" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#bf0000"/>
-                                <stop offset="100%" style="stop-color:#7c3aed"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-
-                <div class="grid-3" style="margin-top: 1rem;">
-                    <div class="info-box" style="text-align: center;">
-                        <div class="info-box-title" style="justify-content: center;">📝 Branche Texte</div>
-                        <p>TF-IDF → LinearSVC</p>
-                    </div>
-                    <div class="success-box" style="text-align: center;">
-                        <div class="success-box-title" style="justify-content: center;">🖼️ Branche Image</div>
-                        <p>CNN → Voting (3 modèles)</p>
-                    </div>
-                    <div class="warning-box" style="text-align: center;">
-                        <div class="warning-box-title" style="justify-content: center;">🔀 Fusion</div>
-                        <p>Late Fusion pondérée</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 10: EXPLICABILITÉ ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Transparence</span>
-                    <h2 class="slide-title">Explicabilité des Modèles</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">Comprendre <strong>pourquoi</strong> le modèle prédit une catégorie, pas seulement <strong>laquelle</strong>.</p>
-
-                <div class="grid-2">
-                    <div>
-                        <div class="card">
-                            <div class="card-title">SHAP — Texte</div>
-                            <div class="card-text">
-                                <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">Exemple : <em>"iPhone 15 Pro Max 256GB"</em></p>
-                                <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div style="width: 140px; height: 18px; background: linear-gradient(90deg, #bf0000 90%, transparent); border-radius: 3px;"></div>
-                                        <span style="font-family: 'Fira Code'; font-size: 0.85rem;">iphone (0.42)</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div style="width: 95px; height: 18px; background: linear-gradient(90deg, #dc2626 90%, transparent); border-radius: 3px;"></div>
-                                        <span style="font-family: 'Fira Code'; font-size: 0.85rem;">smartphone (0.28)</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div style="width: 60px; height: 18px; background: linear-gradient(90deg, #ef4444 90%, transparent); border-radius: 3px;"></div>
-                                        <span style="font-family: 'Fira Code'; font-size: 0.85rem;">apple (0.18)</span>
-                                    </div>
-                                </div>
-                                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Prédiction : <strong style="color: var(--accent-green);">Téléphones (94.2%)</strong></p>
+                <div class="card" style="max-width: 700px; margin: 1rem auto;">
+                    <div class="card-title">Visualisation Grad-CAM</div>
+                    <div class="card-text">
+                        <div style="display: flex; gap: 2rem; align-items: center; justify-content: center; margin: 1.2rem 0;">
+                            <div style="width: 110px; height: 110px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative;">
+                                &#x1F4F1;
+                                <div style="position: absolute; bottom: -8px; right: -8px; font-size: 0.75rem; background: var(--accent-green); color: white; padding: 0.2rem 0.5rem; border-radius: 4px;">Original</div>
+                            </div>
+                            <span style="font-size: 2rem; color: var(--text-muted);">&#8594;</span>
+                            <div style="width: 110px; height: 110px; background: linear-gradient(135deg, rgba(191,0,0,0.3), rgba(255,200,0,0.3), rgba(0,200,0,0.1)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative;">
+                                &#x1F4F1;
+                                <div style="position: absolute; bottom: -8px; right: -8px; font-size: 0.75rem; background: var(--rakuten-red); color: white; padding: 0.2rem 0.5rem; border-radius: 4px;">Heatmap</div>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <div class="card">
-                            <div class="card-title">Grad-CAM — Image</div>
-                            <div class="card-text">
-                                <p style="margin-bottom: 0.5rem; font-size: 0.95rem;">Visualise les zones de l'image activées par le CNN :</p>
-                                <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; margin: 0.8rem 0;">
-                                    <div style="width: 90px; height: 90px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative;">
-                                        📱
-                                        <div style="position: absolute; bottom: -5px; right: -5px; font-size: 0.7rem; background: var(--accent-green); color: white; padding: 0.15rem 0.4rem; border-radius: 4px;">Original</div>
-                                    </div>
-                                    <span style="font-size: 1.5rem; color: var(--text-muted);">→</span>
-                                    <div style="width: 90px; height: 90px; background: linear-gradient(135deg, rgba(191,0,0,0.3), rgba(255,200,0,0.3), rgba(0,200,0,0.1)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative;">
-                                        📱
-                                        <div style="position: absolute; bottom: -5px; right: -5px; font-size: 0.7rem; background: var(--rakuten-red); color: white; padding: 0.15rem 0.4rem; border-radius: 4px;">Heatmap</div>
-                                    </div>
-                                </div>
-                                <p style="font-size: 0.9rem;">Les zones <strong style="color: var(--rakuten-red);">rouges</strong> = zones décisives pour la prédiction.</p>
-                            </div>
-                        </div>
+                        <p style="text-align: center; font-size: 1.1rem;">Les zones <strong style="color: var(--rakuten-red);">rouges</strong> = zones decisives pour la prediction.</p>
                     </div>
                 </div>
 
-                <div class="grid-4 mt-1">
+                <div class="grid-3 mt-1">
                     <div class="metric-card">
                         <div class="metric-value" style="font-size: 1.8rem;">SHAP</div>
                         <div class="metric-label">Texte Global</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value" style="font-size: 1.8rem;">LIME</div>
-                        <div class="metric-label">Texte Local</div>
                     </div>
                     <div class="metric-card warning">
                         <div class="metric-value" style="font-size: 1.6rem;">Grad-CAM</div>
@@ -1957,116 +1836,137 @@
                     </div>
                 </div>
 
-                <div class="info-box mt-1">
-                    <div class="info-box-title">🏛️ Conformité AI Act</div>
-                    <p>L'explicabilité répond aux exigences de <strong>transparence algorithmique</strong> du règlement européen sur l'IA : chaque prédiction peut être justifiée et auditée.</p>
+                <div class="info-box mt-1" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Conformite AI Act</div>
+                    <p>Transparence algorithmique, droit a l'explication, audit des biais.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 11: EXEMPLES PRATIQUES ===================== -->
+        <!-- ===================== SLIDE 20: DATA LEAKAGE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
-                    <span class="section-badge results">Démo</span>
-                    <h2 class="slide-title">Exemples de Prédictions</h2>
+                    <span class="section-badge" style="background: linear-gradient(135deg, var(--accent-orange), var(--danger));">Integrite</span>
+                    <h2 class="slide-title">Data Leakage &#8212; Integrite Scientifique</h2>
                 </div>
 
-                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1.1rem;">
-                    Cas réels montrant la <strong>complémentarité texte/image</strong> et la robustesse du système.
-                </p>
-
-                <div class="grid-3" style="gap: 1.2rem;">
-                    <!-- Example 1: Clear case -->
-                    <div class="card" style="border-left: 4px solid var(--accent-green);">
-                        <div style="text-align: center; margin-bottom: 0.8rem;">
-                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 12px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">📚</div>
-                        </div>
-                        <div class="card-title" style="text-align: center; color: var(--accent-green);">✓ Cas Clair</div>
-                        <div style="background: #f8fafc; padding: 0.6rem; border-radius: 6px; margin: 0.5rem 0; font-size: 0.95rem;">
-                            <strong>Texte:</strong> "Harry Potter tome 1"<br>
-                            <strong>Image:</strong> Couverture livre
-                        </div>
-                        <div style="text-align: center;">
-                            <span class="tag tag-green" style="font-size: 1rem;">→ Livres (99%)</span>
-                        </div>
+                <div class="grid-2">
+                    <div class="warning-box" style="padding: 1.5rem;">
+                        <div class="warning-box-title">Decouverte</div>
+                        <p style="font-size: 1.15rem;">Les scores image etaient gonfles a <strong>92%</strong> (data leakage dans l'evaluation).</p>
                     </div>
-
-                    <!-- Example 2: Ambiguous - Image helps -->
-                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
-                        <div style="text-align: center; margin-bottom: 0.8rem;">
-                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🏊</div>
-                        </div>
-                        <div class="card-title" style="text-align: center; color: var(--accent-blue);">🖼️ Image Décisive</div>
-                        <div style="background: #f8fafc; padding: 0.6rem; border-radius: 6px; margin: 0.5rem 0; font-size: 0.95rem;">
-                            <strong>Texte:</strong> "Accessoire bleu"<br>
-                            <strong>Image:</strong> Bouée piscine
-                        </div>
-                        <div style="text-align: center;">
-                            <span class="tag tag-blue" style="font-size: 1rem;">→ Piscine (92%)</span>
-                        </div>
-                    </div>
-
-                    <!-- Example 3: Ambiguous - Text helps -->
-                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
-                        <div style="text-align: center; margin-bottom: 0.8rem;">
-                            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-radius: 12px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">💿</div>
-                        </div>
-                        <div class="card-title" style="text-align: center; color: var(--accent-purple);">📝 Texte Décisif</div>
-                        <div style="background: #f8fafc; padding: 0.6rem; border-radius: 6px; margin: 0.5rem 0; font-size: 0.95rem;">
-                            <strong>Texte:</strong> "DVD Le Grand Bleu"<br>
-                            <strong>Image:</strong> Pochette bleue
-                        </div>
-                        <div style="text-align: center;">
-                            <span class="tag tag-purple" style="font-size: 1rem;">→ DVD/Film (87%)</span>
-                        </div>
+                    <div class="success-box" style="padding: 1.5rem;">
+                        <div class="success-box-title">Correction</div>
+                        <p style="font-size: 1.15rem;">Audit complet, chaque fichier, chaque slide, chaque metrique. Score reel : <strong>79.28%</strong>.</p>
                     </div>
                 </div>
 
-                <div class="info-box mt-1" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">💡 Synergie Multimodale</div>
-                    <p>Quand l'image est ambiguë, le texte tranche. Quand le texte est vague, l'image décide. <strong>La fusion combine le meilleur des deux mondes.</strong></p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin: 2rem 0;">
+                    <div class="metric-card" style="padding: 1.5rem; border: 2px solid var(--danger); position: relative;">
+                        <div class="metric-value" style="font-size: 3rem; text-decoration: line-through; background: linear-gradient(135deg, var(--danger), #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">92%</div>
+                        <div class="metric-label" style="color: var(--danger);">Gonfle (leakage)</div>
+                    </div>
+                    <span style="font-size: 2.5rem; color: var(--accent-orange);">&#8594;</span>
+                    <div class="metric-card success" style="padding: 1.5rem; border: 2px solid var(--accent-green);">
+                        <div class="metric-value" style="font-size: 3rem;">79.28%</div>
+                        <div class="metric-label" style="color: var(--accent-green);">Correct (audite)</div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Demarche d'ingenieur</div>
+                    <p>C'est la difference entre un projet academique et une demarche d'ingenieur. <strong>L'integrite avant la performance.</strong></p>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== SLIDE 12: RETOUR D'EXPERIENCE ===================== -->
+        <!-- ===================== SLIDE 21: QUALITE & TESTS ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Resultats</span>
+                    <h2 class="slide-title">Qualite &amp; Tests</h2>
+                </div>
+
+                <div class="grid-4 mt-2">
+                    <div class="metric-card">
+                        <div class="metric-value" style="font-size: 2.4rem;">210+</div>
+                        <div class="metric-label">Tests</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-value" style="font-size: 2.4rem;">85%</div>
+                        <div class="metric-label">Coverage</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-value" style="font-size: 2.4rem;">50+</div>
+                        <div class="metric-label">Securite OWASP</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="font-size: 2.4rem;">6/6</div>
+                        <div class="metric-label">Quality Gates</div>
+                    </div>
+                </div>
+
+                <div class="grid-2 mt-2">
+                    <div class="card">
+                        <div class="card-title">Pyramide de Tests</div>
+                        <ul class="feature-list" style="font-size: 1.05rem;">
+                            <li style="font-size: 1.05rem;">Unitaires (90)</li>
+                            <li style="font-size: 1.05rem;">Integration (30)</li>
+                            <li style="font-size: 1.05rem;">ML / Performance (40)</li>
+                            <li style="font-size: 1.05rem;">Securite OWASP (50)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Quality Gates ML</div>
+                        <ul class="feature-list" style="font-size: 1.05rem;">
+                            <li style="font-size: 1.05rem;">Accuracy 79.3% &#10004;</li>
+                            <li style="font-size: 1.05rem;">F1 Macro 78.5% &#10004;</li>
+                            <li style="font-size: 1.05rem;">Latence &lt;100ms &#10004;</li>
+                            <li style="font-size: 1.05rem;">27/27 classes &#10004;</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 22: RETOUR D'EXPERIENCE ===================== -->
         <div class="slide">
             <div class="content-full">
                 <div class="slide-header">
-                    <h2 class="slide-title">Retour d'Expérience</h2>
+                    <span class="section-badge results">Bilan</span>
+                    <h2 class="slide-title">Retour d'Experience</h2>
                 </div>
 
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem; text-align: center; font-size: 1.1rem;">
-                    Ce que ce projet nous a appris en tant qu'<strong>ingénieurs ML</strong>.
+                    Ce que ce projet nous a appris en tant qu'<strong>ingenieurs ML</strong>.
                 </p>
 
                 <div class="grid-2" style="gap: 1.5rem;">
-                    <!-- Ce qu'on referait différemment -->
                     <div class="card" style="border-left: 4px solid var(--accent-orange);">
                         <div class="card-title" style="color: var(--accent-orange);">Ce qu'on referait autrement</div>
                         <ul style="font-size: 0.95rem; line-height: 1.8; list-style: none; padding: 0;">
-                            <li>1. <strong>Commencer par la fusion</strong> dès le début, pas après avoir finalisé chaque pipeline séparément</li>
-                            <li>2. <strong>Implémenter le monitoring</strong> des métriques dès le premier modèle, pas en fin de projet</li>
+                            <li>1. <strong>Commencer par la fusion</strong> des le debut, pas apres avoir finalise chaque pipeline separement</li>
+                            <li>2. <strong>Implementer le monitoring</strong> des metriques des le premier modele</li>
                             <li>3. <strong>Tester l'OCR</strong> sur les images-texte avant d'investir dans le fine-tuning image</li>
                         </ul>
                     </div>
 
-                    <!-- Erreurs instructives -->
                     <div class="card" style="border-left: 4px solid var(--danger);">
                         <div class="card-title" style="color: var(--danger);">Erreurs instructives</div>
                         <ul style="font-size: 0.95rem; line-height: 1.8; list-style: none; padding: 0;">
-                            <li>1. <strong>ResNet "Phoenix"</strong> : 91% train, 65% test. Leçon : toujours surveiller le gap train/val</li>
-                            <li>2. <strong>Labels désalignés</strong> : 3 référentiels incompatibles. Leçon : standardiser le mapping dès le départ</li>
-                            <li>3. <strong>XGBoost non calibré</strong> : probabilités "molles" diluaient le vote. Leçon : vérifier la calibration avant l'ensemble</li>
+                            <li>1. <strong>ResNet "Phoenix"</strong> : 91% train, 65% test. Lecon : surveiller le gap train/val</li>
+                            <li>2. <strong>Labels desalignes</strong> : 3 referentiels incompatibles. Lecon : standardiser le mapping</li>
+                            <li>3. <strong>XGBoost non calibre</strong> : probabilites "molles" diluaient le vote</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="info-box mt-1" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Compétences acquises hors formation</div>
+                    <div class="info-box-title" style="justify-content: center;">Competences acquises</div>
                     <p>
-                        <span class="tag tag-purple">Vision Transformers (ViT/DINO)</span>
+                        <span class="tag tag-purple">Vision Transformers</span>
                         <span class="tag tag-blue">Self-Supervised Learning</span>
                         <span class="tag tag-green">Ensemble Calibration</span>
                         <span class="tag tag-orange">Multimodal Fusion</span>
@@ -2075,57 +1975,175 @@
             </div>
         </div>
 
-        <!-- ===================== SLIDE 13: CONCLUSION ===================== -->
+        <!-- ===================== SLIDE 23: IMPACT BUSINESS ===================== -->
         <div class="slide">
-            <div class="content-full text-center">
-                <h1 class="hero-title" style="font-size: 2.5rem;">Conclusion & Perspectives</h1>
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Resultats</span>
+                    <h2 class="slide-title">Impact Business</h2>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card" style="border-left: 4px solid var(--accent-orange);">
+                        <div class="card-title" style="color: var(--accent-orange);">AVANT (Manuel)</div>
+                        <div class="card-text" style="font-size: 1.15rem;">
+                            <strong>5 min/produit</strong>, 10-15% erreur, non scalable
+                        </div>
+                    </div>
+                    <div class="card" style="border-left: 4px solid var(--accent-green);">
+                        <div class="card-title" style="color: var(--accent-green);">APRES (IA)</div>
+                        <div class="card-text" style="font-size: 1.15rem;">
+                            <strong>&lt;1s/produit</strong>, ~85% F1, 100K+ produits/jour
+                        </div>
+                    </div>
+                </div>
 
                 <div class="grid-3 mt-2">
+                    <div class="metric-card success">
+                        <div class="metric-value" style="font-size: 2.4rem;">~70%</div>
+                        <div class="metric-label">Automatisation</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-value" style="font-size: 2.4rem;">30%</div>
+                        <div class="metric-label">Revue humaine</div>
+                    </div>
                     <div class="metric-card">
-                        <div class="metric-value">92%</div>
+                        <div class="metric-value" style="font-size: 2.4rem;">500K+</div>
+                        <div class="metric-label">Produits/jour GPU</div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-2" style="text-align: center;">
+                    <div class="info-box-title" style="justify-content: center;">Seuil de confiance</div>
+                    <p>Le systeme sait dire "je ne suis pas sur". <strong>Zero automatisation aveugle</strong> &#8212; seuil de confiance 80%.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 24: CONCLUSION ===================== -->
+        <div class="slide">
+            <div class="content-full text-center">
+                <h1 class="hero-title" style="font-size: 2.8rem;">Conclusion &amp; Perspectives</h1>
+
+                <div class="grid-3 mt-2" style="max-width: 900px; margin-left: auto; margin-right: auto;">
+                    <div class="metric-card warning">
+                        <div class="metric-value">~79%</div>
                         <div class="metric-label">Image Voting</div>
                     </div>
                     <div class="metric-card success">
                         <div class="metric-value">83%</div>
                         <div class="metric-label">Texte SVC</div>
                     </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value">~94%</div>
+                    <div class="metric-card">
+                        <div class="metric-value">F1~0.85</div>
                         <div class="metric-label">Fusion</div>
                     </div>
                 </div>
 
-                <div class="grid-3 mt-2" style="max-width: 900px; margin-left: auto; margin-right: auto;">
-                    <div class="card text-center">
-                        <div class="card-icon" style="margin: 0 auto 0.5rem;">🏢</div>
-                        <div class="card-title">Impact Métier</div>
-                        <div class="card-text">De 5 min/produit (manuel) à <strong>&lt;1s</strong> (IA). Erreur : 15% → 6%</div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-icon" style="margin: 0 auto 0.5rem;">🏆</div>
-                        <div class="card-title">Innovation</div>
-                        <div class="card-text">Voting System + Sharpening : <strong>3 modèles complémentaires</strong></div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-icon" style="margin: 0 auto 0.5rem;">📈</div>
-                        <div class="card-title">Scalabilité</div>
-                        <div class="card-text"><strong>100K+ produits/jour</strong>. Prêt pour la production</div>
-                    </div>
-                </div>
-
-                <div class="success-box mt-2" style="max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <div class="success-box-title">🎯 Perspectives d'amélioration</div>
+                <div class="success-box mt-2" style="max-width: 800px; margin-left: auto; margin-right: auto; text-align: center;">
+                    <div class="success-box-title" style="justify-content: center;">Perspectives d'amelioration</div>
                     <p>
-                        <span class="tag tag-green">OCR +3-5%</span>
-                        <span class="tag tag-blue">CamemBERT +5-8%</span>
+                        <span class="tag tag-green">OCR (+3-5%)</span>
+                        <span class="tag tag-blue">CamemBERT (a evaluer)</span>
                         <span class="tag tag-purple">Fine-tuning DINOv3</span>
-                        <span class="tag tag-orange">Déploiement Cloud</span>
+                        <span class="tag tag-orange">Deploiement Cloud</span>
                     </p>
                 </div>
+            </div>
+        </div>
 
-                <p style="margin-top: 2rem; color: var(--text-muted); font-size: 1.1rem;">
-                    <strong style="color: var(--rakuten-red);">Merci !</strong> — Questions ?
+        <!-- ===================== SLIDE 27: DEMO LIVE ===================== -->
+        <div class="slide">
+            <div class="content-single">
+                <div class="slide-header">
+                    <span class="section-badge results">Demo</span>
+                    <h2 class="slide-title">Place a la Demonstration</h2>
+                </div>
+
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem; text-align: center; font-size: 1.15rem;">
+                    Vous connaissez la theorie. <strong>Oussama</strong> va maintenant vous montrer le systeme en action.
                 </p>
+
+                <div class="grid-3" style="gap: 1.2rem;">
+                    <div class="card" style="border-left: 4px solid var(--accent-green);">
+                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F4DD;</div>
+                        <div class="card-title">1. Texte seul</div>
+                        <div class="card-text" style="font-size: 1.05rem;">
+                            "Harry Potter edition poche"<br>&#8594; <strong>Livres (99%)</strong>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-green">Le texte suffit</span>
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
+                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F5BC;&#xFE0F;</div>
+                        <div class="card-title">2. Image seule</div>
+                        <div class="card-text" style="font-size: 1.05rem;">
+                            Photo bouee piscine<br>&#8594; <strong>Piscine (~79%)</strong>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-blue">Le Voting decide</span>
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
+                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F500;</div>
+                        <div class="card-title">3. Fusion</div>
+                        <div class="card-text" style="font-size: 1.05rem;">
+                            "DVD Le Grand Bleu" + jaquette bleue<br>&#8594; <strong>DVD (87%)</strong>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 0.8rem;">
+                            <span class="tag tag-purple">Texte corrige image</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-box mt-2" style="text-align: center;">
+                    <div class="success-box-title" style="justify-content: center;">Application Streamlit</div>
+                    <p>Predictions en temps reel &#8226; 3 modalites &#8226; Explicabilite integree &#8226; F1~0.85</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 28: MERCI ===================== -->
+        <div class="slide">
+            <div class="content-full text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                <h1 class="hero-title" style="font-size: 5rem; margin-bottom: 1rem;">Merci !</h1>
+                <p class="hero-subtitle" style="font-size: 2rem; margin-bottom: 2rem;">Questions ?</p>
+
+                <div class="grid-4 mt-2" style="max-width: 900px;">
+                    <div class="metric-card">
+                        <div class="metric-value" style="font-size: 2rem;">84 916</div>
+                        <div class="metric-label">Produits</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" style="font-size: 2rem;">27</div>
+                        <div class="metric-label">Categories</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-value" style="font-size: 2rem;">3</div>
+                        <div class="metric-label">Modeles</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-value" style="font-size: 2rem;">F1~0.85</div>
+                        <div class="metric-label">Fusion</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
+                    <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
+                    <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
+                    <span style="font-weight: 600; color: var(--text-main);">Hery M. Ralaimanantsoa</span>
+                    <span style="color: var(--rakuten-red);">&#8226;</span>
+                    <span style="font-weight: 600; color: var(--text-main);">Oussama Akir</span>
+                </div>
+
+                <div style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">
+                    <strong>Mentor : Antoine</strong> &#8212; DataScientest &#215; Mines Paris-PSL &#8212; Fevrier 2026
+                </div>
             </div>
         </div>
 
@@ -2133,16 +2151,11 @@
 
     <!-- Navigation -->
     <nav>
-        <button class="nav-btn" onclick="prevSlide()" title="Précédent">←</button>
+        <button class="nav-btn" onclick="prevSlide()" title="Precedent">&#8592;</button>
         <div class="nav-separator"></div>
-        <span class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">16</span></span>
+        <span class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">27</span></span>
         <div class="nav-separator"></div>
-        <button class="nav-btn" onclick="nextSlide()" title="Suivant">→</button>
-        <div class="nav-separator"></div>
-        <button class="pdf-export-btn" onclick="exportPDF()" title="Exporter en PDF">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-6h8v2H8v-2zm0-3h8v2H8v-2z"/></svg>
-            PDF
-        </button>
+        <button class="nav-btn" onclick="nextSlide()" title="Suivant">&#8594;</button>
     </nav>
 
     <div class="progress-bar">
@@ -2185,10 +2198,6 @@
         });
 
         updateSlide();
-
-        function exportPDF() {
-            window.print();
-        }
     </script>
 </body>
 
