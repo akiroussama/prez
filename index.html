@@ -2,2279 +2,981 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classification Multimodale Rakuten | Soutenance BMLE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Outfit:wght@300;500;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Palette Light Mode - Professional */
-            --bg-light: #f8f9fa;
-            --bg-white: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-
-            /* Rakuten Brand Colors */
-            --rakuten-red: #bf0000;
-            --rakuten-dark: #8b0000;
-            --accent-blue: #2563eb;
-            --accent-purple: #7c3aed;
-            --accent-cyan: #06b6d4;
-            --accent-orange: #f59e0b;
-            --accent-green: #10b981;
-
-            /* Status Colors */
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-
-            /* UI Elements */
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --border-light: #e2e8f0;
-            --glass-border: rgba(30, 58, 95, 0.1);
-            --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-light);
-            background-image:
-                linear-gradient(rgba(191, 0, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(191, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: var(--text-main);
-            overflow: hidden;
-            height: 100vh;
-            line-height: 1.5;
-        }
-
-        header {
-            padding: 1rem 3rem;
-            min-height: 100px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 2px solid rgba(191, 0, 0, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            z-index: 100;
-            position: relative;
-        }
-
-        .header-left {
-            justify-self: start;
-            display: flex;
-            align-items: center;
-        }
-
-        .header-center {
-            justify-self: center;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header-right {
-            justify-self: end;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .institution-badge {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.2rem;
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(191, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-
-        .institution-info {
-            line-height: 1.3;
-            text-align: right;
-        }
-
-        .institution-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-
-        .institution-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--rakuten-red);
-        }
-
-        .institution-sub {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-            opacity: 0.9;
-        }
-
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-            margin-bottom: 0.3rem;
-        }
-
-        .logo-sub {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            display: block;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--rakuten-red), var(--rakuten-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(191, 0, 0, 0.3);
-        }
-
-        .slide-counter {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: var(--rakuten-red);
-            font-weight: 700;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        /* ===== TIMER SOUTENANCE ===== */
-        .soutenance-timer {
-            position: fixed;
-            bottom: 60px;
-            left: 20px;
-            z-index: 300;
-            font-family: 'Fira Code', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: var(--glass-bg);
-            border: 2px solid var(--border-light);
-            border-radius: 10px;
-            padding: 0.4rem 0.8rem;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: var(--card-shadow);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .soutenance-timer:hover {
-            border-color: var(--rakuten-red);
-            box-shadow: var(--card-hover);
-        }
-        .soutenance-timer.running {
-            border-color: var(--accent-green);
-        }
-        .soutenance-timer .timer-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            transition: background 0.3s;
-        }
-        .soutenance-timer.running .timer-dot {
-            background: var(--accent-green);
-        }
-        .soutenance-timer.alert {
-            border-color: var(--rakuten-red);
-            animation: timer-blink 0.5s ease-in-out 10;
-        }
-        .soutenance-timer.alert .timer-dot {
-            background: var(--rakuten-red);
-            animation: timer-blink 0.5s ease-in-out 10;
-        }
-        .soutenance-timer .timer-label {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            max-width: 120px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .soutenance-timer.alert .timer-label {
-            color: var(--rakuten-red);
-            font-weight: 700;
-        }
-        @keyframes timer-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.15; }
-        }
-
-        .progress-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 200;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--rakuten-red), var(--accent-purple));
-            width: 0%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        main {
-            position: relative;
-            height: calc(100vh - 100px);
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transform: translateX(80px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding: 1.2rem 3rem 0.8rem;
-            padding-top: 3%;
-            overflow-y: auto;
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: all;
-        }
-
-        .slide.prev {
-            transform: translateX(-80px);
-            opacity: 0;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Outfit', sans-serif;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-title {
-            font-size: 4.2rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            text-align: center;
-            letter-spacing: -0.03em;
-        }
-
-        .hero-title .accent {
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.65rem;
-            color: var(--text-muted);
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto 1rem;
-            line-height: 1.5;
-        }
-
-        .slide-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid var(--glass-border);
-        }
-
-        .section-badge {
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            margin-right: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .section-badge.data {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-        }
-
-        .section-badge.model {
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-        }
-
-        .section-badge.results {
-            background: linear-gradient(135deg, var(--accent-orange), var(--rakuten-red));
-        }
-
-        .slide-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.2;
-        }
-
-        .content-full {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .content-single {
-            max-width: 1250px;
-            margin: 0 auto;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 0.5rem 0;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: var(--card-shadow);
-            transition: all 0.2s ease;
-            margin: 0.2rem 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--card-hover);
-            border-color: var(--rakuten-red);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 0.6rem;
-            display: block;
-            color: var(--rakuten-red);
-        }
-
-        .card-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--text-main);
-        }
-
-        .card-text {
-            color: var(--text-muted);
-            line-height: 1.4;
-            font-size: 1.05rem;
-        }
-
-        /* Metric Cards */
-        .metric-card {
-            background: white;
-            padding: 0.8rem;
-            border-radius: 14px;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--glass-border);
-        }
-
-        .metric-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .metric-card.success .metric-value {
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .metric-card.warning .metric-value {
-            background: linear-gradient(135deg, var(--accent-orange), var(--warning));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .metric-label {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-top: 0.3rem;
-            line-height: 1.3;
-        }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            background: var(--bg-white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            font-size: 1.2rem;
-        }
-
-        th {
-            background: linear-gradient(135deg, var(--rakuten-red), var(--rakuten-dark));
-            color: white;
-            padding: 0.85rem 1.1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 1.15rem;
-        }
-
-        td {
-            padding: 0.75rem 1.1rem;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(191, 0, 0, 0.03);
-        }
-
-        .highlight {
-            color: var(--rakuten-red);
-            font-weight: 600;
-        }
-
-        /* Info Boxes */
-        .info-box {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.08));
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 10px;
-            padding: 0.7rem 1.2rem;
-            margin: 0.5rem 0;
-            font-size: 1.05rem;
-        }
-
-        .info-box-title {
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 0.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .success-box {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.08));
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 10px;
-            padding: 0.7rem 1.2rem;
-            margin: 0.5rem 0;
-            font-size: 1.05rem;
-        }
-
-        .success-box-title {
-            font-weight: 600;
-            color: var(--accent-green);
-            margin-bottom: 0.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(239, 68, 68, 0.08));
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: 10px;
-            padding: 0.7rem 1.2rem;
-            margin: 0.5rem 0;
-            font-size: 1.05rem;
-        }
-
-        .warning-box-title {
-            font-weight: 600;
-            color: var(--accent-orange);
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        /* Tags */
-        .tag {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 14px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin: 0.15rem;
-        }
-
-        .tag-blue { background: rgba(37, 99, 235, 0.1); color: var(--accent-blue); }
-        .tag-green { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
-        .tag-orange { background: rgba(245, 158, 11, 0.1); color: var(--accent-orange); }
-        .tag-red { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
-        .tag-purple { background: rgba(124, 58, 237, 0.1); color: var(--accent-purple); }
-
-        /* Feature List */
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 0.55rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1.25rem;
-        }
-
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li::before {
-            content: '\2192';
-            color: var(--accent-green);
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        /* Dataflow / Pipeline */
-        .dataflow-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.9rem;
-            margin: 1.6rem 0;
-            flex-wrap: wrap;
-        }
-
-        .dataflow-box {
-            padding: 0.9rem 1.1rem;
-            background: white;
-            border: 2px solid var(--rakuten-red);
-            border-radius: 10px;
-            text-align: center;
-            min-width: 120px;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .dataflow-box.highlight-box {
-            border-color: var(--accent-green);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
-        }
-
-        .dataflow-arrow {
-            font-size: 1.65rem;
-            color: var(--accent-orange);
-        }
-
-        /* Voting Visual */
-        .voting-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 0.8rem 0;
-            flex-wrap: wrap;
-        }
-
-        .model-card {
-            background: white;
-            border: 2px solid var(--border-light);
-            border-radius: 14px;
-            padding: 0.9rem;
-            text-align: center;
-            min-width: 175px;
-            transition: all 0.3s ease;
-        }
-
-        .model-card:hover {
-            border-color: var(--rakuten-red);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .model-icon {
-            font-size: 2.75rem;
-            margin-bottom: 0.65rem;
-        }
-
-        .model-name {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--text-main);
-        }
-
-        .model-score {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.85rem;
-            font-weight: 700;
-            color: var(--rakuten-red);
-        }
-
-        .model-weight {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
-
-        .voting-arrow {
-            font-size: 2rem;
-            color: var(--rakuten-red);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translateX(0); }
-            50% { opacity: 1; transform: translateX(5px); }
-        }
-
-        .final-card {
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            border: none;
-            color: white;
-        }
-
-        .final-card .model-name,
-        .final-card .model-score {
-            color: white;
-        }
-
-        .final-card .model-weight {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Team Grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.8rem;
-            margin-top: 0.8rem;
-        }
-
-        .team-member {
-            background: white;
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 0.7rem;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .team-member:hover {
-            transform: translateY(-3px);
-            border-color: var(--rakuten-red);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .team-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.75rem;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .team-name {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            z-index: 200;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--rakuten-red);
-            transition: all 0.2s ease;
-            font-size: 1.2rem;
-        }
-
-        .nav-btn:hover {
-            background: rgba(191, 0, 0, 0.08);
-            transform: scale(1.1);
-        }
-
-        .nav-separator {
-            width: 1px;
-            height: 20px;
-            background: rgba(191, 0, 0, 0.15);
-        }
-
-        /* Code */
-        code {
-            font-family: 'Fira Code', monospace;
-            background: rgba(191, 0, 0, 0.08);
-            padding: 0.15rem 0.35rem;
-            border-radius: 4px;
-            font-size: 0.85em;
-            color: var(--rakuten-red);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .slide.active .card {
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        }
-
-        .slide.active .card:nth-child(1) { animation-delay: 0.1s; }
-        .slide.active .card:nth-child(2) { animation-delay: 0.2s; }
-        .slide.active .card:nth-child(3) { animation-delay: 0.3s; }
-        .slide.active .card:nth-child(4) { animation-delay: 0.35s; }
-        .slide.active .card:nth-child(5) { animation-delay: 0.4s; }
-        .slide.active .card:nth-child(6) { animation-delay: 0.45s; }
-
-        .slide.active table {
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-            animation-delay: 0.15s;
-        }
-
-        .slide.active .info-box,
-        .slide.active .success-box,
-        .slide.active .warning-box {
-            animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-            animation-delay: 0.3s;
-        }
-
-        .slide.active .slide-header {
-            animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        }
-
-        .slide.active .metric-card {
-            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-        }
-
-        .text-center { text-align: center; }
-        .mb-1 { margin-bottom: 0.3rem; }
-        .mb-2 { margin-bottom: 0.6rem; }
-        .mt-1 { margin-top: 0.3rem; }
-        .mt-2 { margin-top: 0.6rem; }
-
-        @media print {
-            body { background: white; }
-            header { position: relative; }
-            #slides-container {
-                position: relative;
-                height: auto !important;
-            }
-            .slide {
-                position: relative !important;
-                opacity: 1 !important;
-                transform: none !important;
-                pointer-events: all !important;
-                page-break-after: always;
-                min-height: 100vh;
-                padding: 1.5rem 2rem;
-                display: flex !important;
-            }
-            .slide.prev { opacity: 1 !important; transform: none !important; }
-            nav, .progress-bar, .soutenance-timer { display: none !important; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EFREI Next | Backlog J1 Apres-Midi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 2.2cm;
+    }
+
+    :root {
+      --primary: #C41E3A;
+      --primary-dark: #9B1B30;
+      --secondary: #1B2B4B;
+      --secondary-light: #2D4A7C;
+      --accent: #D4AF37;
+      --success: #2D8B6F;
+      --warning: #D4940B;
+      --danger: #C23B3B;
+      --gray-50: #FAFBFC;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-800: #1F2937;
+      --gray-900: #111827;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 11pt;
+      line-height: 1.7;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-800);
+      background: linear-gradient(135deg, #E8E8E8 0%, #F5F5F5 50%, #EBEBEB 100%);
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .print-button-container {
+      position: sticky;
+      top: 1rem;
+      text-align: right;
+      z-index: 10;
+      margin-bottom: 1rem;
+    }
+
+    .print-button {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.25);
+    }
+
+    .document-container {
+      background: #fff;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 2.2cm;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .document-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+    }
+
+    .cover-page {
+      min-height: 760px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      page-break-after: always;
+      position: relative;
+      padding: 1.5rem 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(196, 30, 58, 0.02) 100%);
+    }
+
+    .cover-logo {
+      font-family: var(--font-display);
+      font-size: 68pt;
+      color: var(--primary);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 0.3rem;
+      text-shadow: 2px 2px 0 rgba(196, 30, 58, 0.1);
+    }
+
+    .cover-institution {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gray-500);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .cover-formation {
+      font-size: 10pt;
+      color: var(--secondary);
+      font-weight: 600;
+      border: 1px solid var(--gray-200);
+      padding: 0.45rem 1.2rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: 30pt;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-title-accent {
+      color: var(--primary);
+    }
+
+    .cover-subtitle {
+      max-width: 88%;
+      color: var(--gray-600);
+      font-size: 12.5pt;
+      margin-bottom: 1.8rem;
+    }
+
+    .cover-divider {
+      width: 90px;
+      height: 4px;
+      background: var(--primary);
+      margin: 1.8rem 0;
+      position: relative;
+    }
+
+    .cover-divider::before,
+    .cover-divider::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+    }
+
+    .cover-divider::before {
+      left: -15px;
+    }
+
+    .cover-divider::after {
+      right: -15px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .cover-metric {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      padding: 0.6rem 0.9rem;
+      min-width: 120px;
+    }
+
+    .cover-metric-value {
+      display: block;
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 14pt;
+    }
+
+    .cover-metric-label {
+      display: block;
+      font-size: 8.5pt;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cover-date {
+      margin-top: 1.2rem;
+      color: var(--gray-500);
+      font-size: 10pt;
+      letter-spacing: 1px;
+    }
+
+    .abstract-page,
+    .toc-page {
+      page-break-after: always;
+      padding-top: 0.2rem;
+    }
+
+    .abstract-title,
+    .toc-title,
+    h1 {
+      font-family: var(--font-display);
+      color: var(--secondary);
+      letter-spacing: -0.2px;
+    }
+
+    .abstract-title,
+    .toc-title {
+      font-size: 24pt;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 0.35rem;
+      display: inline-block;
+    }
+
+    .lead {
+      font-size: 12pt;
+      color: var(--gray-700);
+      margin-bottom: 1rem;
+    }
+
+    .keywords {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .keyword-tag {
+      font-size: 8.5pt;
+      background: rgba(196, 30, 58, 0.08);
+      border: 1px solid rgba(196, 30, 58, 0.25);
+      color: var(--primary-dark);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.7rem;
+      margin: 1rem 0 1.3rem;
+    }
+
+    .metric-card {
+      border: 1px solid var(--gray-200);
+      background: #fff;
+      padding: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--secondary);
+    }
+
+    .metric-card.primary::before {
+      background: var(--primary);
+    }
+
+    .metric-card.success::before {
+      background: var(--success);
+    }
+
+    .metric-card.warning::before {
+      background: var(--warning);
+    }
+
+    .metric-card.danger::before {
+      background: var(--danger);
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.2;
+    }
+
+    .metric-label {
+      font-size: 8.5pt;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .toc-group {
+      margin: 0.5rem 0 0.9rem;
+    }
+
+    .toc-part {
+      margin-top: 0.6rem;
+      margin-bottom: 0.25rem;
+      font-size: 9pt;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 3px solid var(--primary);
+      padding-left: 0.5rem;
+    }
+
+    .toc-section {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted var(--gray-300);
+      color: var(--gray-700);
+      font-size: 10pt;
+      padding: 0.15rem 0;
+    }
+
+    .part-divider {
+      page-break-before: always;
+      page-break-after: always;
+      min-height: 660px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(196, 30, 58, 0.03) 0%, rgba(27, 43, 75, 0.03) 100%);
+      border: 1px solid var(--gray-200);
+    }
+
+    .part-number {
+      font-family: var(--font-display);
+      color: var(--primary);
+      font-size: 56pt;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .part-title {
+      font-family: var(--font-display);
+      color: var(--secondary);
+      font-size: 27pt;
+      margin-top: 0.6rem;
+    }
+
+    .part-subtitle {
+      color: var(--gray-600);
+      margin-top: 0.35rem;
+      font-size: 12pt;
+    }
+
+    section {
+      margin-bottom: 1.2rem;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    h1 {
+      font-size: 22pt;
+      margin-bottom: 0.65rem;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 0.3rem;
+    }
+
+    h2 {
+      font-size: 14pt;
+      color: var(--secondary);
+      margin-top: 0.9rem;
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      color: var(--gray-800);
+      margin-top: 0.6rem;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 0.45rem;
+    }
+
+    ul,
+    ol {
+      margin: 0.2rem 0 0.7rem 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.16rem;
+    }
+
+    .callout {
+      margin: 0.65rem 0 0.8rem;
+      padding: 0.7rem 0.9rem;
+      border-left: 4px solid var(--secondary);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.2rem;
+      font-size: 10.5pt;
+    }
+
+    .callout.success {
+      border-left-color: var(--success);
+    }
+
+    .callout.warning {
+      border-left-color: var(--warning);
+    }
+
+    .callout.danger {
+      border-left-color: var(--danger);
+    }
+
+    .callout.primary {
+      border-left-color: var(--primary);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .example-box {
+      border: 1px solid var(--gray-200);
+      background: #fff;
+      padding: 0.6rem 0.7rem;
+    }
+
+    .example-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 10.5pt;
+      margin-bottom: 0.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0 0.8rem;
+      font-size: 9.8pt;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--gray-200);
+      padding: 0.45rem 0.5rem;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--gray-50);
+      color: var(--secondary);
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      font-size: 8.2pt;
+      font-weight: 700;
+      margin-right: 0.22rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .badge-primary {
+      background: rgba(196, 30, 58, 0.12);
+      color: var(--primary-dark);
+    }
+
+    .badge-success {
+      background: rgba(45, 139, 111, 0.12);
+      color: #1F6B55;
+    }
+
+    .badge-warning {
+      background: rgba(212, 148, 11, 0.16);
+      color: #7C5606;
+    }
+
+    .badge-danger {
+      background: rgba(194, 59, 59, 0.14);
+      color: #8F2424;
+    }
+
+    .code-inline {
+      font-family: var(--font-mono);
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      padding: 0.08rem 0.35rem;
+      font-size: 9pt;
+      border-radius: 4px;
+    }
+
+    .footer-note {
+      margin-top: 1rem;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 0.6rem;
+      color: var(--gray-600);
+      font-size: 9.3pt;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .print-button-container {
+        display: none;
+      }
+
+      .document-container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .document-container::before {
+        height: 0;
+      }
+    }
+
+    @media (max-width: 980px) {
+      body {
+        padding: 1rem;
+      }
+
+      .document-container {
+        padding: 1.4rem;
+      }
+
+      .metrics-grid,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="header-left">
-            <div class="logo-icon">R</div>
+  <div class="document-container">
+    <section class="cover-page">
+      <div class="cover-logo">E</div>
+      <div class="cover-institution">EFREI Paris Pantheon-Assas Universite</div>
+      <div class="cover-formation">RNCP39608 - Bloc 4 - Projet Transverse (J1)</div>
+
+      <h1 class="cover-title">
+        Backlog d'Execution <span class="cover-title-accent">Apres-Midi</span><br>
+        Guide Etudiant
+      </h1>
+      <p class="cover-subtitle">
+        Document de cadrage operationnel pour avancer <strong>sans ambiguite</strong>, produire des preuves evaluables,
+        et preparer la soutenance du jeudi.
+      </p>
+
+      <div class="cover-divider"></div>
+
+      <div class="cover-meta">
+        <div class="cover-metric">
+          <span class="cover-metric-value">7</span>
+          <span class="cover-metric-label">Equipes</span>
         </div>
-        <div class="header-center">
-            <div class="logo">
-                Rakuten Challenge
-                <span class="logo-sub">Classification Multimodale de Produits</span>
-            </div>
+        <div class="cover-metric">
+          <span class="cover-metric-value">3h</span>
+          <span class="cover-metric-label">Execution</span>
         </div>
-        <div class="header-right">
-            <div class="institution-badge">
-                <div class="institution-info">
-                    <div class="institution-label">Formation RNCP</div>
-                    <div class="institution-name">Liora</div>
-                </div>
-            </div>
+        <div class="cover-metric">
+          <span class="cover-metric-value">8</span>
+          <span class="cover-metric-label">Blocs Obliges</span>
         </div>
-    </header>
-
-    <main id="slides-container">
-
-        <!-- ===================== SLIDE 1: COVER ===================== -->
-        <div class="slide active">
-            <div class="content-full text-center">
-                <h1 class="hero-title">Classification <span class="accent">Multimodale</span><br>
-                    <span style="font-size: 0.5em; font-weight: 500;">Produits E-Commerce — Challenge Rakuten France</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Approche hybride combinant <strong>texte</strong> et <strong>image</strong> avec un systeme de vote innovant
-                    pour classifier automatiquement des produits parmi 27 categories.
-                </p>
-
-                <div class="grid-4 mt-2">
-                    <div class="metric-card">
-                        <div class="metric-value">84 916</div>
-                        <div class="metric-label">Produits</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">27</div>
-                        <div class="metric-label">Categories</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value">~79%</div>
-                        <div class="metric-label">Image</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value">83%</div>
-                        <div class="metric-label">Texte</div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
-                    <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Hery M. Ralaimanantsoa</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Oussama Akir</span>
-                </div>
-
-                <div style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">
-                    <strong>Mentor : Antoine</strong> &#8212; Fevrier 2026
-                </div>
-            </div>
+        <div class="cover-metric">
+          <span class="cover-metric-value">4</span>
+          <span class="cover-metric-label">Checkpoints</span>
         </div>
+      </div>
 
-        <!-- ===================== SLIDE 2: EQUIPE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header" style="border-bottom: none; margin-bottom: 0.8rem;">
-                    <h2 class="slide-title" style="font-size: 2.2rem; letter-spacing: -0.03em;">
-                        <span style="color: var(--rakuten-red);">&#8212;</span> L'Equipe &amp; Contributions
-                    </h2>
-                </div>
-                <div class="grid-2" style="gap: 1.5rem; margin-top: 1rem;">
-                    <div class="card" style="border-left: 4px solid var(--rakuten-red);">
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Johan Frachon</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Pipeline Image &amp; Voting System</p>
-                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
-                            <li>DINOv3 + MLP (79.43%)</li>
-                            <li>EfficientNet-B0 &amp; XGBoost</li>
-                            <li>Calibration Sharpening</li>
-                        </ul>
-                    </div>
-                    <div class="card" style="border-left: 4px solid #3b82f6;">
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Liviu Andronic</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">NLP &amp; Expert Technique</p>
-                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
-                            <li>LinearSVC (83%)</li>
-                            <li>Fusion multimodale (F1~0.85)</li>
-                            <li>GridSearch, SHAP</li>
-                        </ul>
-                    </div>
-                    <div class="card" style="border-left: 4px solid #10b981;">
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Hery M. Ralaimanantsoa</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Donnees &amp; Preprocessing Texte</p>
-                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
-                            <li>Exploration dataset (84 916 produits)</li>
-                            <li>Nettoyage HTML, gestion NaN</li>
-                            <li>TF-IDF 280K features</li>
-                        </ul>
-                    </div>
-                    <div class="card" style="border-left: 4px solid #f59e0b;">
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Oussama Akir</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic; margin-bottom: 0.5rem;">Image &amp; Integration</p>
-                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1.2rem;">
-                            <li>Pipeline image</li>
-                            <li>Application Streamlit</li>
-                            <li>Multimodal, Demo</li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">
-                    <strong>Mentor :</strong> Antoine &#8212; Liora
-                </div>
-            </div>
+      <div class="cover-divider"></div>
+      <p class="cover-date">Lundi 16 fevrier 2026</p>
+    </section>
+
+    <section class="abstract-page">
+      <h1 class="abstract-title">Resume Executif</h1>
+      <p class="lead">
+        Cette apres-midi est un sprint de production, pas un cours magistral. Chaque equipe doit construire un socle
+        defendable pour E7/E8: problematique ciblee, backlog priorise, hypothese testable, benchmark utile, parcours
+        MVP,
+        prototype dirty, et traces individuelles/collectives.
+      </p>
+      <p>
+        Le niveau attendu n'est pas "fini et parfait". Le niveau attendu est: <strong>clair, coherent, trace,
+          defendable</strong>.
+        Les decisions sont plus importantes que la decoration.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card primary">
+          <div class="metric-value">20+</div>
+          <div class="metric-label">Cartes Board Minimum</div>
         </div>
-
-        <!-- ===================== SLIDE 3: NOTRE MISSION ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Contexte</span>
-                    <h2 class="slide-title">Notre Mission</h2>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-title" style="color: var(--accent-orange);">Le Probleme</div>
-                        <div class="warning-box" style="margin-top: 0.5rem;">
-                            <p style="font-size: 1.15rem;">Classification manuelle : <strong>5 min/produit</strong>, 10-15% d'erreur, non-scalable pour des millions de produits.</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title" style="color: var(--accent-green);">Notre Solution</div>
-                        <div class="success-box" style="margin-top: 0.5rem;">
-                            <p style="font-size: 1.15rem;">IA multimodale : <strong>&lt;1s/produit</strong>, 27 categories, F1~0.85, deploiement Streamlit.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-2" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Soutenance RNCP &#8212; Ingenieur Machine Learning</div>
-                    <p>Liora &#8212; Promotion Octobre 2025. <strong>Plongeons dans la technique.</strong></p>
-                </div>
-            </div>
+        <div class="metric-card success">
+          <div class="metric-value">15+</div>
+          <div class="metric-label">User Stories Finales</div>
         </div>
-
-        <!-- ===================== SLIDE 4: CHALLENGE RAKUTEN ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Contexte</span>
-                    <h2 class="slide-title">Le Challenge Rakuten France</h2>
-                </div>
-
-                <div class="grid-2">
-                    <div>
-                        <div class="warning-box">
-                            <div class="warning-box-title">Objectif</div>
-                            <p>Classifier automatiquement des produits e-commerce parmi <strong>27 categories</strong> en utilisant texte + image.</p>
-                        </div>
-
-                        <div class="card" style="padding: 0.7rem 1rem; margin-top: 0.5rem;">
-                            <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0.2rem;">Enjeux Business</div>
-                            <ul class="feature-list" style="font-size: 0.95rem;">
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Ameliorer l'experience de recherche</li>
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Reduire le taux de rebond</li>
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Automatiser millions de produits/jour</li>
-                                <li style="padding: 0.15rem 0; font-size: 0.95rem;">Traiter donnees multilingues</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="grid-2" style="gap: 0.8rem;">
-                            <div class="metric-card">
-                                <div class="metric-value">84 916</div>
-                                <div class="metric-label">Produits Train</div>
-                            </div>
-                            <div class="metric-card">
-                                <div class="metric-value">13 812</div>
-                                <div class="metric-label">Produits Test</div>
-                            </div>
-                            <div class="metric-card success">
-                                <div class="metric-value">27</div>
-                                <div class="metric-label">Categories</div>
-                            </div>
-                            <div class="metric-card warning">
-                                <div class="metric-value">35%</div>
-                                <div class="metric-label">Descriptions NaN</div>
-                            </div>
-                        </div>
-
-                        <div class="info-box mt-1">
-                            <div class="info-box-title">Metrique d'evaluation</div>
-                            <p><strong>F1-Score weighted</strong> : prend en compte le desequilibre des classes.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="metric-card warning">
+          <div class="metric-value">3 max</div>
+          <div class="metric-label">Must MVP</div>
         </div>
-
-        <!-- ===================== SLIDE 5: DATASET EN CHIFFRES ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge data">Donnees</span>
-                    <h2 class="slide-title">Le Dataset en Chiffres</h2>
-                </div>
-
-                <div class="grid-3 mt-2">
-                    <div class="metric-card" style="padding: 1.8rem;">
-                        <div class="metric-value">84 916</div>
-                        <div class="metric-label">Produits Train</div>
-                    </div>
-                    <div class="metric-card" style="padding: 1.8rem;">
-                        <div class="metric-value">27</div>
-                        <div class="metric-label">Categories</div>
-                    </div>
-                    <div class="metric-card" style="padding: 1.8rem;">
-                        <div class="metric-value">5</div>
-                        <div class="metric-label">Langues</div>
-                    </div>
-                </div>
-
-                <div class="grid-3 mt-1">
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 2.4rem;">35%</div>
-                        <div class="metric-label">Descriptions NaN</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2.4rem;">500&#215;500</div>
-                        <div class="metric-label">Images px</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 2.4rem;">13&#215;</div>
-                        <div class="metric-label">Ratio Desequilibre</div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-1" style="text-align: center;">
-                    <p><strong>Texte :</strong> designation + description (courte, 8 mots en moyenne). <strong>Image :</strong> photos produit JPEG.</p>
-                </div>
-            </div>
+        <div class="metric-card danger">
+          <div class="metric-value">5 min</div>
+          <div class="metric-label">Ecrans Prototype Mini</div>
         </div>
+      </div>
 
-        <!-- ===================== SLIDE 6: DESEQUILIBRE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge data">Donnees</span>
-                    <h2 class="slide-title">Desequilibre des Classes</h2>
-                </div>
+      <div class="keywords">
+        <span class="keyword-tag">E7 Individuel</span>
+        <span class="keyword-tag">E8 Collectif</span>
+        <span class="keyword-tag">T6 Journal</span>
+        <span class="keyword-tag">T7 Annexe Individuelle</span>
+        <span class="keyword-tag">Decision Log</span>
+        <span class="keyword-tag">Reverse Learning</span>
+      </div>
+    </section>
 
-                <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 0.8rem; align-items: start;">
-                    <!-- Graphique distribution -->
-                    <div style="text-align: center;">
-                        <img src="../src/streamlit/assets/class_distribution.png" alt="Distribution des classes" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow);">
-                    </div>
+    <section class="toc-page">
+      <h1 class="toc-title">Table des Matieres</h1>
+      <div class="toc-group">
+        <div class="toc-part">Partie I - Cadrage et done</div>
+        <div class="toc-section"><span>1.1 Modules attribues</span><span>4</span></div>
+        <div class="toc-section"><span>1.2 Definition of Done 17h00</span><span>4</span></div>
 
-                    <!-- Metriques + Strategie -->
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <div style="display: flex; gap: 0.5rem;">
-                            <div class="metric-card warning" style="flex: 1; padding: 0.5rem;">
-                                <div class="metric-value" style="font-size: 2.2rem;">13&#215;</div>
-                                <div class="metric-label" style="font-size: 0.9rem;">Ratio Max/Min</div>
-                            </div>
-                            <div class="metric-card" style="flex: 1; padding: 0.5rem;">
-                                <div class="metric-value" style="font-size: 2.2rem;">3 145</div>
-                                <div class="metric-label" style="font-size: 0.9rem;">Moyenne/Classe</div>
-                            </div>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="../src/streamlit/assets/strategy_efficacy.png" alt="Naif 60.7% vs Strategie 83.8%" style="width: 100%; max-width: 440px; border-radius: 8px; box-shadow: var(--card-shadow);">
-                        </div>
-                        <div style="text-align: center;">
-                            <span class="tag tag-green">class_weight='balanced'</span>
-                            <span class="tag tag-blue">F1 weighted</span>
-                            <span class="tag tag-purple">Oversampling</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="toc-part">Partie II - Execution obligatoire</div>
+        <div class="toc-section"><span>2.1 Roles d'equipe</span><span>5</span></div>
+        <div class="toc-section"><span>2.2 Board de suivi</span><span>6</span></div>
+        <div class="toc-section"><span>2.3 Personas</span><span>6</span></div>
+        <div class="toc-section"><span>2.4 User Stories + MoSCoW</span><span>7</span></div>
+        <div class="toc-section"><span>2.5 Hypothese testable</span><span>8</span></div>
+        <div class="toc-section"><span>2.6 Benchmark</span><span>8</span></div>
+        <div class="toc-section"><span>2.7 Parcours MVP + Prototype</span><span>9</span></div>
+        <div class="toc-section"><span>2.8 E7/E8/T6/T7</span><span>9</span></div>
+
+        <div class="toc-part">Partie III - Checkpoints</div>
+        <div class="toc-section"><span>3.1 Checkpoint 14h30</span><span>10</span></div>
+        <div class="toc-section"><span>3.2 Checkpoint 15h30</span><span>10</span></div>
+        <div class="toc-section"><span>3.3 Checkpoint 16h30</span><span>11</span></div>
+        <div class="toc-section"><span>3.4 Checkpoint 17h00</span><span>11</span></div>
+
+        <div class="toc-part">Partie IV - Regles et FAQ</div>
+        <div class="toc-section"><span>4.1 Regle blocage &gt; 10 min</span><span>12</span></div>
+        <div class="toc-section"><span>4.2 FAQ operationnelle</span><span>12</span></div>
+      </div>
+    </section>
+
+    <section class="part-divider">
+      <div class="part-number">I</div>
+      <div class="part-title">Cadrage</div>
+      <div class="part-subtitle">Contexte, modules, objectif de sortie a 17h00</div>
+    </section>
+
+    <section class="page-break">
+      <h1>1.1 Modules attribues</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Groupe</th>
+            <th>Module</th>
+            <th>Focus probable aujourd'hui</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>G1</td>
+            <td>AskEfrei</td>
+            <td>Q/R campus + escalade support humain</td>
+          </tr>
+          <tr>
+            <td>G2</td>
+            <td>SkillSwap</td>
+            <td>Matching aide entre etudiants</td>
+          </tr>
+          <tr>
+            <td>G3</td>
+            <td>EfreiRate</td>
+            <td>Avis cours + moderation</td>
+          </tr>
+          <tr>
+            <td>G4</td>
+            <td>EfreiEvents</td>
+            <td>Inscription, jauge, liste d'attente</td>
+          </tr>
+          <tr>
+            <td>G5</td>
+            <td>AssocHub</td>
+            <td>Discovery associations + calendrier unifie</td>
+          </tr>
+          <tr>
+            <td>G6</td>
+            <td>EfreiRide</td>
+            <td>Covoiturage campus + securite</td>
+          </tr>
+          <tr>
+            <td>G7</td>
+            <td>EfreiMarket</td>
+            <td>Marketplace etudiante + anti-fraude</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>1.2 Definition of Done a 17h00</h1>
+      <div class="callout primary">
+        <div class="callout-title">Resultat attendu par equipe</div>
+        <ul>
+          <li><span class="badge badge-primary">Board</span> 20 cartes minimum avec responsable + echeance + critere de
+            fin.</li>
+          <li><span class="badge badge-success">Product</span> 3 personas complets + 15 US finales + MoSCoW + 3 Must
+            max.</li>
+          <li><span class="badge badge-warning">Validation</span> 1 hypothese testable + 1 metrique.</li>
+          <li><span class="badge badge-primary">Conception</span> benchmark exploitable + parcours MVP + 5 ecrans mini.
+          </li>
+          <li><span class="badge badge-danger">Docs</span> E7 (2/4/6), E8 (1/2/3), T6 complete, T7 demarre pour tous.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="part-divider">
+      <div class="part-number">II</div>
+      <div class="part-title">Execution</div>
+      <div class="part-subtitle">8 blocs a faire dans l'ordre, sans sauter</div>
+    </section>
+
+    <section class="page-break">
+      <h1>2.1 Roles d'equipe (10 min)</h1>
+      <p>Attribuez immediatement: CP, Product, UX, Benchmark, Doc/Qualite. Un role ajoute est possible si justifie.</p>
+      <div class="callout warning">
+        <div class="callout-title">Erreur a eviter</div>
+        <p>"On verra apres". Sans role clair, le board n'est pas pilotable.</p>
+      </div>
+      <div class="example-box">
+        <div class="example-title">Exemple module: AskEfrei</div>
+        <p>CP cadence toutes les 25 min. Product priorise "question administrative urgente". UX formalise le flux
+          question - reponse - escalade humaine.</p>
+      </div>
+
+      <h1>2.2 Board de suivi (20 min)</h1>
+      <p>Colonnes obligatoires: A faire, En cours, A valider, Fait. Minimum 20 cartes, toutes assignees.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: SkillSwap</div>
+        <p>Cartes: persona apprenant, US matching, hypothese, benchmark, proto session 1. Chaque carte a un critere de
+          fin.</p>
+      </div>
+
+      <h1>2.3 Personas (25 min)</h1>
+      <p>3 personas complets + 1 edge case bonus.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: EfreiRate</div>
+        <p>Persona etudiant 1A, persona contributeur actif, persona responsable pedagogique. Edge case: enseignant
+          impacte.</p>
+      </div>
+
+      <h1>2.4 User Stories + MoSCoW (35 min)</h1>
+      <p>20 US brutes -> 15+ finales. Maximum 3 Must, avec criteres d'acceptation pour chaque Must.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: EfreiEvents</div>
+        <p>Must: inscription si place, liste d'attente, annulation avec liberation de place. Should: filtres. Could:
+          partage social.</p>
+      </div>
+
+      <h1>2.5 Hypothese testable (10 min)</h1>
+      <p>Format impose: <span class="code-inline">Si X, alors Y mesurable</span> + metrique.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: AssocHub</div>
+        <p>Si calendrier unifie, alors taux d'inscription a un event associatif augmente de X% sur 1 mois.</p>
+      </div>
+
+      <h1>2.6 Benchmark (30 min)</h1>
+      <p>3 references (2 minimum absolu), forces/faiblesses, 1 feature "steal with pride" + adaptation EFREI.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: EfreiRide</div>
+        <p>Comparer 3 apps de covoiturage puis retenir une feature trajet recurrente + adaptation securite etudiante.
+        </p>
+      </div>
+
+      <h1>2.7 Parcours MVP + dirty prototype (45 min)</h1>
+      <p>Parcours complet entree -> action -> resultat, 5 ecrans minimum, captures nommees proprement.</p>
+      <div class="example-box">
+        <div class="example-title">Exemple module: EfreiMarket</div>
+        <p>Liste annonces -> fiche -> contact -> confirmation -> notation post-transaction.</p>
+      </div>
+
+      <h1>2.8 Documentation minimale (30 min)</h1>
+      <p>E7 sections 2/4/6, E8 sections 1/2/3, T6 complete, T7 commence pour chaque etudiant.</p>
+      <div class="callout danger">
+        <div class="callout-title">Erreur critique</div>
+        <p>Attendre jeudi pour rediger. Ce sera incomplet, non traçable, et difficile a defendre en soutenance.</p>
+      </div>
+    </section>
+
+    <section class="part-divider">
+      <div class="part-number">III</div>
+      <div class="part-title">Checkpoints</div>
+      <div class="part-subtitle">Validation horaire avec exemples modules alternes</div>
+    </section>
+
+    <section class="page-break">
+      <h1>3.1 Checkpoint 14h30 - Equipe cadree</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Attendu</th>
+            <th>Exemple 1</th>
+            <th>Exemple 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Roles fixes + board actif + plan 15h30</td>
+            <td><strong>AskEfrei</strong>: 20 cartes creees, 3 deja en cours, porte-parole designe</td>
+            <td><strong>EfreiMarket</strong>: risques anti-fraude planifies sur le board</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h1>3.2 Checkpoint 15h30 - Besoin transforme en backlog</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Attendu</th>
+            <th>Exemple 1</th>
+            <th>Exemple 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3 personas + 15 US + 3 Must + hypothese testable</td>
+            <td><strong>SkillSwap</strong>: metrique sur temps moyen pour trouver une aide utile</td>
+            <td><strong>AssocHub</strong>: hypothese sur hausse participation inter-assos</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><span class="badge badge-success">Bonus +1</span> si tout est valide a l'heure.</p>
+
+      <h1>3.3 Checkpoint 16h30 - Solution visualisee</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Attendu</th>
+            <th>Exemple 1</th>
+            <th>Exemple 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Benchmark exploite + parcours MVP + 5 ecrans</td>
+            <td><strong>EfreiEvents</strong>: jauge + liste d'attente clairement gerees</td>
+            <td><strong>EfreiRide</strong>: parcours conducteur/passager separes + regles no-show</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><span class="badge badge-warning">Bonus +2</span> si tout est valide a l'heure.</p>
+
+      <h1>3.4 Checkpoint 17h00 - Dossier propre</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Attendu</th>
+            <th>Exemple 1</th>
+            <th>Exemple 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>E7/E8 amorces + T6/T7 pour tous + parking lot priorise</td>
+            <td><strong>EfreiRate</strong>: arbitrage trace moderation vs liberte publication</td>
+            <td><strong>AskEfrei</strong>: regle explicite d'escalade bot -> support humain</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><span class="badge badge-danger">Bonus +3</span> non cumulable avec +1/+2.</p>
+    </section>
+
+    <section class="part-divider">
+      <div class="part-number">IV</div>
+      <div class="part-title">Regles & FAQ</div>
+      <div class="part-subtitle">Execution, blocages, contributions individuelles</div>
+    </section>
+
+    <section class="page-break">
+      <h1>4.1 Regle d'execution non negociable</h1>
+      <div class="callout primary">
+        <div class="callout-title">Si blocage &gt; 10 minutes</div>
+        <ol>
+          <li>Noter le blocage dans <span class="code-inline">Parking lot</span>.</li>
+          <li>Choisir une option temporaire.</li>
+          <li>Avancer sans attendre.</li>
+          <li>Tracer la decision: options, avantages/inconvenients, impact.</li>
+        </ol>
+      </div>
+
+      <h1>4.2 FAQ operationnelle (5 cas reels)</h1>
+      <div class="grid-2">
+        <div class="callout">
+          <div class="callout-title">Q1. Mon role n'est pas sollicite ?</div>
+          <p>Aider le bloc critique du moment. Logger la contribution dans T7 avec preuve.</p>
         </div>
-
-        <!-- ===================== SLIDE 7: PREPROCESSING TEXTE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Pipeline</span>
-                    <h2 class="slide-title">Preprocessing Texte &#8212; TF-IDF</h2>
-                </div>
-
-                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F4DD;</div>
-
-                <div class="dataflow-container">
-                    <div class="dataflow-box">HTML+NaN</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box">Clean</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box">Concat</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box highlight-box">TF-IDF</div>
-                </div>
-
-                <ul class="feature-list" style="max-width: 900px; margin: 0 auto;">
-                    <li>Nettoyage HTML, suppression accents, gestion NaN (35%)</li>
-                    <li>Detection de langue (5 langues) + traduction FR</li>
-                    <li>FeatureUnion : Word n-grams (1,2) + Char n-grams (3,5)</li>
-                    <li><strong>Pas de lemmatisation</strong> &#8212; preserve les marques (iPhone, PlayStation)</li>
-                </ul>
-
-                <div class="success-box mt-2" style="text-align: center;">
-                    <p><strong>Resultat :</strong> 280K features TF-IDF &#8212; robuste aux fautes, au multilingue, et aux noms de marques.</p>
-                </div>
-            </div>
+        <div class="callout">
+          <div class="callout-title">Q2. J'ai aide hors role ?</div>
+          <p>Oui, c'est autorise et utile. Condition: trace board + T7, sinon contribution invisible.</p>
         </div>
-
-        <!-- ===================== SLIDE 8: PREPROCESSING IMAGE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Pipeline</span>
-                    <h2 class="slide-title">Preprocessing Image &#8212; Transfer Learning</h2>
-                </div>
-
-                <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F5BC;&#xFE0F;</div>
-
-                <div class="dataflow-container">
-                    <div class="dataflow-box">500&#215;500</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box">224&#215;224</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box">Normalize</div>
-                    <span class="dataflow-arrow">&#8594;</span>
-                    <div class="dataflow-box highlight-box">Features</div>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
-                        <div class="card-title" style="font-size: 1.15rem;">DINOv3</div>
-                        <div class="card-text" style="font-size: 1rem;">ViT-Large self-supervised (Meta)</div>
-                        <div style="margin-top: auto; padding-top: 0.5rem;">
-                            <span class="tag tag-purple">1024 features</span>
-                        </div>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
-                        <div class="card-title" style="font-size: 1.15rem;">EfficientNet</div>
-                        <div class="card-text" style="font-size: 1rem;">CNN B0 lightweight (5.3M params)</div>
-                        <div style="margin-top: auto; padding-top: 0.5rem;">
-                            <span class="tag tag-blue">1280 features</span>
-                        </div>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent-green);">
-                        <div class="card-title" style="font-size: 1.15rem;">ResNet50</div>
-                        <div class="card-text" style="font-size: 1rem;">Feature extractor pour XGBoost</div>
-                        <div style="margin-top: auto; padding-top: 0.5rem;">
-                            <span class="tag tag-green">2048 features</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-1" style="text-align: center;">
-                    <p>Normalisation ImageNet (mean/std). Pas de fine-tuning : extraction de features directe.</p>
-                </div>
-            </div>
+        <div class="callout">
+          <div class="callout-title">Q3. On a pivote en cours de route ?</div>
+          <p>Autorise si justifie: cause, decision, impact, preuve. Pivot non trace = risque d'evaluation.</p>
         </div>
-
-        <!-- ===================== SLIDE 9: POSITIONNEMENT SOTA ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Contexte</span>
-                    <h2 class="slide-title">Positionnement vs Etat de l'Art</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <th>Approche</th>
-                        <th>Architecture</th>
-                        <th>Fusion</th>
-                        <th>F1</th>
-                        <th>Contrainte</th>
-                    </tr>
-                    <tr>
-                        <td>Gagnant Rakuten 2020</td>
-                        <td>CamemBERT + ResNet152</td>
-                        <td>Late Fusion</td>
-                        <td>91.4%</td>
-                        <td><span class="tag tag-red">GPU massif</span></td>
-                    </tr>
-                    <tr>
-                        <td>SOTA 2024-2025</td>
-                        <td>Transformers multimodaux</td>
-                        <td>Attention fusion</td>
-                        <td>94-95%</td>
-                        <td><span class="tag tag-red">Infrastructure lourde</span></td>
-                    </tr>
-                    <tr style="background: rgba(16, 185, 129, 0.1);">
-                        <td class="highlight">Notre approche</td>
-                        <td class="highlight">TF-IDF + Voting + Late Fusion</td>
-                        <td>Late Fusion</td>
-                        <td class="highlight">~85%</td>
-                        <td><span class="tag tag-green">CPU-friendly</span></td>
-                    </tr>
-                </table>
-
-                <div class="grid-2 mt-1">
-                    <div class="info-box">
-                        <div class="info-box-title">Pourquoi 85% et pas 91% ?</div>
-                        <p>Nos choix : pas de CamemBERT (GPU), pas de fine-tuning (temps), interpretabilite (SHAP).</p>
-                    </div>
-                    <div class="success-box">
-                        <div class="success-box-title">Notre avantage</div>
-                        <p>Deployable, interpretable, <strong>&lt;1s inference sans GPU</strong> pour le texte.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="callout">
+          <div class="callout-title">Q4. IA autorisee ?</div>
+          <p>Oui, si usage documente: generation, verification, correction, limites observees.</p>
         </div>
-
-        <!-- ===================== SLIDE 10: IMAGE ML vs DL ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge model">Image</span>
-                    <h2 class="slide-title">Modelisation Image &#8212; ML vs Deep Learning</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <th>Modele</th>
-                        <th>F1-Score</th>
-                        <th>Temps</th>
-                        <th>Hardware</th>
-                        <th>Verdict</th>
-                    </tr>
-                    <tr>
-                        <td>Random Forest</td>
-                        <td>0.71</td>
-                        <td>~30 min</td>
-                        <td>CPU</td>
-                        <td><span class="tag tag-blue">Baseline</span></td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost GPU</td>
-                        <td>0.72</td>
-                        <td>~10 min</td>
-                        <td>GPU</td>
-                        <td><span class="tag tag-blue">Standard</span></td>
-                    </tr>
-                    <tr>
-                        <td>XGBoost Heavy</td>
-                        <td>0.765</td>
-                        <td>6 heures</td>
-                        <td>CPU 128GB</td>
-                        <td><span class="tag tag-orange">Plafond ML</span></td>
-                    </tr>
-                    <tr style="background: rgba(16, 185, 129, 0.1);">
-                        <td class="highlight">DINOv3 + MLP</td>
-                        <td class="highlight">0.794</td>
-                        <td>58 sec</td>
-                        <td>GPU</td>
-                        <td><span class="tag tag-green">Rupture</span></td>
-                    </tr>
-                </table>
-
-                <div class="grid-2 mt-1">
-                    <div class="warning-box">
-                        <div class="warning-box-title">Plafond ML</div>
-                        <p>Les modeles classiques plafonnent a ~76% malgre 6h de calcul.</p>
-                    </div>
-                    <div class="success-box">
-                        <div class="success-box-title">Rupture Deep Learning</div>
-                        <p>DINOv3 + MLP atteint <strong>79.43%</strong> en 58 secondes sur GPU RTX 4070.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="callout warning">
+          <div class="callout-title">Q5. Retard a 16h00: on coupe quoi ?</div>
+          <p>Couper nice-to-have. Garder socle: 3 Must, hypothese, benchmark utile, MVP, traces E7/E8/T6/T7.</p>
         </div>
-
-        <!-- ===================== SLIDE 11: PIPELINE VOTING ===================== -->
-        <div class="slide">
-            <div class="content-full">
-                <div class="slide-header">
-                    <span class="section-badge model">Image</span>
-                    <h2 class="slide-title">Architecture Voting &#8212; Ensemble Image</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1rem;">
-                    Trois architectures complementaires combinees par <strong>Voting pondere</strong> pour la robustesse.
-                </p>
-
-                <div style="text-align: center; margin: 1rem 0;">
-                    <svg viewBox="0 0 820 240" style="max-width: 95%; height: auto;">
-                        <defs>
-                            <marker id="iGrey" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#424242"/></marker>
-                            <marker id="iPurple" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#7c3aed"/></marker>
-                            <marker id="iCyan" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0288d1"/></marker>
-                            <marker id="iDkGreen" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2e7d32"/></marker>
-                        </defs>
-
-                        <!-- Input -->
-                        <ellipse cx="45" cy="120" rx="38" ry="22" fill="#e0e0e0" stroke="#9e9e9e" stroke-width="1.5"/>
-                        <text x="45" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Input</text>
-
-                        <!-- Arrow Input to Preproc -->
-                        <line x1="85" y1="120" x2="118" y2="120" stroke="#424242" stroke-width="2" marker-end="url(#iGrey)"/>
-
-                        <!-- Preproc -->
-                        <rect x="123" y="100" width="80" height="40" rx="10" fill="#fff" stroke="#424242" stroke-width="1.5"/>
-                        <text x="163" y="125" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Preproc</text>
-
-                        <!-- Fork Preproc to DINOv3 / EffNet -->
-                        <line x1="205" y1="110" x2="240" y2="60" stroke="#424242" stroke-width="1.5" marker-end="url(#iGrey)"/>
-                        <line x1="205" y1="130" x2="240" y2="180" stroke="#424242" stroke-width="1.5" marker-end="url(#iGrey)"/>
-
-                        <!-- DINOv3 (purple, top) -->
-                        <ellipse cx="290" cy="52" rx="48" ry="22" fill="#d1c4e9" stroke="#7c3aed" stroke-width="2"/>
-                        <text x="290" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#4a148c">DINOv3</text>
-
-                        <!-- EffNet (blue, bottom) -->
-                        <ellipse cx="290" cy="188" rx="48" ry="22" fill="#b3e5fc" stroke="#0288d1" stroke-width="2"/>
-                        <text x="290" y="193" text-anchor="middle" font-size="13" font-weight="700" fill="#01579b">EffNet</text>
-
-                        <!-- Dashed DINOv3 to XGBoost -->
-                        <line x1="325" y1="68" x2="365" y2="110" stroke="#424242" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#iGrey)"/>
-                        <!-- Dashed EffNet to XGBoost -->
-                        <line x1="325" y1="172" x2="365" y2="130" stroke="#424242" stroke-width="1.2" stroke-dasharray="6,4" marker-end="url(#iGrey)"/>
-
-                        <!-- XGBoost (green, middle) -->
-                        <ellipse cx="410" cy="120" rx="48" ry="22" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
-                        <text x="410" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1b5e20">XGBoost</text>
-
-                        <!-- Curved DINOv3 to VOTING (x4, over top) -->
-                        <path d="M 325,38 C 400,0 510,0 545,75" stroke="#7c3aed" stroke-width="3" fill="none" marker-end="url(#iPurple)"/>
-                        <rect x="425" y="8" width="28" height="18" rx="4" fill="white" fill-opacity="0.9"/>
-                        <text x="439" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c3aed">x4</text>
-
-                        <!-- Curved EffNet to VOTING (x2, under bottom) -->
-                        <path d="M 325,202 C 400,240 510,240 545,165" stroke="#0288d1" stroke-width="2.5" fill="none" marker-end="url(#iCyan)"/>
-                        <rect x="425" y="222" width="28" height="18" rx="4" fill="white" fill-opacity="0.9"/>
-                        <text x="439" y="236" text-anchor="middle" font-size="13" font-weight="bold" fill="#0288d1">x2</text>
-
-                        <!-- XGBoost to VOTING (x1) -->
-                        <line x1="460" y1="120" x2="530" y2="120" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#iDkGreen)"/>
-                        <rect x="480" y="103" width="24" height="16" rx="3" fill="white" fill-opacity="0.9"/>
-                        <text x="492" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">x1</text>
-
-                        <!-- VOTING diamond (large) -->
-                        <polygon points="565,65 615,120 565,175 515,120" fill="#ff8a80" stroke="#d32f2f" stroke-width="2.5"/>
-                        <text x="565" y="125" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">VOTING</text>
-
-                        <!-- Arrow VOTING to Sortie -->
-                        <line x1="617" y1="120" x2="650" y2="120" stroke="#424242" stroke-width="2" marker-end="url(#iGrey)"/>
-
-                        <!-- Sortie -->
-                        <ellipse cx="693" cy="120" rx="38" ry="22" fill="gold" stroke="#f9a825" stroke-width="1.5"/>
-                        <text x="693" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#5d4037">Sortie</text>
-
-                        <!-- Resume box -->
-                        <rect x="742" y="70" width="70" height="100" rx="8" fill="#fef2f2" stroke="#d32f2f" stroke-width="1.5"/>
-                        <text x="777" y="92" text-anchor="middle" font-size="9" font-weight="700" fill="#991b1b">Voting</text>
-                        <text x="777" y="115" text-anchor="middle" font-size="18" font-weight="800" fill="#d32f2f">~79%</text>
-                        <text x="777" y="135" text-anchor="middle" font-size="8" fill="#64748b">Robustesse</text>
-                        <text x="777" y="148" text-anchor="middle" font-size="8" fill="#64748b">Diversite</text>
-                        <text x="777" y="161" text-anchor="middle" font-size="8" fill="#64748b">3 archis</text>
-                    </svg>
-                </div>
-
-                <div class="info-box" style="text-align: center; margin-top: 0.5rem;">
-                    <div class="info-box-title" style="justify-content: center;">3 architectures orthogonales</div>
-                    <p>Transformer (DINOv3), CNN (EfficientNet), Gradient Boosting (XGBoost)</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 12: COMPLEMENTARITE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Innovation</span>
-                    <h2 class="slide-title">Complementarite des Modeles</h2>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
-                        <div class="card-title" style="color: var(--accent-purple);">DINOv3 &#8212; Le Patron</div>
-                        <div class="card-text">
-                            <p><strong>Vision Transformer</strong></p>
-                            <p>Contexte global, poids 4/7</p>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-purple" style="font-size: 1.3rem;">79.43% seul</span>
-                        </div>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
-                        <div class="card-title" style="color: var(--accent-blue);">EfficientNet &#8212; L'Expert</div>
-                        <div class="card-text">
-                            <p><strong>CNN</strong></p>
-                            <p>Textures locales, poids 2/7</p>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-blue" style="font-size: 1.3rem;">66.63% seul</span>
-                        </div>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent-green);">
-                        <div class="card-title" style="color: var(--accent-green);">XGBoost &#8212; Le Statisticien</div>
-                        <div class="card-text">
-                            <p><strong>Gradient Boosting</strong></p>
-                            <p>Features tabulaires, poids 1/7</p>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-green" style="font-size: 1.3rem;">85.32% seul</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visualisation : comment chaque modele voit la meme image -->
-                <div style="text-align: center; margin-top: 0.3rem;">
-                    <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; color: var(--text-main);">Comment chaque modele voit la meme image</p>
-                    <img src="../src/streamlit/assets/explainability_drive.png" alt="Meme produit vu par DINOv3, EfficientNet, XGBoost" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow); transform: scaleY(1.3); transform-origin: top center; margin-bottom: 2rem;">
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 13: CALIBRATION SHARPENING ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Innovation</span>
-                    <h2 class="slide-title">Calibration &#8212; Le Sharpening</h2>
-                </div>
-
-                <!-- Courbes de calibration AVANT / APRES -->
-                <div class="grid-2">
-                    <div class="card" style="text-align: center; padding: 1rem;">
-                        <div class="card-title" style="color: var(--accent-orange);">AVANT &#8212; Le Probleme</div>
-                        <img src="../src/streamlit/assets/calibration_before.png" alt="Calibration avant sharpening - XGBoost groupe a 25%" style="width: 100%; max-width: 420px; border-radius: 8px; box-shadow: var(--card-shadow);">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">XGBoost (vert) groupe a ~25% &#8594; seuil 80% jamais atteint</p>
-                    </div>
-                    <div class="card" style="text-align: center; padding: 1rem;">
-                        <div class="card-title" style="color: var(--accent-green);">APRES &#8212; Sharpening</div>
-                        <img src="../src/streamlit/assets/calibration_after.png" alt="Calibration apres sharpening - XGBoost depasse 80%" style="width: 100%; max-width: 420px; border-radius: 8px; box-shadow: var(--card-shadow);">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">XGBoost calibre &#8594; decisions nettes au-dela du seuil</p>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin: 0.8rem 0;">
-                    <div style="display: inline-block; background: white; border: 2px solid var(--accent-purple); border-radius: 12px; padding: 0.8rem 2rem; box-shadow: var(--shadow-lg);">
-                        <code style="font-size: 1.6rem; background: none; color: var(--accent-purple);">p_sharp = p&#179; / &#931;(p&#179;)</code>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">Concentre la probabilite sur la classe dominante</p>
-                    </div>
-                </div>
-
-                <div class="success-box" style="text-align: center;">
-                    <div class="success-box-title" style="justify-content: center;">Resultat</div>
-                    <p>Apres sharpening : le Voting est mieux calibre, <strong>~70% d'automatisation</strong> au seuil de 80%.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 14: RESULTATS IMAGE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Resultats</span>
-                    <h2 class="slide-title">Resultats Image</h2>
-                </div>
-
-                <div class="voting-container">
-                    <div class="model-card">
-                        <div class="model-icon">&#x1F996;</div>
-                        <div class="model-name">DINOv3 + MLP</div>
-                        <div class="model-score">79.43%</div>
-                        <div class="model-weight">Poids 4/7</div>
-                    </div>
-                    <span class="voting-arrow">&#8594;</span>
-                    <div class="model-card">
-                        <div class="model-icon">&#x1F332;</div>
-                        <div class="model-name">XGBoost</div>
-                        <div class="model-score">85.32%</div>
-                        <div class="model-weight">Champion</div>
-                    </div>
-                    <span class="voting-arrow">&#8594;</span>
-                    <div class="model-card">
-                        <div class="model-icon">&#x26A1;</div>
-                        <div class="model-name">EfficientNet</div>
-                        <div class="model-score">66.63%</div>
-                        <div class="model-weight">Poids 2/7</div>
-                    </div>
-                    <span class="voting-arrow" style="font-size: 2rem;">&#8658;</span>
-                    <div class="model-card final-card">
-                        <div class="model-icon">&#x1F3C6;</div>
-                        <div class="model-name">VOTING</div>
-                        <div class="model-score" style="font-size: 1.8rem;">~79%</div>
-                        <div class="model-weight">Diversite</div>
-                    </div>
-                </div>
-
-                <div class="info-box" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Le role du Voting</div>
-                    <p>Le Voting (~79%) ne bat pas XGBoost individuel (85%). Son role : <strong>robustesse architecturale et diversite</strong>. Quand un modele se trompe, les autres compensent.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 15: PIPELINE TEXTE ===================== -->
-        <div class="slide">
-            <div class="content-full">
-                <div class="slide-header">
-                    <span class="section-badge model">Texte</span>
-                    <h2 class="slide-title">TEXTE : Quel classifieur ?</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1rem; text-align: center; font-size: 1rem;">
-                    Chaque choix technique resulte d'un <strong>arbitrage raisonne</strong> entre performance, complexite et contraintes.
-                </p>
-
-                <div style="text-align: center; margin: 1rem 0;">
-                    <svg viewBox="0 0 820 200" style="max-width: 95%; height: auto;">
-                        <defs>
-                            <marker id="tGrey" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#424242"/></marker>
-                            <marker id="tGreen" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#10b981"/></marker>
-                        </defs>
-
-                        <!-- Input -->
-                        <ellipse cx="45" cy="100" rx="38" ry="22" fill="#e0e0e0" stroke="#9e9e9e" stroke-width="1.5"/>
-                        <text x="45" y="105" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Input</text>
-
-                        <!-- Arrow Input to Clean -->
-                        <line x1="85" y1="100" x2="118" y2="100" stroke="#424242" stroke-width="2" marker-end="url(#tGrey)"/>
-
-                        <!-- Clean -->
-                        <rect x="123" y="80" width="75" height="40" rx="10" fill="#fff" stroke="#424242" stroke-width="1.5"/>
-                        <text x="160" y="105" text-anchor="middle" font-size="13" font-weight="600" fill="#424242">Clean</text>
-
-                        <!-- Arrow Clean to TF-IDF -->
-                        <line x1="200" y1="100" x2="233" y2="100" stroke="#424242" stroke-width="2" marker-end="url(#tGrey)"/>
-
-                        <!-- TF-IDF -->
-                        <ellipse cx="285" cy="100" rx="48" ry="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-                        <text x="285" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">TF-IDF</text>
-
-                        <!-- Fork to 3 candidates -->
-                        <line x1="335" y1="86" x2="380" y2="38" stroke="#424242" stroke-width="1.5" marker-end="url(#tGrey)"/>
-                        <line x1="335" y1="100" x2="380" y2="100" stroke="#10b981" stroke-width="3" marker-end="url(#tGreen)"/>
-                        <line x1="335" y1="114" x2="380" y2="165" stroke="#424242" stroke-width="1.5" marker-end="url(#tGrey)"/>
-
-                        <!-- CamemBERT (top, rejected) -->
-                        <ellipse cx="450" cy="32" rx="60" ry="22" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,4"/>
-                        <text x="450" y="28" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">CamemBERT</text>
-                        <text x="450" y="43" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="bold">GPU | 200ms | lourd</text>
-                        <line x1="502" y1="18" x2="516" y2="32" stroke="#ef4444" stroke-width="3"/>
-                        <line x1="516" y1="18" x2="502" y2="32" stroke="#ef4444" stroke-width="3"/>
-
-                        <!-- LinearSVC (middle, selected) -->
-                        <ellipse cx="450" cy="100" rx="60" ry="22" fill="#d1fae5" stroke="#10b981" stroke-width="3"/>
-                        <text x="450" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#065f46">LinearSVC</text>
-                        <text x="450" y="111" text-anchor="middle" font-size="10" fill="#065f46" font-weight="bold">83% | CPU | 10ms</text>
-
-                        <!-- Random Forest (bottom, rejected) -->
-                        <ellipse cx="450" cy="168" rx="60" ry="22" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,4"/>
-                        <text x="450" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="#991b1b">RandomForest</text>
-                        <text x="450" y="179" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="bold">72% | CPU | 50ms</text>
-                        <line x1="502" y1="154" x2="516" y2="168" stroke="#ef4444" stroke-width="3"/>
-                        <line x1="516" y1="154" x2="502" y2="168" stroke="#ef4444" stroke-width="3"/>
-
-                        <!-- Arrow LinearSVC to Sortie -->
-                        <line x1="512" y1="100" x2="555" y2="100" stroke="#10b981" stroke-width="3" marker-end="url(#tGreen)"/>
-
-                        <!-- Sortie -->
-                        <ellipse cx="600" cy="100" rx="38" ry="22" fill="gold" stroke="#f9a825" stroke-width="1.5"/>
-                        <text x="600" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#5d4037">Sortie</text>
-
-                        <!-- Resume box -->
-                        <rect x="660" y="60" width="150" height="80" rx="8" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
-                        <text x="735" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="#065f46">Champion Texte</text>
-                        <text x="735" y="100" text-anchor="middle" font-size="18" font-weight="800" fill="#10b981">F1 = 0.83</text>
-                        <text x="735" y="118" text-anchor="middle" font-size="9" fill="#64748b">CPU | &lt; 10ms</text>
-                        <text x="735" y="132" text-anchor="middle" font-size="9" fill="#64748b">Interpretable</text>
-                    </svg>
-                </div>
-
-                <div class="info-box" style="text-align: center; margin-top: 0.5rem;">
-                    <div class="info-box-title" style="justify-content: center;">Principe directeur</div>
-                    <p>Le gain potentiel de CamemBERT (~1-2%) ne justifie pas la complexite (GPU, 200ms, boite noire). <strong>LinearSVC = meilleur compromis.</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 16: BENCHMARK TEXTE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge model">Texte</span>
-                    <h2 class="slide-title">Modelisation Texte &#8212; LinearSVC</h2>
-                </div>
-
-                <div class="grid-2">
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Modele</th>
-                                <th>F1-Score</th>
-                                <th>Temps</th>
-                            </tr>
-                            <tr>
-                                <td>Logistic Regression</td>
-                                <td>0.79</td>
-                                <td>~2 min</td>
-                            </tr>
-                            <tr>
-                                <td>Multinomial NB</td>
-                                <td>0.76</td>
-                                <td>~30 sec</td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.1);">
-                                <td class="highlight">LinearSVC (C=0.5)</td>
-                                <td class="highlight">0.83</td>
-                                <td>~3 min</td>
-                            </tr>
-                            <tr>
-                                <td>Random Forest</td>
-                                <td>0.68</td>
-                                <td>~15 min</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <div class="metric-card" style="padding: 1rem;">
-                            <div class="metric-value" style="font-size: 3.5rem;">83%</div>
-                            <div class="metric-label">Accuracy LinearSVC</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="success-box mt-1">
-                    <div class="success-box-title">Champion Texte</div>
-                    <p><strong>LinearSVC</strong> avec <code>class_weight='balanced'</code> et <code>C=0.5</code> optimise par GridSearch.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 17: FUSION MULTIMODALE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Fusion</span>
-                    <h2 class="slide-title">Fusion Multimodale &#8212; Late Fusion</h2>
-                </div>
-
-                <div class="dataflow-container" style="margin: 0.8rem 0;">
-                    <div class="dataflow-box" style="border-color: var(--accent-green);">
-                        <strong>Image</strong><br>~79%
-                    </div>
-                    <span class="dataflow-arrow">&#215;0.6</span>
-                    <div class="dataflow-box" style="border-color: var(--accent-purple);">
-                        <strong>+</strong><br>Late Fusion
-                    </div>
-                    <span class="dataflow-arrow">&#215;0.4</span>
-                    <div class="dataflow-box" style="border-color: var(--accent-orange);">
-                        <strong>Texte</strong><br>83%
-                    </div>
-                    <span class="dataflow-arrow" style="font-size: 1.5rem;">=</span>
-                    <div class="dataflow-box highlight-box" style="background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple)); color: white; border: none;">
-                        <strong>Final</strong><br>F1~0.85
-                    </div>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-title">Exemple Synergie</div>
-                        <div class="card-text">
-                            <strong>Image</strong> : Forme ronde bleue &#8594; "Piscine" &#10060;<br>
-                            <strong>Texte</strong> : "DVD Le Grand Bleu" &#8594; "DVD" &#10004;<br>
-                            <strong>Fusion</strong> : Le texte corrige l'erreur visuelle
-                        </div>
-                    </div>
-
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Configuration</th>
-                                <th>Accuracy</th>
-                            </tr>
-                            <tr>
-                                <td>Texte seul</td>
-                                <td>83%</td>
-                            </tr>
-                            <tr>
-                                <td>Image seule</td>
-                                <td>~79%</td>
-                            </tr>
-                            <tr style="background: rgba(16, 185, 129, 0.1);">
-                                <td class="highlight">Fusion Multimodale</td>
-                                <td class="highlight">F1 ~ 0.85</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 18: EXPLICABILITE TEXTE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Transparence</span>
-                    <h2 class="slide-title">Explicabilite &#8212; SHAP (Texte)</h2>
-                </div>
-
-                <div class="card" style="max-width: 800px; margin: 0.5rem auto;">
-                    <div class="card-title">Exemple : "iPhone 15 Pro Max 256GB"</div>
-                    <div class="card-text">
-                        <div style="display: flex; flex-direction: column; gap: 0.4rem; margin: 0.5rem 0;">
-                            <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 200px; height: 20px; background: linear-gradient(90deg, #bf0000 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">iphone (0.42)</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 135px; height: 20px; background: linear-gradient(90deg, #dc2626 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">smartphone (0.28)</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 85px; height: 20px; background: linear-gradient(90deg, #ef4444 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">apple (0.18)</span>
-                            </div>
-                        </div>
-                        <p style="margin-top: 0.5rem; font-size: 1.05rem;">Prediction : <strong style="color: var(--accent-green);">Telephones (94.2%)</strong></p>
-                    </div>
-                </div>
-
-                <div class="info-box mt-1" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">SHAP (Shapley Values)</div>
-                    <p>Identifie les mots-cles qui poussent vers chaque categorie. Interpretation directe grace aux coefficients LinearSVC.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 19: EXPLICABILITE IMAGE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge">Transparence</span>
-                    <h2 class="slide-title">Explicabilite &#8212; Grad-CAM (Image)</h2>
-                </div>
-
-                <!-- Rapport Technique Grad-CAM + Focus Battle cote a cote -->
-                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 0.6rem; align-items: start;">
-                    <div style="text-align: center;">
-                        <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem;">Rapport Technique Grad-CAM</p>
-                        <img src="../src/streamlit/assets/rapport_technique_gradcam.png" alt="Rapport technique Grad-CAM" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow); transform: scaleY(1.4); transform-origin: top center; margin-bottom: 3rem;">
-                    </div>
-                    <div style="text-align: center;">
-                        <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem;">Focus Battle &#8212; 4 Modeles</p>
-                        <img src="../src/streamlit/assets/focus_battle.png" alt="Comparaison du focus des 4 modeles" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow);">
-                    </div>
-                </div>
-
-                <div class="info-box" style="text-align: center; margin-top: 0.4rem;">
-                    <p>Les zones <strong style="color: var(--rakuten-red);">rouges</strong> = zones decisives pour la prediction. Conformite AI Act : transparence algorithmique, droit a l'explication.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 20: DATA LEAKAGE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge" style="background: linear-gradient(135deg, var(--accent-orange), var(--danger));">Integrite</span>
-                    <h2 class="slide-title">Data Leakage &#8212; Integrite Scientifique</h2>
-                </div>
-
-                <div class="grid-2">
-                    <div class="warning-box" style="padding: 0.8rem;">
-                        <div class="warning-box-title">Decouverte</div>
-                        <p style="font-size: 1.15rem;">Les scores image etaient gonfles a <strong>92%</strong> (data leakage dans l'evaluation).</p>
-                    </div>
-                    <div class="success-box" style="padding: 0.8rem;">
-                        <div class="success-box-title">Correction</div>
-                        <p style="font-size: 1.15rem;">Audit complet, chaque fichier, chaque slide, chaque metrique. Score reel : <strong>79.28%</strong>.</p>
-                    </div>
-                </div>
-
-                <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin: 1rem 0;">
-                    <div class="metric-card" style="padding: 1rem; border: 2px solid var(--danger); position: relative;">
-                        <div class="metric-value" style="font-size: 3rem; text-decoration: line-through; background: linear-gradient(135deg, var(--danger), #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">92%</div>
-                        <div class="metric-label" style="color: var(--danger);">Gonfle (leakage)</div>
-                    </div>
-                    <span style="font-size: 2.5rem; color: var(--accent-orange);">&#8594;</span>
-                    <div class="metric-card success" style="padding: 1rem; border: 2px solid var(--accent-green);">
-                        <div class="metric-value" style="font-size: 3rem;">79.28%</div>
-                        <div class="metric-label" style="color: var(--accent-green);">Correct (audite)</div>
-                    </div>
-                </div>
-
-                <div class="info-box" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Demarche d'ingenieur</div>
-                    <p>C'est la difference entre un projet academique et une demarche d'ingenieur. <strong>L'integrite avant la performance.</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 21: QUALITE & TESTS ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Resultats</span>
-                    <h2 class="slide-title">Qualite &amp; Tests</h2>
-                </div>
-
-                <div class="grid-4 mt-2">
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2.4rem;">210+</div>
-                        <div class="metric-label">Tests</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value" style="font-size: 2.4rem;">85%</div>
-                        <div class="metric-label">Coverage</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 2.4rem;">50+</div>
-                        <div class="metric-label">Securite OWASP</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2.4rem;">6/6</div>
-                        <div class="metric-label">Quality Gates</div>
-                    </div>
-                </div>
-
-                <div class="grid-2 mt-2">
-                    <div class="card">
-                        <div class="card-title">Pyramide de Tests</div>
-                        <ul class="feature-list" style="font-size: 1.05rem;">
-                            <li style="font-size: 1.05rem;">Unitaires (90)</li>
-                            <li style="font-size: 1.05rem;">Integration (30)</li>
-                            <li style="font-size: 1.05rem;">ML / Performance (40)</li>
-                            <li style="font-size: 1.05rem;">Securite OWASP (50)</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <div class="card-title">Quality Gates ML</div>
-                        <ul class="feature-list" style="font-size: 1.05rem;">
-                            <li style="font-size: 1.05rem;">Accuracy 79.3% &#10004;</li>
-                            <li style="font-size: 1.05rem;">F1 Macro 78.5% &#10004;</li>
-                            <li style="font-size: 1.05rem;">Latence &lt;100ms &#10004;</li>
-                            <li style="font-size: 1.05rem;">27/27 classes &#10004;</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 22: RETOUR D'EXPERIENCE ===================== -->
-        <div class="slide">
-            <div class="content-full">
-                <div class="slide-header">
-                    <span class="section-badge results">Bilan</span>
-                    <h2 class="slide-title">Retour d'Experience</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem; text-align: center; font-size: 1.1rem;">
-                    Ce que ce projet nous a appris en tant qu'<strong>ingenieurs ML</strong>.
-                </p>
-
-                <div class="grid-2" style="gap: 1.5rem;">
-                    <div class="card" style="border-left: 4px solid var(--accent-orange);">
-                        <div class="card-title" style="color: var(--accent-orange);">Ce qu'on referait autrement</div>
-                        <ul style="font-size: 0.95rem; line-height: 1.8; list-style: none; padding: 0;">
-                            <li>1. <strong>Commencer par la fusion</strong> des le debut, pas apres avoir finalise chaque pipeline separement</li>
-                            <li>2. <strong>Implementer le monitoring</strong> des metriques des le premier modele</li>
-                            <li>3. <strong>Tester l'OCR</strong> sur les images-texte avant d'investir dans le fine-tuning image</li>
-                        </ul>
-                    </div>
-
-                    <div class="card" style="border-left: 4px solid var(--danger);">
-                        <div class="card-title" style="color: var(--danger);">Erreurs instructives</div>
-                        <ul style="font-size: 0.95rem; line-height: 1.8; list-style: none; padding: 0;">
-                            <li>1. <strong>ResNet "Phoenix"</strong> : 91% train, 65% test. Lecon : surveiller le gap train/val</li>
-                            <li>2. <strong>Labels desalignes</strong> : 3 referentiels incompatibles. Lecon : standardiser le mapping</li>
-                            <li>3. <strong>XGBoost non calibre</strong> : probabilites "molles" diluaient le vote</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="info-box mt-1" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Competences acquises</div>
-                    <p>
-                        <span class="tag tag-purple">Vision Transformers</span>
-                        <span class="tag tag-blue">Self-Supervised Learning</span>
-                        <span class="tag tag-green">Ensemble Calibration</span>
-                        <span class="tag tag-orange">Multimodal Fusion</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 23: IMPACT BUSINESS ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Resultats</span>
-                    <h2 class="slide-title">Impact Business</h2>
-                </div>
-
-                <div class="grid-2">
-                    <div class="card" style="border-left: 4px solid var(--accent-orange);">
-                        <div class="card-title" style="color: var(--accent-orange);">AVANT (Manuel)</div>
-                        <div class="card-text" style="font-size: 1.15rem;">
-                            <strong>5 min/produit</strong>, 10-15% erreur, non scalable
-                        </div>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent-green);">
-                        <div class="card-title" style="color: var(--accent-green);">APRES (IA)</div>
-                        <div class="card-text" style="font-size: 1.15rem;">
-                            <strong>&lt;1s/produit</strong>, ~85% F1, 100K+ produits/jour
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-3 mt-2">
-                    <div class="metric-card success">
-                        <div class="metric-value" style="font-size: 2.4rem;">~70%</div>
-                        <div class="metric-label">Automatisation</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 2.4rem;">30%</div>
-                        <div class="metric-label">Revue humaine</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2.4rem;">500K+</div>
-                        <div class="metric-label">Produits/jour GPU</div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-2" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Seuil de confiance</div>
-                    <p>Le systeme sait dire "je ne suis pas sur". <strong>Zero automatisation aveugle</strong> &#8212; seuil de confiance 80%.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 24: CONCLUSION ===================== -->
-        <div class="slide">
-            <div class="content-full text-center">
-                <h1 class="hero-title" style="font-size: 2.8rem;">Conclusion &amp; Perspectives</h1>
-
-                <div class="grid-3 mt-2" style="max-width: 900px; margin-left: auto; margin-right: auto;">
-                    <div class="metric-card warning">
-                        <div class="metric-value">~79%</div>
-                        <div class="metric-label">Image Voting</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value">83%</div>
-                        <div class="metric-label">Texte SVC</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">F1~0.85</div>
-                        <div class="metric-label">Fusion</div>
-                    </div>
-                </div>
-
-                <div class="success-box mt-2" style="max-width: 800px; margin-left: auto; margin-right: auto; text-align: center;">
-                    <div class="success-box-title" style="justify-content: center;">Perspectives d'amelioration</div>
-                    <p>
-                        <span class="tag tag-green">OCR (+3-5%)</span>
-                        <span class="tag tag-blue">CamemBERT (a evaluer)</span>
-                        <span class="tag tag-purple">Fine-tuning DINOv3</span>
-                        <span class="tag tag-orange">Deploiement Cloud</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 25: DEMO LIVE ===================== -->
-        <div class="slide">
-            <div class="content-single">
-                <div class="slide-header">
-                    <span class="section-badge results">Demo</span>
-                    <h2 class="slide-title">Place a la Demonstration</h2>
-                </div>
-
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem; text-align: center; font-size: 1.15rem;">
-                    Vous connaissez la theorie. <strong>Oussama</strong> va maintenant vous montrer le systeme en action.
-                </p>
-
-                <div class="grid-3" style="gap: 1.2rem;">
-                    <div class="card" style="border-left: 4px solid var(--accent-green);">
-                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F4DD;</div>
-                        <div class="card-title">1. Texte seul</div>
-                        <div class="card-text" style="font-size: 1.05rem;">
-                            "Harry Potter edition poche"<br>&#8594; <strong>Livres (99%)</strong>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-green">Le texte suffit</span>
-                        </div>
-                    </div>
-
-                    <div class="card" style="border-left: 4px solid var(--accent-blue);">
-                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F5BC;&#xFE0F;</div>
-                        <div class="card-title">2. Image seule</div>
-                        <div class="card-text" style="font-size: 1.05rem;">
-                            Photo bouee piscine<br>&#8594; <strong>Piscine (~79%)</strong>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-blue">Le Voting decide</span>
-                        </div>
-                    </div>
-
-                    <div class="card" style="border-left: 4px solid var(--accent-purple);">
-                        <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">&#x1F500;</div>
-                        <div class="card-title">3. Fusion</div>
-                        <div class="card-text" style="font-size: 1.05rem;">
-                            "DVD Le Grand Bleu" + jaquette bleue<br>&#8594; <strong>DVD (87%)</strong>
-                        </div>
-                        <div style="margin-top: auto; padding-top: 0.8rem;">
-                            <span class="tag tag-purple">Texte corrige image</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="success-box mt-2" style="text-align: center;">
-                    <div class="success-box-title" style="justify-content: center;">Application Streamlit</div>
-                    <p>Predictions en temps reel &#8226; 3 modalites &#8226; Explicabilite integree &#8226; F1~0.85</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===================== SLIDE 26: MERCI ===================== -->
-        <div class="slide">
-            <div class="content-full text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-                <h1 class="hero-title" style="font-size: 5rem; margin-bottom: 1rem;">Merci !</h1>
-                <p class="hero-subtitle" style="font-size: 2rem; margin-bottom: 1rem;">Questions ?</p>
-
-                <div class="grid-4 mt-2" style="max-width: 900px;">
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2rem;">84 916</div>
-                        <div class="metric-label">Produits</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 2rem;">27</div>
-                        <div class="metric-label">Categories</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 2rem;">3</div>
-                        <div class="metric-label">Modeles</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-value" style="font-size: 2rem;">F1~0.85</div>
-                        <div class="metric-label">Fusion</div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
-                    <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Hery M. Ralaimanantsoa</span>
-                    <span style="color: var(--rakuten-red);">&#8226;</span>
-                    <span style="font-weight: 600; color: var(--text-main);">Oussama Akir</span>
-                </div>
-
-                <div style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">
-                    <strong>Mentor : Antoine</strong> &#8212; Liora &#8212; Fevrier 2026
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Timer Soutenance -->
-    <div class="soutenance-timer" id="soutenance-timer" onclick="toggleTimer()" title="Cliquer pour demarrer / arreter le chrono">
-        <div class="timer-dot"></div>
-        <span id="timer-display">00:00</span>
-        <span class="timer-label" id="timer-label">Cliquer pour lancer</span>
-    </div>
-
-    <!-- Navigation -->
-    <nav>
-        <button class="nav-btn" onclick="prevSlide()" title="Precedent">&#8592;</button>
-        <div class="nav-separator"></div>
-        <span class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">27</span></span>
-        <div class="nav-separator"></div>
-        <button class="nav-btn" onclick="nextSlide()" title="Suivant">&#8594;</button>
-    </nav>
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill"></div>
-    </div>
-
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        let currentSlide = 0;
-
-        document.getElementById('total-slides').textContent = totalSlides;
-
-        function updateSlide() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev');
-                if (index === currentSlide) slide.classList.add('active');
-                else if (index < currentSlide) slide.classList.add('prev');
-            });
-            document.getElementById('current-slide').textContent = currentSlide + 1;
-            document.getElementById('progress-fill').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
-        }
-
-        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); } }
-        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
-        function goToSlide(index) { if (index >= 0 && index < totalSlides) { currentSlide = index; updateSlide(); } }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
-            else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
-            else if (e.key === 'End') { e.preventDefault(); goToSlide(totalSlides - 1); }
-        });
-
-        let touchStartX = 0;
-        document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-        document.addEventListener('touchend', (e) => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
-        });
-
-        updateSlide();
-
-        // ===== TIMER SOUTENANCE =====
-        const HANDOFF_POINTS = [
-            { sec: 60,  label: "Oussama \u2192 Michael" },
-            { sec: 360, label: "Michael \u2192 suivant" },
-            { sec: 660, label: "Passage \u00e0 11 min" },
-            { sec: 960, label: "Passage \u00e0 16 min" }
-        ];
-        let timerInterval = null;
-        let timerSeconds = 0;
-        let timerRunning = false;
-        let alertTimeout = null;
-
-        const timerEl = document.getElementById('soutenance-timer');
-        const timerDisplay = document.getElementById('timer-display');
-        const timerLabel = document.getElementById('timer-label');
-
-        function formatTime(totalSec) {
-            const m = Math.floor(totalSec / 60);
-            const s = totalSec % 60;
-            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-        }
-
-        function tickTimer() {
-            timerSeconds++;
-            timerDisplay.textContent = formatTime(timerSeconds);
-
-            // Check handoff points
-            const handoff = HANDOFF_POINTS.find(h => h.sec === timerSeconds);
-            if (handoff) {
-                timerEl.classList.add('alert');
-                timerLabel.textContent = handoff.label;
-                if (alertTimeout) clearTimeout(alertTimeout);
-                alertTimeout = setTimeout(() => {
-                    timerEl.classList.remove('alert');
-                }, 5000);
-            }
-        }
-
-        function toggleTimer() {
-            if (!timerRunning) {
-                timerRunning = true;
-                timerEl.classList.add('running');
-                timerEl.classList.remove('alert');
-                timerLabel.textContent = 'En cours...';
-                timerInterval = setInterval(tickTimer, 1000);
-            } else {
-                timerRunning = false;
-                timerEl.classList.remove('running');
-                clearInterval(timerInterval);
-                timerInterval = null;
-                timerLabel.textContent = 'En pause';
-            }
-        }
-    </script>
+      </div>
+
+      <div class="footer-note">
+        Ligne directrice: ne cherchez pas le "joli". Cherchez le "defendable".
+        Une equipe qui arbitre, trace, et produit est mieux evaluee qu'une equipe qui discute sans preuves.
+      </div>
+    </section>
+  </div>
 </body>
 
 </html>
