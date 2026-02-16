@@ -174,6 +174,70 @@
             text-align: center;
         }
 
+        /* ===== TIMER SOUTENANCE ===== */
+        .soutenance-timer {
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+            z-index: 300;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--glass-bg);
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--card-shadow);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .soutenance-timer:hover {
+            border-color: var(--rakuten-red);
+            box-shadow: var(--card-hover);
+        }
+        .soutenance-timer.running {
+            border-color: var(--accent-green);
+        }
+        .soutenance-timer .timer-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            transition: background 0.3s;
+        }
+        .soutenance-timer.running .timer-dot {
+            background: var(--accent-green);
+        }
+        .soutenance-timer.alert {
+            border-color: var(--rakuten-red);
+            animation: timer-blink 0.5s ease-in-out 10;
+        }
+        .soutenance-timer.alert .timer-dot {
+            background: var(--rakuten-red);
+            animation: timer-blink 0.5s ease-in-out 10;
+        }
+        .soutenance-timer .timer-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .soutenance-timer.alert .timer-label {
+            color: var(--rakuten-red);
+            font-weight: 700;
+        }
+        @keyframes timer-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.15; }
+        }
+
         .progress-bar {
             position: fixed;
             bottom: 0;
@@ -210,8 +274,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 2rem 3rem 1rem;
-            padding-top: 5%;
+            padding: 1.2rem 3rem 0.8rem;
+            padding-top: 3%;
             overflow-y: auto;
         }
 
@@ -253,14 +317,14 @@
             color: var(--text-muted);
             text-align: center;
             max-width: 1000px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 1rem;
             line-height: 1.5;
         }
 
         .slide-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.8rem;
             padding-bottom: 0.8rem;
             border-bottom: 2px solid var(--glass-border);
         }
@@ -290,7 +354,7 @@
         }
 
         .slide-title {
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-main);
             line-height: 1.2;
@@ -310,32 +374,32 @@
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 1rem 0;
+            gap: 1rem;
+            margin: 0.5rem 0;
         }
 
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .card {
             background: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: 10px;
-            padding: 1.5rem;
+            padding: 1rem;
             box-shadow: var(--card-shadow);
             transition: all 0.2s ease;
-            margin: 0.5rem 0;
+            margin: 0.2rem 0;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -356,22 +420,22 @@
 
         .card-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.45rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             color: var(--text-main);
         }
 
         .card-text {
             color: var(--text-muted);
-            line-height: 1.5;
-            font-size: 1.2rem;
+            line-height: 1.4;
+            font-size: 1.05rem;
         }
 
         /* Metric Cards */
         .metric-card {
             background: white;
-            padding: 1.2rem;
+            padding: 0.8rem;
             border-radius: 14px;
             text-align: center;
             box-shadow: var(--shadow-lg);
@@ -380,7 +444,7 @@
 
         .metric-value {
             font-family: 'Outfit', sans-serif;
-            font-size: 3.1rem;
+            font-size: 2.6rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--rakuten-red), var(--accent-purple));
             -webkit-background-clip: text;
@@ -450,48 +514,48 @@
         .info-box {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(124, 58, 237, 0.08));
             border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: 12px;
-            padding: 1.1rem 1.4rem;
-            margin: 1rem 0;
-            font-size: 1.2rem;
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
         }
 
         .info-box-title {
             font-weight: 600;
             color: var(--accent-blue);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
         }
 
         .success-box {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.08));
             border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 12px;
-            padding: 1.1rem 1.4rem;
-            margin: 1rem 0;
-            font-size: 1.2rem;
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
         }
 
         .success-box-title {
             font-weight: 600;
             color: var(--accent-green);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
         }
 
         .warning-box {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(239, 68, 68, 0.08));
             border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: 12px;
-            padding: 1.1rem 1.4rem;
-            margin: 1rem 0;
-            font-size: 1.2rem;
+            border-radius: 10px;
+            padding: 0.7rem 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
         }
 
         .warning-box-title {
@@ -582,8 +646,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.3rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 0.8rem 0;
             flex-wrap: wrap;
         }
 
@@ -591,7 +655,7 @@
             background: white;
             border: 2px solid var(--border-light);
             border-radius: 14px;
-            padding: 1.3rem;
+            padding: 0.9rem;
             text-align: center;
             min-width: 175px;
             transition: all 0.3s ease;
@@ -657,15 +721,15 @@
         .team-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
         }
 
         .team-member {
             background: white;
             border: 1px solid var(--border-light);
             border-radius: 12px;
-            padding: 1rem;
+            padding: 0.7rem;
             text-align: center;
             transition: all 0.2s ease;
         }
@@ -795,18 +859,30 @@
         }
 
         .text-center { text-align: center; }
-        .mb-1 { margin-bottom: 0.5rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mt-1 { margin-top: 0.5rem; }
-        .mt-2 { margin-top: 1rem; }
+        .mb-1 { margin-bottom: 0.3rem; }
+        .mb-2 { margin-bottom: 0.6rem; }
+        .mt-1 { margin-top: 0.3rem; }
+        .mt-2 { margin-top: 0.6rem; }
 
         @media print {
-            .slide {
-                page-break-after: always;
-                min-height: auto;
-                padding: 1rem;
+            body { background: white; }
+            header { position: relative; }
+            #slides-container {
+                position: relative;
+                height: auto !important;
             }
-            nav { display: none; }
+            .slide {
+                position: relative !important;
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: all !important;
+                page-break-after: always;
+                min-height: 100vh;
+                padding: 1.5rem 2rem;
+                display: flex !important;
+            }
+            .slide.prev { opacity: 1 !important; transform: none !important; }
+            nav, .progress-bar, .soutenance-timer { display: none !important; }
         }
     </style>
 </head>
@@ -827,8 +903,7 @@
             <div class="institution-badge">
                 <div class="institution-info">
                     <div class="institution-label">Formation RNCP</div>
-                    <div class="institution-name">DataScientest</div>
-                    <div class="institution-sub">Mines Paris-PSL</div>
+                    <div class="institution-name">Liora</div>
                 </div>
             </div>
         </div>
@@ -866,7 +941,7 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
+                <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
                     <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
                     <span style="color: var(--rakuten-red);">&#8226;</span>
                     <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
@@ -929,7 +1004,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">
-                    <strong>Mentor :</strong> Antoine &#8212; DataScientest &#215; Mines Paris-PSL
+                    <strong>Mentor :</strong> Antoine &#8212; Liora
                 </div>
             </div>
         </div>
@@ -960,7 +1035,7 @@
 
                 <div class="info-box mt-2" style="text-align: center;">
                     <div class="info-box-title" style="justify-content: center;">Soutenance RNCP &#8212; Ingenieur Machine Learning</div>
-                    <p>DataScientest &#215; Mines Paris-PSL &#8212; Promotion Octobre 2025. <strong>Plongeons dans la technique.</strong></p>
+                    <p>Liora &#8212; Promotion Octobre 2025. <strong>Plongeons dans la technique.</strong></p>
                 </div>
             </div>
         </div>
@@ -1072,69 +1147,31 @@
                     <h2 class="slide-title">Desequilibre des Classes</h2>
                 </div>
 
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">L'analyse revele un <strong>desequilibre significatif</strong> constituant un defi majeur du projet.</p>
-
-                <div class="grid-2">
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Rang</th>
-                                <th>Categorie</th>
-                                <th>Effectif</th>
-                                <th>%</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td class="highlight">Piscines</td>
-                                <td>10 217</td>
-                                <td>12.0%</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Mobilier</td>
-                                <td>5 076</td>
-                                <td>6.0%</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Deco</td>
-                                <td>4 996</td>
-                                <td>5.9%</td>
-                            </tr>
-                            <tr>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                                <td>...</td>
-                            </tr>
-                            <tr>
-                                <td>27</td>
-                                <td class="highlight">Consoles</td>
-                                <td>761</td>
-                                <td>0.9%</td>
-                            </tr>
-                        </table>
+                <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 0.8rem; align-items: start;">
+                    <!-- Graphique distribution -->
+                    <div style="text-align: center;">
+                        <img src="../src/streamlit/assets/class_distribution.png" alt="Distribution des classes" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow);">
                     </div>
 
-                    <div>
-                        <div class="grid-2" style="gap: 0.8rem;">
-                            <div class="metric-card warning">
-                                <div class="metric-value">13&#215;</div>
-                                <div class="metric-label">Ratio Max/Min</div>
+                    <!-- Metriques + Strategie -->
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <div class="metric-card warning" style="flex: 1; padding: 0.5rem;">
+                                <div class="metric-value" style="font-size: 2.2rem;">13&#215;</div>
+                                <div class="metric-label" style="font-size: 0.9rem;">Ratio Max/Min</div>
                             </div>
-                            <div class="metric-card">
-                                <div class="metric-value">3 145</div>
-                                <div class="metric-label">Moyenne/Classe</div>
+                            <div class="metric-card" style="flex: 1; padding: 0.5rem;">
+                                <div class="metric-value" style="font-size: 2.2rem;">3 145</div>
+                                <div class="metric-label" style="font-size: 0.9rem;">Moyenne/Classe</div>
                             </div>
                         </div>
-
-                        <div class="success-box mt-1">
-                            <div class="success-box-title">Solutions adoptees</div>
-                            <p>
-                                <span class="tag tag-green">class_weight='balanced'</span>
-                                <span class="tag tag-blue">F1-Score weighted</span>
-                                <span class="tag tag-purple">Oversampling</span>
-                            </p>
+                        <div style="text-align: center;">
+                            <img src="../src/streamlit/assets/strategy_efficacy.png" alt="Naif 60.7% vs Strategie 83.8%" style="width: 100%; max-width: 440px; border-radius: 8px; box-shadow: var(--card-shadow);">
+                        </div>
+                        <div style="text-align: center;">
+                            <span class="tag tag-green">class_weight='balanced'</span>
+                            <span class="tag tag-blue">F1 weighted</span>
+                            <span class="tag tag-purple">Oversampling</span>
                         </div>
                     </div>
                 </div>
@@ -1472,9 +1509,10 @@
                     </div>
                 </div>
 
-                <div class="info-box mt-2" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Pourquoi le Voting ?</div>
-                    <p>XGBoost est le champion individuel (85.32%) mais fait des erreurs <strong>DIFFERENTES</strong> des reseaux de neurones. C'est cette independance qui securise le vote.</p>
+                <!-- Visualisation : comment chaque modele voit la meme image -->
+                <div style="text-align: center; margin-top: 0.3rem;">
+                    <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem; color: var(--text-main);">Comment chaque modele voit la meme image</p>
+                    <img src="../src/streamlit/assets/explainability_drive.png" alt="Meme produit vu par DINOv3, EfficientNet, XGBoost" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow); transform: scaleY(1.3); transform-origin: top center; margin-bottom: 2rem;">
                 </div>
             </div>
         </div>
@@ -1487,25 +1525,24 @@
                     <h2 class="slide-title">Calibration &#8212; Le Sharpening</h2>
                 </div>
 
+                <!-- Courbes de calibration AVANT / APRES -->
                 <div class="grid-2">
-                    <div class="card">
+                    <div class="card" style="text-align: center; padding: 1rem;">
                         <div class="card-title" style="color: var(--accent-orange);">AVANT &#8212; Le Probleme</div>
-                        <div class="card-text" style="font-size: 1.1rem;">
-                            XGBoost produit des scores groupes a ~25%. Le seuil de 80% n'est jamais atteint &#8594; le modele hesite trop.
-                        </div>
+                        <img src="../src/streamlit/assets/calibration_before.png" alt="Calibration avant sharpening - XGBoost groupe a 25%" style="width: 100%; max-width: 420px; border-radius: 8px; box-shadow: var(--card-shadow);">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">XGBoost (vert) groupe a ~25% &#8594; seuil 80% jamais atteint</p>
                     </div>
-                    <div class="card">
-                        <div class="card-title" style="color: var(--accent-green);">APRES &#8212; La Solution</div>
-                        <div class="card-text" style="font-size: 1.1rem;">
-                            Sharpening force XGBoost a trancher. Les scores depassent 80% &#8594; decisions nettes.
-                        </div>
+                    <div class="card" style="text-align: center; padding: 1rem;">
+                        <div class="card-title" style="color: var(--accent-green);">APRES &#8212; Sharpening</div>
+                        <img src="../src/streamlit/assets/calibration_after.png" alt="Calibration apres sharpening - XGBoost depasse 80%" style="width: 100%; max-width: 420px; border-radius: 8px; box-shadow: var(--card-shadow);">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">XGBoost calibre &#8594; decisions nettes au-dela du seuil</p>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin: 1.5rem 0;">
-                    <div style="display: inline-block; background: white; border: 2px solid var(--accent-purple); border-radius: 12px; padding: 1.2rem 2.5rem; box-shadow: var(--shadow-lg);">
-                        <code style="font-size: 1.8rem; background: none; color: var(--accent-purple);">p_sharp = p&#179; / &#931;(p&#179;)</code>
-                        <p style="color: var(--text-muted); font-size: 1rem; margin-top: 0.5rem;">Concentre la probabilite sur la classe dominante</p>
+                <div style="text-align: center; margin: 0.8rem 0;">
+                    <div style="display: inline-block; background: white; border: 2px solid var(--accent-purple); border-radius: 12px; padding: 0.8rem 2rem; box-shadow: var(--shadow-lg);">
+                        <code style="font-size: 1.6rem; background: none; color: var(--accent-purple);">p_sharp = p&#179; / &#931;(p&#179;)</code>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">Concentre la probabilite sur la classe dominante</p>
                     </div>
                 </div>
 
@@ -1685,7 +1722,7 @@
                     </div>
 
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <div class="metric-card" style="padding: 2rem;">
+                        <div class="metric-card" style="padding: 1rem;">
                             <div class="metric-value" style="font-size: 3.5rem;">83%</div>
                             <div class="metric-label">Accuracy LinearSVC</div>
                         </div>
@@ -1707,7 +1744,7 @@
                     <h2 class="slide-title">Fusion Multimodale &#8212; Late Fusion</h2>
                 </div>
 
-                <div class="dataflow-container" style="margin: 2rem 0;">
+                <div class="dataflow-container" style="margin: 0.8rem 0;">
                     <div class="dataflow-box" style="border-color: var(--accent-green);">
                         <strong>Image</strong><br>~79%
                     </div>
@@ -1767,24 +1804,24 @@
                     <h2 class="slide-title">Explicabilite &#8212; SHAP (Texte)</h2>
                 </div>
 
-                <div class="card" style="max-width: 800px; margin: 1rem auto;">
+                <div class="card" style="max-width: 800px; margin: 0.5rem auto;">
                     <div class="card-title">Exemple : "iPhone 15 Pro Max 256GB"</div>
                     <div class="card-text">
-                        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0;">
+                        <div style="display: flex; flex-direction: column; gap: 0.4rem; margin: 0.5rem 0;">
                             <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 200px; height: 22px; background: linear-gradient(90deg, #bf0000 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 1rem;">iphone (0.42)</span>
+                                <div style="width: 200px; height: 20px; background: linear-gradient(90deg, #bf0000 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">iphone (0.42)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 135px; height: 22px; background: linear-gradient(90deg, #dc2626 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 1rem;">smartphone (0.28)</span>
+                                <div style="width: 135px; height: 20px; background: linear-gradient(90deg, #dc2626 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">smartphone (0.28)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <div style="width: 85px; height: 22px; background: linear-gradient(90deg, #ef4444 90%, transparent); border-radius: 3px;"></div>
-                                <span style="font-family: 'Fira Code'; font-size: 1rem;">apple (0.18)</span>
+                                <div style="width: 85px; height: 20px; background: linear-gradient(90deg, #ef4444 90%, transparent); border-radius: 3px;"></div>
+                                <span style="font-family: 'Fira Code'; font-size: 0.95rem;">apple (0.18)</span>
                             </div>
                         </div>
-                        <p style="margin-top: 1rem; font-size: 1.15rem;">Prediction : <strong style="color: var(--accent-green);">Telephones (94.2%)</strong></p>
+                        <p style="margin-top: 0.5rem; font-size: 1.05rem;">Prediction : <strong style="color: var(--accent-green);">Telephones (94.2%)</strong></p>
                     </div>
                 </div>
 
@@ -1803,42 +1840,20 @@
                     <h2 class="slide-title">Explicabilite &#8212; Grad-CAM (Image)</h2>
                 </div>
 
-                <div class="card" style="max-width: 700px; margin: 1rem auto;">
-                    <div class="card-title">Visualisation Grad-CAM</div>
-                    <div class="card-text">
-                        <div style="display: flex; gap: 2rem; align-items: center; justify-content: center; margin: 1.2rem 0;">
-                            <div style="width: 110px; height: 110px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative;">
-                                &#x1F4F1;
-                                <div style="position: absolute; bottom: -8px; right: -8px; font-size: 0.75rem; background: var(--accent-green); color: white; padding: 0.2rem 0.5rem; border-radius: 4px;">Original</div>
-                            </div>
-                            <span style="font-size: 2rem; color: var(--text-muted);">&#8594;</span>
-                            <div style="width: 110px; height: 110px; background: linear-gradient(135deg, rgba(191,0,0,0.3), rgba(255,200,0,0.3), rgba(0,200,0,0.1)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative;">
-                                &#x1F4F1;
-                                <div style="position: absolute; bottom: -8px; right: -8px; font-size: 0.75rem; background: var(--rakuten-red); color: white; padding: 0.2rem 0.5rem; border-radius: 4px;">Heatmap</div>
-                            </div>
-                        </div>
-                        <p style="text-align: center; font-size: 1.1rem;">Les zones <strong style="color: var(--rakuten-red);">rouges</strong> = zones decisives pour la prediction.</p>
+                <!-- Rapport Technique Grad-CAM + Focus Battle cote a cote -->
+                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 0.6rem; align-items: start;">
+                    <div style="text-align: center;">
+                        <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem;">Rapport Technique Grad-CAM</p>
+                        <img src="../src/streamlit/assets/rapport_technique_gradcam.png" alt="Rapport technique Grad-CAM" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow); transform: scaleY(1.4); transform-origin: top center; margin-bottom: 3rem;">
+                    </div>
+                    <div style="text-align: center;">
+                        <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem;">Focus Battle &#8212; 4 Modeles</p>
+                        <img src="../src/streamlit/assets/focus_battle.png" alt="Comparaison du focus des 4 modeles" style="width: 100%; border-radius: 8px; box-shadow: var(--card-shadow);">
                     </div>
                 </div>
 
-                <div class="grid-3 mt-1">
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 1.8rem;">SHAP</div>
-                        <div class="metric-label">Texte Global</div>
-                    </div>
-                    <div class="metric-card warning">
-                        <div class="metric-value" style="font-size: 1.6rem;">Grad-CAM</div>
-                        <div class="metric-label">Image CNN</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value" style="font-size: 1.6rem;">Attention</div>
-                        <div class="metric-label">Transformer</div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-1" style="text-align: center;">
-                    <div class="info-box-title" style="justify-content: center;">Conformite AI Act</div>
-                    <p>Transparence algorithmique, droit a l'explication, audit des biais.</p>
+                <div class="info-box" style="text-align: center; margin-top: 0.4rem;">
+                    <p>Les zones <strong style="color: var(--rakuten-red);">rouges</strong> = zones decisives pour la prediction. Conformite AI Act : transparence algorithmique, droit a l'explication.</p>
                 </div>
             </div>
         </div>
@@ -1852,23 +1867,23 @@
                 </div>
 
                 <div class="grid-2">
-                    <div class="warning-box" style="padding: 1.5rem;">
+                    <div class="warning-box" style="padding: 0.8rem;">
                         <div class="warning-box-title">Decouverte</div>
                         <p style="font-size: 1.15rem;">Les scores image etaient gonfles a <strong>92%</strong> (data leakage dans l'evaluation).</p>
                     </div>
-                    <div class="success-box" style="padding: 1.5rem;">
+                    <div class="success-box" style="padding: 0.8rem;">
                         <div class="success-box-title">Correction</div>
                         <p style="font-size: 1.15rem;">Audit complet, chaque fichier, chaque slide, chaque metrique. Score reel : <strong>79.28%</strong>.</p>
                     </div>
                 </div>
 
-                <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin: 2rem 0;">
-                    <div class="metric-card" style="padding: 1.5rem; border: 2px solid var(--danger); position: relative;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin: 1rem 0;">
+                    <div class="metric-card" style="padding: 1rem; border: 2px solid var(--danger); position: relative;">
                         <div class="metric-value" style="font-size: 3rem; text-decoration: line-through; background: linear-gradient(135deg, var(--danger), #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">92%</div>
                         <div class="metric-label" style="color: var(--danger);">Gonfle (leakage)</div>
                     </div>
                     <span style="font-size: 2.5rem; color: var(--accent-orange);">&#8594;</span>
-                    <div class="metric-card success" style="padding: 1.5rem; border: 2px solid var(--accent-green);">
+                    <div class="metric-card success" style="padding: 1rem; border: 2px solid var(--accent-green);">
                         <div class="metric-value" style="font-size: 3rem;">79.28%</div>
                         <div class="metric-label" style="color: var(--accent-green);">Correct (audite)</div>
                     </div>
@@ -2052,7 +2067,7 @@
             </div>
         </div>
 
-        <!-- ===================== SLIDE 27: DEMO LIVE ===================== -->
+        <!-- ===================== SLIDE 25: DEMO LIVE ===================== -->
         <div class="slide">
             <div class="content-single">
                 <div class="slide-header">
@@ -2106,11 +2121,11 @@
             </div>
         </div>
 
-        <!-- ===================== SLIDE 28: MERCI ===================== -->
+        <!-- ===================== SLIDE 26: MERCI ===================== -->
         <div class="slide">
             <div class="content-full text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                 <h1 class="hero-title" style="font-size: 5rem; margin-bottom: 1rem;">Merci !</h1>
-                <p class="hero-subtitle" style="font-size: 2rem; margin-bottom: 2rem;">Questions ?</p>
+                <p class="hero-subtitle" style="font-size: 2rem; margin-bottom: 1rem;">Questions ?</p>
 
                 <div class="grid-4 mt-2" style="max-width: 900px;">
                     <div class="metric-card">
@@ -2131,7 +2146,7 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
+                <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; font-size: 1rem;">
                     <span style="font-weight: 600; color: var(--text-main);">Johan Frachon</span>
                     <span style="color: var(--rakuten-red);">&#8226;</span>
                     <span style="font-weight: 600; color: var(--text-main);">Liviu Andronic</span>
@@ -2142,12 +2157,19 @@
                 </div>
 
                 <div style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">
-                    <strong>Mentor : Antoine</strong> &#8212; DataScientest &#215; Mines Paris-PSL &#8212; Fevrier 2026
+                    <strong>Mentor : Antoine</strong> &#8212; Liora &#8212; Fevrier 2026
                 </div>
             </div>
         </div>
 
     </main>
+
+    <!-- Timer Soutenance -->
+    <div class="soutenance-timer" id="soutenance-timer" onclick="toggleTimer()" title="Cliquer pour demarrer / arreter le chrono">
+        <div class="timer-dot"></div>
+        <span id="timer-display">00:00</span>
+        <span class="timer-label" id="timer-label">Cliquer pour lancer</span>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -2198,6 +2220,60 @@
         });
 
         updateSlide();
+
+        // ===== TIMER SOUTENANCE =====
+        const HANDOFF_POINTS = [
+            { sec: 60,  label: "Oussama \u2192 Michael" },
+            { sec: 360, label: "Michael \u2192 suivant" },
+            { sec: 660, label: "Passage \u00e0 11 min" },
+            { sec: 960, label: "Passage \u00e0 16 min" }
+        ];
+        let timerInterval = null;
+        let timerSeconds = 0;
+        let timerRunning = false;
+        let alertTimeout = null;
+
+        const timerEl = document.getElementById('soutenance-timer');
+        const timerDisplay = document.getElementById('timer-display');
+        const timerLabel = document.getElementById('timer-label');
+
+        function formatTime(totalSec) {
+            const m = Math.floor(totalSec / 60);
+            const s = totalSec % 60;
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        function tickTimer() {
+            timerSeconds++;
+            timerDisplay.textContent = formatTime(timerSeconds);
+
+            // Check handoff points
+            const handoff = HANDOFF_POINTS.find(h => h.sec === timerSeconds);
+            if (handoff) {
+                timerEl.classList.add('alert');
+                timerLabel.textContent = handoff.label;
+                if (alertTimeout) clearTimeout(alertTimeout);
+                alertTimeout = setTimeout(() => {
+                    timerEl.classList.remove('alert');
+                }, 5000);
+            }
+        }
+
+        function toggleTimer() {
+            if (!timerRunning) {
+                timerRunning = true;
+                timerEl.classList.add('running');
+                timerEl.classList.remove('alert');
+                timerLabel.textContent = 'En cours...';
+                timerInterval = setInterval(tickTimer, 1000);
+            } else {
+                timerRunning = false;
+                timerEl.classList.remove('running');
+                clearInterval(timerInterval);
+                timerInterval = null;
+                timerLabel.textContent = 'En pause';
+            }
+        }
     </script>
 </body>
 
